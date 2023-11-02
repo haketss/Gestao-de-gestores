@@ -7,6 +7,7 @@ import "../index.css";
 import { Input } from "../components/Input";
 import { Bar } from "../components/barlogin";
 
+ 
 
 import { loginUser } from "../services/user-services";
 
@@ -34,15 +35,16 @@ export function Login() {
 
     return (
         <Container className="mt-2">
-          <Bar></Bar>
-            
+          <Bar />
+          
             <Container>
                 <Form
                     id="form"
                     noValidate
                     validated={!!errors}
                     onSubmit={handleSubmit(onSubmit)}
-                >
+                ><img src="https://th.bing.com/th/id/OIG.4F7FJQwjdZKK6AGooVVj?pid=ImgGn" width={200}></img>
+            
                     <Col
                         id="inputs"
                         className=".bg-white  p-5 m-auto novalidate border-top-style:"
@@ -50,7 +52,7 @@ export function Login() {
                         E-mail:
                         <Input
                             className="m-1"
-                            id="inputs"
+                            
                             type="text"
                             placeholder="Insira seu e-mail"
                             error={errors.email}

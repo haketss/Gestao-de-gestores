@@ -3,8 +3,8 @@ import { Container, Col } from "react-bootstrap";
 import { useNavigate } from "react-router-dom";
 import { useEffect, useState } from "react";
 import { useForm } from "react-hook-form";
-
 import "../index.css";
+
 import { Gestor } from "../components/Gestor";
 import { Evento } from "../components/Evento";
 import { Bar } from "../components/bar";
@@ -106,7 +106,7 @@ export function Dashbord() {
 
     return (
         <Container fluid>
-            <Bar></Bar>
+            <Bar />
 
             <Container>
                 <p id="q_g">Quantidade de gestors: {gestors.length} <img id="imagen" width={150} src="https://static.vecteezy.com/system/resources/previews/000/379/094/original/edit-profile-vector-icon.jpg"></img></p>

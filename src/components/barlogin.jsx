@@ -61,11 +61,11 @@ export function Bar() {
                         </li>
                         <li id="bemvindo" class="nav-item">
                             <a class="nav-link" href="#">
-                                Bem vindo, Entre com sua conta
+                                
                             </a>
                         </li>
                         <li id="tituloT" class="nav-item">
-                            <a class="nav-link" href="#">Idioma
+                            <a class="nav-link" href="#">Bem vindo, Entre com sua conta {" "}
                                 <svg
                                     id="tradu"
                                     xmlns="http://www.w3.org/2000/svg"

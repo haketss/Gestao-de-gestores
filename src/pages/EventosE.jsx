@@ -117,7 +117,7 @@ export function Eventos() {
 
     return (
         <Container fluid>
-            <Bar></Bar>
+            <Bar />
 
             <Container>
                 <input

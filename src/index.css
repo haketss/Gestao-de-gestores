@@ -24,7 +24,7 @@
 
 @media screen and (min-width: 800px) {
   #form {
-    padding-top: 15%;
+
     padding-left: 30%;
     padding-right: 30%;
   }
@@ -87,6 +87,7 @@
 
 #title {
   margin-top: -1%;
+
 }
 
 #Cards {
@@ -128,43 +129,36 @@
 }
 
 #editeedele {
-  margin-left: 79%;
-  margin-bottom: 1%;
-  background-color: rgb(255, 255, 255);
+  
+  background-color: rgba(255, 255, 255, 0);
   color: rgb(0, 52, 136);
-  border-radius: 0;
-  border-color: rgb(255, 255, 255);
-  border-radius: 5px;
+  border-color: rgb(255, 255, 255, 0);
+  
 }
 
 #editeedele:hover {
-  margin-left: 79%;
-  margin-bottom: 1%;
-  background-color: rgb(176, 250, 255);
-  border-color: rgb(158, 213, 248);;
-  color: rgb(0, 21, 54);
-  border-radius: 0;
+
+  background-color: rgb(176, 250, 255, 0.565);
+  border-color: rgb(158, 213, 248);
+  color: rgb(0, 52, 136);
   border-radius: 5px;
 }
 
 #editeedelet {
-  margin-left: 82%;
-  margin-bottom: 1%;
-  background-color: rgb(255, 255, 255);
+ 
+  background-color: rgb(255, 255, 255, 0);
   color: rgb(0, 52, 136);
-  border-radius: 0;
-  border-color: rgb(255, 255, 255);
+  border-color: rgb(255, 255, 255, 0);
   border-radius: 5px;
 }
 
 #editeedelet:hover {
-  margin-left: 82%;
-  margin-bottom: 1%;
-  background-color: rgb(255, 0, 0);
+
+  background-color: rgba(255, 0, 0, 0.565);
   color: rgb(255, 255, 255);
   border-radius: 5px;
   border-color: rgb(255, 255, 255);
-  
+
 }
 
 #tradu {
@@ -190,7 +184,9 @@
   margin-top: 2%;
   margin-right: -12%;
   margin-left: -12%;
-
+  font-family: 'DM Sans', sans-serif;
+  border-bottom: 10px;
+  border-color: red;
 }
 
 @media screen and (min-width: 400px) {
@@ -204,11 +200,13 @@
 #tituloT {
   margin-left: -4%;
   color: rgb(0, 52, 136);
+  font-family: 'DM Sans', sans-serif;
 }
 
 #tituloTL {
   margin-left: -40%;
   color: rgb(0, 52, 136);
+  font-family: 'DM Sans', sans-serif;
 }
 
 li {
@@ -216,9 +214,9 @@ li {
 }
 
 #barrastilo {
-  padding-left: 170%;
-  background-color: rgb(195, 218, 255, 1);
-  margin-left: -30%;
+  padding-left: 153%;
+  background-color: rgb(183, 211, 255);
+  margin-left: -28%;
 
 }
 
@@ -233,22 +231,26 @@ li {
   color: rgb(255, 255, 255);
   margin-bottom: -4px;
   margin-left: 15px;
+  font-family: 'DM Sans', sans-serif;
 }
 
 #Cardsgestors {
   color: rgb(255, 255, 255);
   background-color: rgb(0, 35, 91);
-  margin: 0.5%;
- 
-  margin-right: -7.5%;
+  margin: 0.2%;
+  margin-right: -11.5%;
+  margin-left: 1%;
+  font-family: 'DM Sans', sans-serif;
 }
+
+
 
 #q_g {
   font-size: 25px;
   color: rgb(249, 249, 249);
   padding: 1%;
   background-color: rgb(62, 45, 223);
-  border-radius: 10px;
+  border-radius: 2px;
 }
 
 #q_e {
@@ -256,27 +258,27 @@ li {
   color: rgb(255, 255, 255);
   padding: 1%;
   background-color: rgb(62, 45, 223);
-  border-radius: 10px;
+  border-radius: 2px;
 }
 
 #q_g:hover {
-  
+
   color: rgb(249, 249, 249);
   padding: 1%;
   background-color: rgb(51, 28, 250);
-  border-radius: 10px;
+  border-radius: 2px;
 }
 
 #q_e:hover {
-  
+
   color: rgb(255, 255, 255);
   padding: 1%;
   background-color: rgb(51, 28, 250);
-  border-radius: 10px;
+  border-radius: 2px;
 }
 
 #imagen {
-  border-radius: 10px;
+  border-radius: 2px;
 }
 
 #Cardsgestorstp {
@@ -285,60 +287,70 @@ li {
   margin: -0.5%;
   border-radius: 10px;
   padding: 0.5%;
-  
+
 }
 
 #nomeGestor {
   background-color: rgb(208, 249, 255, 1);
   border-radius: 1;
   border-color: rgb(255, 255, 255);
- 
+
 }
+
 #sobrenomeGestor {
   background-color: rgb(208, 249, 255, 1);
   border-radius: 1;
   border-color: rgb(255, 255, 255);
 }
+
 #idadeGestor {
   background-color: rgb(208, 249, 255, 1);
   border-radius: 1;
   border-color: rgb(255, 255, 255);
 }
+
 #generoGestor {
   background-color: rgb(208, 249, 255, 1);
   border-radius: 1;
   border-color: rgb(255, 255, 255);
 }
+
 #dataDeNascimentoGestor {
   background-color: rgb(208, 249, 255, 1);
   border-radius: 1;
   border-color: rgb(255, 255, 255);
 }
+
 #localDeTrabalhoGestor {
   background-color: rgb(208, 249, 255, 1);
   border-radius: 1;
   border-color: rgb(255, 255, 255);
 }
+
 #CRMGestor {
   background-color: rgb(208, 249, 255, 1);
   border-radius: 1;
   border-color: rgb(255, 255, 255);
 }
+
 #tipoDeContratoGestor {
   background-color: rgb(208, 249, 255, 1);
   border-radius: 1;
   border-color: rgb(255, 255, 255);
 }
+
 #formacaoGestor {
   background-color: rgb(208, 249, 255, 1);
   border-radius: 1;
   border-color: rgb(255, 255, 255);
 }
+
 #senhaProvisoriaGestor {
   background-color: rgb(208, 249, 255, 1);
   border-radius: 1;
   border-color: rgb(255, 255, 255);
 }
+
 #metasGestor {
   background-color: rgb(208, 249, 255, 1);
   border-radius: 1;
@@ -347,36 +359,37 @@ li {
 
 #adicionar {
   border-radius: 0;
- margin-left: 40%;
+  margin-left: 40%;
   padding-top: 1%;
   padding-bottom: 1%;
   padding-left: 5%;
   padding-right: 5%;
   background-color: rgb(0, 35, 91);
   border-color: rgb(227, 227, 227);
-  border: rgb(0, 35, 91) ;
- 
+  border: rgb(0, 35, 91);
+
 }
+
 #voltar {
   border-radius: 0;
   margin-left: 5%;
-   padding-top: 1%;
-   padding-bottom: 1%;
-   padding-left: 5%;
-   padding-right: 5%;
-   background-color: rgb(223, 223, 223);
-   border-color: rgb(227, 227, 227);
-   border: rgb(0, 35, 91) ;
+  padding-top: 1%;
+  padding-bottom: 1%;
+  padding-left: 5%;
+  padding-right: 5%;
+  background-color: rgb(223, 223, 223);
+  border-color: rgb(227, 227, 227);
+  border: rgb(0, 35, 91);
 }
 
 #voltart {
   color: rgb(0, 0, 0);
   text-decoration: none;
-  
+
 }
 
 #ta {
-  
+
   padding: -10%;
   margin-left: -10%;
 
@@ -392,33 +405,35 @@ li {
   padding-left: 9%;
   padding-right: 9%;
   padding-bottom: 60%;
-  background-color:  rgb(0, 35, 91);
+  background-color: rgb(0, 35, 91);
   border-radius: 1px;
 }
+
 #cadastros {
   color: rgb(0, 35, 91);
   margin-left: 40%;
   padding: 1%;
-  
+
 }
+
 #barrainicio {
- 
+
   margin-left: 40%;
   color: rgb(0, 35, 91);
   text-decoration: none;
- 
+
 }
 
 #barragestores {
   color: rgb(0, 35, 91);
   text-decoration: none;
- 
+
 }
 
 #barraeventos {
   color: rgb(0, 35, 91);
   text-decoration: none;
- 
+
 }
 
 #dropboto {
@@ -429,40 +444,45 @@ li {
   color: rgb(255, 255, 255);
   background-color: rgb(0, 35, 91);
   text-decoration: none;
-  
+
 }
 
 #chart {
   box-shadow: 0 4px 8px rgba(255, 255, 255, 0);
- background-color: aliceblue;
- background-color: rgb(0, 35, 91);
- text-decoration: none;
- border: 2px solid #ffffff; 
+  background-color: aliceblue;
+  background-color: rgb(0, 35, 91);
+  text-decoration: none;
+  border: 2px solid #ffffff;
 }
+
 #chartt {
   box-shadow: 0 4px 8px rgba(255, 255, 255, 0);
   background-color: aliceblue;
   background-color: rgb(0, 35, 91);
   padding: 0.6%;
   text-decoration: none;
-  border: 2px solid #ffffff; 
+  border: 2px solid #ffffff;
   border-color: rgb(0, 35, 91);
 
- }
- #charttA {
-  margin-left: 57%;
+}
+
+#charttA {
+  margin-left: 56%;
   box-shadow: 0 4px 8px rgba(255, 255, 255, 0);
   background-color: aliceblue;
   background-color: rgb(0, 35, 91);
   padding: 0.6%;
   text-decoration: none;
-  border: 2px solid #ffffff; 
+  border: 2px solid #ffffff;
   border-color: rgb(0, 35, 91);
 
- }
+}
+
+
+
 #tituloTT {
-margin-left: -15% ;
-text-decoration: none;
+  margin-left: -15%;
+  text-decoration: none;
 
 }
 
@@ -480,12 +500,13 @@ text-decoration: none;
   padding-bottom: 10px;
   padding-left: 20px;
   padding-right: 20px;
-  
-  text-shadow:none;
+
+  text-shadow: none;
   text-decoration: none;
 }
+
 #menumaism {
- 
+
   margin-left: 40%;
 }
 
@@ -493,38 +514,39 @@ text-decoration: none;
   margin-left: 1%;
   margin-top: -1%;
 }
+
 #pizza2 {
   margin-left: 1%;
-  
+
 }
 
 #letra {
-  color:white
+  color: white
 }
 
 #inpsharch {
   margin-left: 10%;
   padding-left: 10%;
-  background-color:rgb(185, 212, 255);
-  border-radius: 10px; 
-  border: 2px solid #ffffff; 
-  color: #ffffff; 
-  padding: 10px; 
-  width: 300px; 
-  margin: 20px; 
+  background-color: rgb(185, 212, 255);
+  border-radius: 10px;
+  border: 2px solid #ffffff;
+  color: #ffffff;
+  padding: 10px;
+  width: 300px;
+  margin: 20px;
   box-shadow: 0 4px 8px rgba(255, 255, 255, 0);
 }
 
 #inpsharch:hover {
   margin-left: 10%;
   padding-left: 10%;
-  background-color:rgb(185, 212, 255);
-  border-radius: 10px; 
-  border: 2px solid #ffffff; 
-  color: #ffffff; 
-  padding: 10px; 
-  width: 300px; 
-  margin: 20px; 
+  background-color: rgb(185, 212, 255);
+  border-radius: 10px;
+  border: 2px solid #ffffff;
+  color: #ffffff;
+  padding: 10px;
+  width: 300px;
+  margin: 20px;
   box-shadow: 0 4px 8px rgba(255, 255, 255, 0);
 }
 
@@ -537,16 +559,19 @@ text-decoration: none;
   border-radius: 0;
   border-color: rgb(255, 255, 255);
   border-radius: 5px;
+  opacity: 50%;
 }
 
 #botaodocard:hover {
   margin-left: 13%;
   margin-bottom: 1%;
   background-color: rgb(0, 52, 136);
-  border-color: rgb(0, 52, 136);;
+  border-color: rgb(0, 52, 136);
+  ;
   color: rgb(254, 254, 254);
   border-radius: 0;
   border-radius: 5px;
+  opacity: 100%;
 }
 
 #botaodocarde {
@@ -557,6 +582,7 @@ text-decoration: none;
   border-radius: 0;
   border-color: rgb(255, 255, 255);
   border-radius: 5px;
+  opacity: 50%;
 }
 
 #botaodocarde:hover {
@@ -566,5 +592,30 @@ text-decoration: none;
   color: rgb(255, 255, 255);
   border-radius: 5px;
   border-color: rgb(255, 255, 255);
-  
+  opacity: 100%;
+}
+
+#password {
+  border-radius: 0;
+}
+
+#email {
+  border-radius: 0;
+}
+
+.eventos-container {
+
+  display: flex;
+  justify-content: space-between;
+  /* ou qualquer outra propriedade de alinhamento desejada */
+}
+
+.eventos-list {
+  display: flex;
+  flex-wrap: wrap;
+  /* Permite que os eventos quebrem para a próxima linha se não houver espaço suficiente na largura da tela muito util */
+}
+
+.card {
+  margin: 1.39%
 }

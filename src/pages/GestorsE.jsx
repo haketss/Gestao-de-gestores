@@ -56,7 +56,7 @@ export function GestorsE() {
 
     return (
         <Container fluid>
-            <Bar></Bar>
+            <Bar />
             <Container></Container> <Col id="botocria" md="10"></Col>
             {/* Formulário dentro do Modal, ideal seria componentizar também, pois é parecido com o Modal de editar */}
             <Container>
@@ -69,163 +69,192 @@ export function GestorsE() {
                     validated={!!errors}
                 >
                     <Modal.Body>
-                        <Input
-                            className="mb-3"
-                            type="text"
-                            label="Nome do gestor"
-                            placeholder="Insira o nome do gestor"
-                            required={true}
-                            name="nomeGestor"
-                            error={errors.nomeGestor}
-                            validations={register("nomeGestor", {
-                                required: {
-                                    value: true,
-                                    message: "Nome do gestor é obrigatório.",
-                                },
-                            })}
-                        />
-                        <Input
-                            className="mb-3"
-                            type="text"
-                            label=" sobrenome"
-                            placeholder="Insira o nome do gestor"
-                            required={true}
-                            name="sobrenomeGestor"
-                            error={errors.sobrenomeGestor}
-                            validations={register("sobrenomeGestor", {
-                                required: {
-                                    value: true,
-                                    message:
-                                        "Sovrenome do gestor é obrigatório.",
-                                },
-                            })}
-                        />
-                        <Input
-                            className="mb-3"
-                            type="number"
-                            label="idade"
-                            placeholder="Insira o nome do gestor"
-                            required={true}
-                            name="idadeGestor"
-                            error={errors.idadeGestor}
-                            validations={register("idadeGestor", {
-                                required: {
-                                    value: true,
-                                    message: "idade do gestor é obrigatório.",
-                                },
-                            })}
-                        />
-                        <Input
-                            className="mb-3"
-                            type="text"
-                            label="genero"
-                            placeholder="Insira o nome do gestor"
-                            required={true}
-                            name="generoGestor"
-                            error={errors.generoGestor}
-                            validations={register("generoGestor", {
-                                required: {
-                                    value: true,
-                                    message: "genero do gestor é obrigatório.",
-                                },
-                            })}
-                        />
-                        <Input
-                            className="mb-3"
-                            type="date"
-                            label="Data de nacimento"
-                            placeholder="Insira o nome do gestor"
-                            required={true}
-                            name="dataDeNascimentoGestor"
-                            error={errors.dataDeNascimentoGestor}
-                            validations={register("dataDeNascimentoGestor", {
-                                required: {
-                                    value: true,
-                                    message:
-                                        "Data de nacimento do gestor é obrigatório.",
-                                },
-                            })}
-                        />
-                        <Input
-                            className="mb-3"
-                            type="text"
-                            label="local De Trabalho"
-                            placeholder="Insira o nome do gestor"
-                            required={true}
-                            name="localDeTrabalhoGestor"
-                            error={errors.localDeTrabalhoGestor}
-                            validations={register("localDeTrabalhoGestor", {
-                                required: {
-                                    value: true,
-                                    message:
-                                        "Local de trabalho do gestor é obrigatório.",
-                                },
-                            })}
-                        />
-                        <Input
-                            className="mb-3"
-                            type="number"
-                            label="CRM"
-                            placeholder="Insira o nome do gestor"
-                            required={true}
-                            name="CRMGestor"
-                            error={errors.CRMGestor}
-                            validations={register("CRMGestor", {
-                                required: {
-                                    value: true,
-                                    message: "CRM do gestor é obrigatório.",
-                                },
-                            })}
-                        />
-                        <Input
-                            className="mb-3"
-                            type="text"
-                            label=" tipo De Contrato"
-                            placeholder="Insira o nome do gestor"
-                            required={true}
-                            name="tipoDeContratoGestor"
-                            error={errors.tipoDeContratoGestor}
-                            validations={register("tipoDeContratoGestor", {
-                                required: {
-                                    value: true,
-                                    message:
-                                        "Tipo de contrato do gestor é obrigatório.",
-                                },
-                            })}
-                        />
-
-                        <Input
-                            className="mb-3"
-                            type="text"
-                            label="Formação"
-                            placeholder="Insira o nome do gestor"
-                            required={true}
-                            name="formacaoGestor"
-                            error={errors.formacaoGestor}
-                            validations={register("formacaoGestor", {
-                                required: {
-                                    value: true,
-                                    message:
-                                        "Formação do gestor é obrigatório.",
-                                },
-                            })}
-                        />
-                        <Input
-                            className="mb-3"
-                            type="text"
-                            label="senha Provisoria"
-                            placeholder="Insira o nome do gestor"
-                            required={true}
-                            name="senhaProvisoriaGestor"
-                            error={errors.senhaProvisoriaGestor}
-                            validations={register("senhaProvisoriaGestor", {
-                                required: {
-                                    value: true,
-                                    message:
-                                        "Senha Provisoria do gestor é obrigatório.",
-                                },
-                            })}
-                        />
+                        <td>
+                            <Input
+                                className="mb-3"
+                                type="text"
+                                label="Nome do gestor"
+                                placeholder="Insira o nome do gestor"
+                                required={true}
+                                name="nomeGestor"
+                                error={errors.nomeGestor}
+                                validations={register("nomeGestor", {
+                                    required: {
+                                        value: true,
+                                        message:
+                                            "Nome do gestor é obrigatório.",
+                                    },
+                                })}
+                            />
+                        </td>
+                        <td>
+                            {" "}
+                            <Input
+                                className="mb-3"
+                                type="text"
+                                label=" sobrenome"
+                                placeholder="Insira o nome do gestor"
+                                required={true}
+                                name="sobrenomeGestor"
+                                error={errors.sobrenomeGestor}
+                                validations={register("sobrenomeGestor", {
+                                    required: {
+                                        value: true,
+                                        message:
+                                            "Sovrenome do gestor é obrigatório.",
+                                    },
+                                })}
+                            />
+                        </td>
+                        <td>
+                            {" "}
+                            <Input
+                                className="mb-3"
+                                type="number"
+                                label="idade"
+                                placeholder="Insira o nome do gestor"
+                                required={true}
+                                name="idadeGestor"
+                                error={errors.idadeGestor}
+                                validations={register("idadeGestor", {
+                                    required: {
+                                        value: true,
+                                        message:
+                                            "idade do gestor é obrigatório.",
+                                    },
+                                })}
+                            />
+                        </td>
+                        <td>
+                            <Input
+                                className="mb-3"
+                                type="text"
+                                label="genero"
+                                placeholder="Insira o nome do gestor"
+                                required={true}
+                                name="generoGestor"
+                                error={errors.generoGestor}
+                                validations={register("generoGestor", {
+                                    required: {
+                                        value: true,
+                                        message:
+                                            "genero do gestor é obrigatório.",
+                                    },
+                                })}
+                            />
+                        </td><br></br>
+                        <td>
+                            <Input
+                                className="mb-3"
+                                type="date"
+                                label="Data de nacimento"
+                                placeholder="Insira o nome do gestor"
+                                required={true}
+                                name="dataDeNascimentoGestor"
+                                error={errors.dataDeNascimentoGestor}
+                                validations={register(
+                                    "dataDeNascimentoGestor",
+                                    {
+                                        required: {
+                                            value: true,
+                                            message:
+                                                "Data de nacimento do gestor é obrigatório.",
+                                        },
+                                    }
+                                )}
+                            />
+                        </td>
+                        <td>
+                            <Input
+                                className="mb-3"
+                                type="text"
+                                label="local De Trabalho"
+                                placeholder="Insira o nome do gestor"
+                                required={true}
+                                name="localDeTrabalhoGestor"
+                                error={errors.localDeTrabalhoGestor}
+                                validations={register("localDeTrabalhoGestor", {
+                                    required: {
+                                        value: true,
+                                        message:
+                                            "Local de trabalho do gestor é obrigatório.",
+                                    },
+                                })}
+                            />
+                        </td>
+                        <td>
+                            {" "}
+                            <Input
+                                className="mb-3"
+                                type="text"
+                                label="CRM"
+                                placeholder="Insira o nome do gestor"
+                                required={true}
+                                name="CRMGestor"
+                                error={errors.CRMGestor}
+                                validations={register("CRMGestor", {
+                                    required: {
+                                        value: true,
+                                        message: "CRM do gestor é obrigatório.",
+                                    },
+                                })}
+                            />
+                        </td>
+                        <td>
+                            {" "}
+                            <Input
+                                className="mb-3"
+                                type="text"
+                                label=" tipo De Contrato"
+                                placeholder="Insira o nome do gestor"
+                                required={true}
+                                name="tipoDeContratoGestor"
+                                error={errors.tipoDeContratoGestor}
+                                validations={register("tipoDeContratoGestor", {
+                                    required: {
+                                        value: true,
+                                        message:
+                                            "Tipo de contrato do gestor é obrigatório.",
+                                    },
+                                })}
+                            />
+                        </td><br></br>
+                        <td>
+                            <Input
+                                className="mb-3"
+                                type="text"
+                                label="Formação"
+                                placeholder="Insira o nome do gestor"
+                                required={true}
+                                name="formacaoGestor"
+                                error={errors.formacaoGestor}
+                                validations={register("formacaoGestor", {
+                                    required: {
+                                        value: true,
+                                        message:
+                                            "Formação do gestor é obrigatório.",
+                                    },
+                                })}
+                            />
+                        </td>
+                        <td>
+                            <Input
+                                className="mb-3"
+                                type="text"
+                                label="senha Provisoria"
+                                placeholder="Insira o nome do gestor"
+                                required={true}
+                                name="senhaProvisoriaGestor"
+                                error={errors.senhaProvisoriaGestor}
+                                validations={register("senhaProvisoriaGestor", {
+                                    required: {
+                                        value: true,
+                                        message:
+                                            "Senha Provisoria do gestor é obrigatório.",
+                                    },
+                                })}
+                            />
+                        </td>
                     </Modal.Body>
                     <Modal.Footer>
                         <Button variant="primary" type="submit">

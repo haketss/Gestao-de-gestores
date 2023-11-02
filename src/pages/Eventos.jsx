@@ -73,8 +73,7 @@ export function Eventos() {
                 senhaProvisoriaGestor: data.senhaProvisoriaGestor,
                 metasGestor: data.metasGestor,
                 vendasGestor: data.vendasGestor,
-                eventosPGestor: data.eventosPGestor
-                
+                eventosPGestor: data.eventosPGestor,
             });
             console.log("gestor updated successfully.");
             await findGestors();
@@ -138,7 +137,7 @@ export function Eventos() {
                 id: data.id,
                 nomeEvento: data.nomeEvento,
                 dataEvento: data.dataEvento,
-                adendo: data.adendoEvento
+                adendo: data.adendoEvento,
             });
             alert("O evento foi alterado com sucesso!");
             console.log("Event updated successfully.");
@@ -165,7 +164,7 @@ export function Eventos() {
 
     return (
         <Container fluid>
-            <Bar></Bar>
+            <Bar />
 
             <Container>
                 <input
@@ -184,7 +183,7 @@ export function Eventos() {
                         xmlns="http://www.w3.org/2000/svg"
                         width="32"
                         height="32"
-                        fill="currentColor"
+                        fill="currenttror"
                         class="bi bi-file-earmark-plus"
                         viewBox="0 0 16 16"
                     >
@@ -192,9 +191,9 @@ export function Eventos() {
                         <path d="M14 4.5V14a2 2 0 0 1-2 2H4a2 2 0 0 1-2-2V2a2 2 0 0 1 2-2h5.5L14 4.5zm-3 0A1.5 1.5 0 0 1 9.5 3V1H4a1 1 0 0 0-1 1v12a1 1 0 0 0 1 1h8a1 1 0 0 0 1-1V4.5h-2z" />
                     </svg>
                 </Button>
-                <Col className="w-5 m-auto mb-5">
+                <section className="eventos-container">
                     {eventos && eventos.length > 0 ? (
-                        <div>
+                        <div className="eventos-list">
                             {eventos.map((evento, index) => (
                                 <Evento
                                     key={index}
@@ -211,7 +210,7 @@ export function Eventos() {
                             Não existe nenhum evento cadastrado!
                         </p>
                     )}
-                </Col>
+                </section>
                 {/* Formulário dentro do Modal, ideal seria componentizar também, pois é parecido com o Modal de editar */}
                 <Modal show={isCreated} onHide={() => setIsCreated(false)}>
                     <Modal.Header>
@@ -267,7 +266,6 @@ export function Eventos() {
                                     },
                                 })}
                             />
-                              
                         </Modal.Body>
                         <Modal.Footer>
                             <Button variant="primary" type="submit">

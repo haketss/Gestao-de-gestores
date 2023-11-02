@@ -92,7 +92,6 @@ export function Gestors() {
                 senhaProvisoriaGestor: data.senhaProvisoriaGestor,
                 metasGestor: data.metasGestor,
                 atendimentosGestor: data.atendimentosGestor,
-                
             });
             console.log("gestor updated successfully.");
             await findGestors();
@@ -117,7 +116,7 @@ export function Gestors() {
 
     return (
         <Container fluid>
-            <Bar></Bar>
+            <Bar />
 
             <Container>
                 <Col className="w-5 m-auto mb-5">
@@ -137,6 +136,7 @@ export function Gestors() {
                             <Link id="tituloto" to="/gestorse">
                                 Adicionar
                                 <svg
+                                    id="bibi"
                                     xmlns="http://www.w3.org/2000/svg"
                                     width="32"
                                     height="32"
@@ -149,23 +149,51 @@ export function Gestors() {
                                 </svg>
                             </Link>
                         </Button>
-                    </li>{" "}
-                    {gestors && gestors.length > 0 ? (
-                        gestors.map((gestor, index) => (
-                            <Gestor
-                                key={index}
-                                gestor={gestor}
-                                removeGestor={async () =>
-                                    await removeGestor(gestor.id)
-                                }
-                                editGestor={editGestor}
-                            />
-                        ))
-                    ) : (
-                        <p className="text-center">
-                            Não existe nenhum gestor cadastrado!
-                        </p>
-                    )}
+                    </li>
+                    <Table striped bordered hover>
+                        <thead>
+                            <tr>
+                                <th>#</th>
+                                <th>Nome</th>
+                                <th>genero</th>
+                                <th>idade</th>
+                                <th>local de trabalho</th>
+                                <th>CRM</th>
+                                <th>Formação</th>
+                                <th>Tipo de contrato</th>
+                                <th>Senha provisoria</th>
+                                <th>Meta</th>
+                                <th>Atendimento</th>
+                                <th></th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            {gestors.map((gestor) => (
+                                <tr key={gestor.id}>
+                                    <td>😀</td>
+                                    <td>{gestor.nome}</td>
+                                    <td>{gestor.genero}</td>
+                                    <td>{gestor.idade}</td>
+                                    <td>{gestor.localDeTrabalho}</td>
+                                    <td>{gestor.CRM}</td>
+                                    <td>{gestor.formacao}</td>
+                                    <td>{gestor.tipoDeContrato}</td>
+                                    <td>{gestor.senhaProvisoria}</td>
+                                    <td>{gestor.metas}</td>
+                                    <td>{gestor.atendimentos}</td>
+                                    <td>
+                                        <Gestor
+                                            gestor={gestor}
+                                            removeGestor={async () =>
+                                                await removeGestor(gestor.id)
+                                            }
+                                            editGestor={editGestor}
+                                        />
+                                    </td>
+                                </tr>
+                            ))}
+                        </tbody>
+                    </Table>
                 </Col>
 
                 <Modal show={isCreated} onHide={() => setIsCreated(false)}>
