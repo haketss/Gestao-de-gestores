@@ -93,191 +93,222 @@ export function Gestor(props) {
                 </Modal.Header>
                 <Form noValidate onSubmit={handleSubmit(editGestor)}>
                     <Modal.Body>
-                        <Input
-                            className="mb-3"
-                            type="text"
-                            defaultValue={props.gestor.nome}
-                            label="Nome do Gestor"
-                            placeholder=""
-                            required={true}
-                            name="nomeGestor"
-                            error={errors.nomeGestor}
-                            validations={register("nomeGestor", {
-                                required: {
-                                    value: true,
-                                    message: "Nome do  é obrigatório.",
-                                },
-                            })}
-                        />
-                        <Input
-                            className="mb-3"
-                            type="text"
-                            defaultValue={props.gestor.sobrenome}
-                            label=" sobrenome"
-                            placeholder=""
-                            required={true}
-                            name="sobrenomeGestor"
-                            error={errors.sobrenomeGestor}
-                            validations={register("sobrenomeGestor", {
-                                required: {
-                                    value: true,
-                                    message:
-                                        "Sovrenome do gestor é obrigatório.",
-                                },
-                            })}
-                        />
-                        <Input
-                            className="mb-3"
-                            type="text"
-                            defaultValue={props.gestor.genero}
-                            label="genero"
-                            placeholder=""
-                            required={true}
-                            name="generoGestor"
-                            error={errors.generoGestor}
-                            validations={register("generoGestor", {
-                                required: {
-                                    value: true,
-                                    message: "genero do gestor é obrigatório.",
-                                },
-                            })}
-                        />
-                        <Input
-                            className="mb-3"
-                            type="INTEGER"
-                            defaultValue={props.gestor.idade}
-                            label="idade"
-                            placeholder=""
-                            required={true}
-                            name="idadeGestor"
-                            error={errors.idadeGestor}
-                            validations={register("idadeGestor", {
-                                required: {
-                                    value: true,
-                                    message: "idade do gestor é obrigatório.",
-                                },
-                            })}
-                        />
+                        <td>
+                            {" "}
+                            <Input
+                                className="mb-3"
+                                type="text"
+                                defaultValue={props.gestor.nome}
+                                label="Nome do Gestor"
+                                placeholder=""
+                                required={true}
+                                name="nomeGestor"
+                                error={errors.nomeGestor}
+                                validations={register("nomeGestor", {
+                                    required: {
+                                        value: true,
+                                        message: "Nome do  é obrigatório.",
+                                    },
+                                })}
+                            />
+                        </td>
+                        <td>
+                            <Input
+                                className="mb-3"
+                                type="text"
+                                defaultValue={props.gestor.sobrenome}
+                                label=" sobrenome"
+                                placeholder=""
+                                required={true}
+                                name="sobrenomeGestor"
+                                error={errors.sobrenomeGestor}
+                                validations={register("sobrenomeGestor", {
+                                    required: {
+                                        value: true,
+                                        message:
+                                            "Sovrenome do gestor é obrigatório.",
+                                    },
+                                })}
+                            />
+                        </td><br/>
+                        <td>
+                            {" "}
+                            <Input
+                                className="mb-3"
+                                type="text"
+                                defaultValue={props.gestor.genero}
+                                label="genero"
+                                placeholder=""
+                                required={true}
+                                name="generoGestor"
+                                error={errors.generoGestor}
+                                validations={register("generoGestor", {
+                                    required: {
+                                        value: true,
+                                        message:
+                                            "genero do gestor é obrigatório.",
+                                    },
+                                })}
+                            />
+                        </td>
+                        <td>
+                            {" "}
+                            <Input
+                                className="mb-3"
+                                type="INTEGER"
+                                defaultValue={props.gestor.idade}
+                                label="idade"
+                                placeholder=""
+                                required={true}
+                                name="idadeGestor"
+                                error={errors.idadeGestor}
+                                validations={register("idadeGestor", {
+                                    required: {
+                                        value: true,
+                                        message:
+                                            "idade do gestor é obrigatório.",
+                                    },
+                                })}
+                            />
+                        </td><br/>
+                        <td>
+                            <Input
+                                className="mb-3"
+                                type="date"
+                                defaultValue={props.gestor.dataDeNascimento}
+                                label="Data de nacimento"
+                                placeholder=""
+                                required={true}
+                                name="dataDeNascimentoGestor"
+                                error={errors.dataDeNascimentoGestor}
+                                validations={register(
+                                    "dataDeNascimentoGestor",
+                                    {
+                                        required: {
+                                            value: true,
+                                            message:
+                                                "Data de nacimento do gestor é obrigatório.",
+                                        },
+                                    }
+                                )}
+                            />
+                        </td>
+                        <td>
+                            {" "}
+                            <Input
+                                className="mb-3"
+                                type="text"
+                                defaultValue={props.gestor.localDeTrabalho}
+                                label="local De Trabalho"
+                                placeholder=""
+                                required={true}
+                                name="localDeTrabalhoGestor"
+                                error={errors.localDeTrabalhoGestor}
+                                validations={register("localDeTrabalhoGestor", {
+                                    required: {
+                                        value: true,
+                                        message:
+                                            "Local de trabalho do gestor é obrigatório.",
+                                    },
+                                })}
+                            />
+                        </td><br/>
+                        <td>
+                            <Input
+                                className="mb-3"
+                                type="text"
+                                defaultValue={props.gestor.CRM}
+                                label="CRM"
+                                placeholder=""
+                                required={true}
+                                name="CRMGestor"
+                                error={errors.CRMGestor}
+                                validations={register("CRMGestor", {
+                                    required: {
+                                        value: true,
+                                        message: "CRM do gestor é obrigatório.",
+                                    },
+                                })}
+                            />
+                        </td>
+                        <td>
+                            <Input
+                                className="mb-3"
+                                type="text"
+                                defaultValue={props.gestor.tipoDeContrato}
+                                label=" tipo De Contrato"
+                                placeholder=""
+                                required={true}
+                                name="tipoDeContratoGestor"
+                                error={errors.tipoDeContratoGestor}
+                                validations={register("tipoDeContratoGestor", {
+                                    required: {
+                                        value: true,
+                                        message:
+                                            "Tipo de contrato do gestor é obrigatório.",
+                                    },
+                                })}
+                            />
+                        </td><br/>
+                        <td>
+                            <Input
+                                className="mb-3"
+                                type="text"
+                                defaultValue={props.gestor.formacao}
+                                label="Formação"
+                                placeholder=""
+                                required={true}
+                                name="formacaoGestor"
+                                error={errors.formacaoGestor}
+                                validations={register("formacaoGestor", {
+                                    required: {
+                                        value: true,
+                                        message:
+                                            "Formação do gestor é obrigatório.",
+                                    },
+                                })}
+                            />
+                        </td>
+                        <td>
+                            {" "}
+                            <Input
+                                className="mb-3"
+                                type="text"
+                                defaultValue={props.gestor.senhaProvisoria}
+                                label="senha Provisoria"
+                                placeholder=""
+                                required={true}
+                                name="senhaProvisoriaGestor"
+                                error={errors.senhaProvisoriaGestor}
+                                validations={register("senhaProvisoriaGestor", {
+                                    required: {
+                                        value: true,
+                                        message:
+                                            "Senha Provisoria do gestor é obrigatório.",
+                                    },
+                                })}
+                            />
+                        </td>
+                        <td>
+                            <Input
+                                className="mb-3"
+                                type="text"
+                                defaultValue={props.gestor.metas}
+                                label="Metas"
+                                placeholder=""
+                                required={true}
+                                name="metasGestor"
+                                error={errors.metasGestor}
+                                validations={register("metasGestor", {
+                                    required: {
+                                        value: true,
+                                        message:
+                                            "Senha Provisoria do gestor é obrigatório.",
+                                    },
+                                })}
+                            />
+                        </td>
 
-                        <Input
-                            className="mb-3"
-                            type="date"
-                            defaultValue={props.gestor.dataDeNascimento}
-                            label="Data de nacimento"
-                            placeholder=""
-                            required={true}
-                            name="dataDeNascimentoGestor"
-                            error={errors.dataDeNascimentoGestor}
-                            validations={register("dataDeNascimentoGestor", {
-                                required: {
-                                    value: true,
-                                    message:
-                                        "Data de nacimento do gestor é obrigatório.",
-                                },
-                            })}
-                        />
-                        <Input
-                            className="mb-3"
-                            type="text"
-                            defaultValue={props.gestor.localDeTrabalho}
-                            label="local De Trabalho"
-                            placeholder=""
-                            required={true}
-                            name="localDeTrabalhoGestor"
-                            error={errors.localDeTrabalhoGestor}
-                            validations={register("localDeTrabalhoGestor", {
-                                required: {
-                                    value: true,
-                                    message:
-                                        "Local de trabalho do gestor é obrigatório.",
-                                },
-                            })}
-                        />
-                        <Input
-                            className="mb-3"
-                            type="text"
-                            defaultValue={props.gestor.CRM}
-                            label="CRM"
-                            placeholder=""
-                            required={true}
-                            name="CRMGestor"
-                            error={errors.CRMGestor}
-                            validations={register("CRMGestor", {
-                                required: {
-                                    value: true,
-                                    message: "CRM do gestor é obrigatório.",
-                                },
-                            })}
-                        />
-                        <Input
-                            className="mb-3"
-                            type="text"
-                            defaultValue={props.gestor.tipoDeContrato}
-                            label=" tipo De Contrato"
-                            placeholder=""
-                            required={true}
-                            name="tipoDeContratoGestor"
-                            error={errors.tipoDeContratoGestor}
-                            validations={register("tipoDeContratoGestor", {
-                                required: {
-                                    value: true,
-                                    message:
-                                        "Tipo de contrato do gestor é obrigatório.",
-                                },
-                            })}
-                        />
-
-                        <Input
-                            className="mb-3"
-                            type="text"
-                            defaultValue={props.gestor.formacao}
-                            label="Formação"
-                            placeholder=""
-                            required={true}
-                            name="formacaoGestor"
-                            error={errors.formacaoGestor}
-                            validations={register("formacaoGestor", {
-                                required: {
-                                    value: true,
-                                    message:
-                                        "Formação do gestor é obrigatório.",
-                                },
-                            })}
-                        />
-                        <Input
-                            className="mb-3"
-                            type="text"
-                            defaultValue={props.gestor.senhaProvisoria}
-                            label="senha Provisoria"
-                            placeholder=""
-                            required={true}
-                            name="senhaProvisoriaGestor"
-                            error={errors.senhaProvisoriaGestor}
-                            validations={register("senhaProvisoriaGestor", {
-                                required: {
-                                    value: true,
-                                    message:
-                                        "Senha Provisoria do gestor é obrigatório.",
-                                },
-                            })}
-                        />
-                        <Input
-                            className="mb-3"
-                            type="text"
-                            defaultValue={props.gestor.metas}
-                            label="Metas"
-                            placeholder=""
-                            required={true}
-                            name="metasGestor"
-                            error={errors.metasGestor}
-                            validations={register("metasGestor", {
-                                required: {
-                                    value: true,
-                                    message:
-                                        "Senha Provisoria do gestor é obrigatório.",
-                                },
-                            })}
-                        />
                         <Input
                             className="mb-3"
                             type="text"

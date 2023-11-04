@@ -357,6 +357,12 @@ li {
   border-color: rgb(255, 255, 255);
 }
 
+#atendimentosGestor {
+  background-color: rgb(208, 249, 255, 1);
+  border-radius: 1;
+  border-color: rgb(255, 255, 255);
+}
+
 #adicionar {
   border-radius: 0;
   margin-left: 40%;

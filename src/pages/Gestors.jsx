@@ -16,6 +16,7 @@ import "../index.css";
 import { Gestor } from "../components/Gestor";
 import { Bar } from "../components/bar";
 import { Input } from "../components/Input";
+import { Contador } from "../components/contador";
 
 import {
     createGestor,
@@ -114,6 +115,8 @@ export function Gestors() {
         }
     }
 
+    
+
     return (
         <Container fluid>
             <Bar />
@@ -150,6 +153,7 @@ export function Gestors() {
                             </Link>
                         </Button>
                     </li>
+                  
                     <Table striped bordered hover>
                         <thead>
                             <tr>
