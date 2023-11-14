@@ -16,7 +16,6 @@ import "../index.css";
 import { Gestor } from "../components/Gestor";
 import { Bar } from "../components/bar";
 import { Input } from "../components/Input";
-import { Contador } from "../components/contador";
 
 import {
     createGestor,
@@ -28,6 +27,7 @@ import {
 export function Gestors() {
     const [gestors, setGestors] = useState([]);
     const [isCreated, setIsCreated] = useState(false);
+    const [modalTest, setModalTest] = useState(false);
 
     const [orderBy, setOrderBy] = useState("nome");
     const [selectedCRM, setSelectedCRM] = useState("");
@@ -115,15 +115,13 @@ export function Gestors() {
         }
     }
 
-    
-
     return (
-        <Container fluid>
-            <Bar />
+        <>
+            <Container fluid>
+                <Bar />
 
-            <Container>
-                <Col className="w-5 m-auto mb-5">
-                    <li>
+                <Col >
+                    <section>
                         {" "}
                         <input
                             id="inpsharch"
@@ -152,8 +150,8 @@ export function Gestors() {
                                 </svg>
                             </Link>
                         </Button>
-                    </li>
-                  
+                    </section>
+
                     <Table striped bordered hover>
                         <thead>
                             <tr>
@@ -223,6 +221,6 @@ export function Gestors() {
                     </Form>
                 </Modal>
             </Container>
-        </Container>
+        </>
     );
 }

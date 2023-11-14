@@ -5,7 +5,6 @@ import { Link, useNavigate } from "react-router-dom";
 
 import "../index.css";
 import { Input } from "../components/Input";
-//import { Header } from '../components/Header';
 import { Modal } from "../components/Modal";
 import { Bar } from "../components/barlogin";
 
@@ -34,68 +33,100 @@ export function Register() {
     };
 
     return (
-        <Container className="mt-5">
+        <>
             <Bar />
-            <Modal
-                show={result}
-                title={result?.title}
-                message={result?.message}
-                handleClose={() => setResult(null)}
-            />
-            <Form
-                id="form"
-                noValidate
-                validated={!!errors}
-                onSubmit={handleSubmit(onSubmit)}
-            >
-                <Col className=".bg-white  p-5 m-auto novalidate border-top-style:">
-                    E-mail:
-                    <Input
-                        className="m-1 shadow"
+            <div id="retangulo" class="rectangle">
+                a
+            </div>
+            <Container>
+                <Modal
+                    show={result}
+                    title={result?.title}
+                    message={result?.message}
+                    handleClose={() => setResult(null)}
+                />
+                <Form
+                    id="form"
+                    noValidate
+                    validated={!!errors}
+                    onSubmit={handleSubmit(onSubmit)}
+                >
+                    {" "}
+                    <img
+                        id="imagemDeLogin"
+                        src="https://th.bing.com/th/id/OIG.4F7FJQwjdZKK6AGooVVj?pid=ImgGn"
+                        width={200}
+                    ></img>
+                    <Col
                         id="inputs"
-                        type="text"
-                        placeholder="Insira seu e-mail"
-                        error={errors.email}
-                        required={true}
-                        name="email"
-                        validations={register("email", {
-                            required: {
-                                value: true,
-                                message: "E-mail é obrigatório",
-                            },
-                            pattern: {
-                                value: /^[a-z0-9.]+@[a-z0-9]+\.[a-z]+(\.[a-z]+)?$/i,
-                                message: "E-mail inválido!",
-                            },
-                        })}
-                    />
-                    Senha:
-                    <Input
-                        className="m-1 shadow"
-                        id="inputs"
-                        type="password"
-                        placeholder="Insira sua senha"
-                        error={errors.password}
-                        required={true}
-                        name="password"
-                        validations={register("password", {
-                            required: {
-                                value: true,
-                                message: "Senha é obrigatório",
-                            },
-                        })}
-                    />
-                    <lu id="criar-3">Esqueceu a senha?</lu>
-                    <div className="d-flex justify-content-between">
-                        <Button id="entrar" type="submit">
-                            Criar
-                        </Button>
-                    </div>{" "}
-                    <Link id="criar-2" to="/">
-                        Já tenho minha conta
-                    </Link>
-                </Col>
-            </Form>
-        </Container>
+                        className=".bg-white  p-5 m-auto novalidate border-top-style:"
+                    >
+                        E-mail:
+                        <Input
+                            className="m-1"
+                            type="text"
+                            placeholder="Insira seu e-mail"
+                            error={errors.email}
+                            required={true}
+                            name="email"
+                            validations={register("email", {
+                                required: {
+                                    value: true,
+                                    message: "E-mail é obrigatório",
+                                },
+                                pattern: {
+                                    value: /^[a-z0-9.]+@[a-z0-9]+\.[a-z]+(\.[a-z]+)?$/i,
+                                    message: "E-mail inválido!",
+                                },
+                            })}
+                        />
+                        Senha:
+                        <Input
+                            className="m-1 shadow"
+                            
+                            type="password"
+                            placeholder="Insira sua senha"
+                            error={errors.password}
+                            required={true}
+                            name="password"
+                            validations={register("password", {
+                                required: {
+                                    value: true,
+                                    message: "Senha é obrigatório",
+                                },
+                            })}
+                        />
+                        <lu id="criar-3">Esqueceu a senha?</lu>
+                        <div className="d-flex justify-content-between">
+                            <Button id="entrar" type="submit">
+                                Criar
+                            </Button>
+                        </div>{" "}
+                        <Link id="criar-2" to="/">
+                            Já tenho minha conta
+                        </Link>
+                    </Col>
+                </Form>
+                <br />
+                <label id="subtitulo">
+                    <p>
+                        <strong>Referência:</strong>
+                        <br />
+                        Silva, Joana. "Inovações na Gestão Hospitalar: Um Estudo
+                        de Caso". Revista de Saúde e Tecnologia, 15 de abril de
+                        2023. Disponível em: [URL fictício].
+                    </p>
+                    <p>
+                        <strong>Contato:</strong>
+                        <br />
+                        Hospital Esperança Endereço: Rua Flores, 123, Bairro
+                        Saúde, Cidade Feliz, Estado Feliz, CEP 12345-678
+                        Telefone: (012) 3456-7890 E-mail:
+                        contato@hospital-esperanca.com Website:
+                        www.hospital-esperanca.com.br
+                    </p>
+                </label>
+            </Container>
+        </>
     );
 }

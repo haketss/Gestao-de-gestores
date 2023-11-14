@@ -2,14 +2,11 @@ import { useState } from "react";
 import { Button, Col, Container, Form } from "react-bootstrap";
 import { useForm } from "react-hook-form";
 import { Link, useNavigate } from "react-router-dom";
-
-import "../index.css";
 import { Input } from "../components/Input";
 import { Bar } from "../components/barlogin";
-
- 
-
+import "../index.css";
 import { loginUser } from "../services/user-services";
+import { Modal } from "../components/Modal";
 
 export function Login() {
     const {
@@ -34,17 +31,30 @@ export function Login() {
     };
 
     return (
-        <Container className="mt-2">
-          <Bar />
-          
+        <>
+            <Bar />
+            <div id="retangulo" class="rectangle">
+                a
+            </div>
             <Container>
+                <Modal 
+                    noValidate
+                    validated={!!errors}
+                    onSubmit={handleSubmit(onSubmit)}
+                    />
+                    
                 <Form
                     id="form"
                     noValidate
                     validated={!!errors}
                     onSubmit={handleSubmit(onSubmit)}
-                ><img src="https://th.bing.com/th/id/OIG.4F7FJQwjdZKK6AGooVVj?pid=ImgGn" width={200}></img>
-            
+                >
+                    <img
+                        id="imagemDeLogin"
+                        src="https://th.bing.com/th/id/OIG.4F7FJQwjdZKK6AGooVVj?pid=ImgGn"
+                        width={200}
+                    ></img>
+
                     <Col
                         id="inputs"
                         className=".bg-white  p-5 m-auto novalidate border-top-style:"
@@ -52,7 +62,6 @@ export function Login() {
                         E-mail:
                         <Input
                             className="m-1"
-                            
                             type="text"
                             placeholder="Insira seu e-mail"
                             error={errors.email}
@@ -85,7 +94,7 @@ export function Login() {
                                 },
                             })}
                         />
-                        <lu id="criar-2">Esqueceu a senha?</lu>
+                        <lu id="criar-3">Esqueceu a senha?</lu>
                         <div className="d-flex justify-content-between">
                             <Button
                                 id="entrar"
@@ -103,7 +112,26 @@ export function Login() {
                         </div>
                     </Col>
                 </Form>
+                <br />
+                <label id="subtitulo">
+                    <p>
+                        <strong>Referência:</strong>
+                        <br />
+                        Silva, Joana. "Inovações na Gestão Hospitalar: Um Estudo
+                        de Caso". Revista de Saúde e Tecnologia, 15 de abril de
+                        2023. Disponível em: [URL fictício].
+                    </p>
+                    <p>
+                        <strong>Contato:</strong>
+                        <br />
+                        Hospital Esperança Endereço: Rua Flores, 123, Bairro
+                        Saúde, Cidade Feliz, Estado Feliz, CEP 12345-678
+                        Telefone: (012) 3456-7890 E-mail:
+                        contato@hospital-esperanca.com Website:
+                        www.hospital-esperanca.com.br
+                    </p>
+                </label>
             </Container>
-        </Container>
+        </>
     );
 }

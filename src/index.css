@@ -1,3 +1,10 @@
+#subtitulo{
+  background-color: rgb(239, 254, 254);
+}
+#imagemDeLogin {
+margin-left: 30%;
+}
+
 #item-1 {
   text-decoration: none;
   color: rgb(0, 0, 0);
@@ -129,11 +136,11 @@
 }
 
 #editeedele {
-  
+
   background-color: rgba(255, 255, 255, 0);
   color: rgb(0, 52, 136);
   border-color: rgb(255, 255, 255, 0);
-  
+
 }
 
 #editeedele:hover {
@@ -145,7 +152,7 @@
 }
 
 #editeedelet {
- 
+
   background-color: rgb(255, 255, 255, 0);
   color: rgb(0, 52, 136);
   border-color: rgb(255, 255, 255, 0);
@@ -624,4 +631,22 @@ li {
 
 .card {
   margin: 1.39%
+}
+
+/* navbar */
+
+#NavBar {
+  background-color: rgb(255, 255, 255);
+  
+
+
+}
+
+#retangulo {
+  color: rgb(0, 52, 136);
+  background-color: rgb(0, 52, 136);
+}
+
+.navbar.navbar--fixed-top {
+  position: sticky;
 }

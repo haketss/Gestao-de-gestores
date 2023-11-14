@@ -123,9 +123,9 @@ export function Dashbord(props) {
     }
 
     return (
-        <Container fluid>
+        <>
             <Bar />
-            <Container>
+            <Container fluid>
                 {" "}
                 <Chart
                     id="chart"
@@ -194,7 +194,8 @@ export function Dashbord(props) {
                                     />
                                 )}{" "}
                             </strong>
-                            Total de atendimentos: <strong>{totalSales} </strong>
+                            Total de atendimentos:{" "}
+                            <strong>{totalSales} </strong>
                         </li>
                     </p>{" "}
                     <p id="q_g">
@@ -322,6 +323,6 @@ export function Dashbord(props) {
                     </div>
                 </li>
             </Container>
-        </Container>
+        </>
     );
 }

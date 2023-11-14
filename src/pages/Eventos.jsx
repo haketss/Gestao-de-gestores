@@ -6,7 +6,6 @@ import { useForm } from "react-hook-form";
 
 import "../index.css";
 import { Evento } from "../components/Evento";
-import { Gestor } from "../components/Gestor";
 
 import { Input } from "../components/Input";
 import { Bar } from "../components/bar";
@@ -18,84 +17,25 @@ import {
     updateEvento,
 } from "../services/evento-service";
 
-import {
-    createGestor,
-    deleteGestor,
-    getGestors,
-    updateGestor,
-} from "../services/gestor-service";
-
 export function Eventos() {
-    const [gestors, setGestors] = useState([]);
+    const [modalTest, setModalTest] = useState(false);
     const [eventos, setEventos] = useState([]);
     const [isCreated, setIsCreated] = useState(false);
     const nomesEventos = eventos.map((evento) => evento.nome);
-    const [orderBy, setOrderBy] = useState("nome");
     const [selectedid, setSelectedid] = useState("");
+    const navigate = useNavigate();
+    const [searchTerm, setSearchTerm] = useState("");
+
     const {
         handleSubmit,
         register,
         formState: { errors },
     } = useForm();
-    const navigate = useNavigate();
 
     useEffect(() => {
         findEventos();
         // eslint-disable-next-line
     }, []);
-
-    async function findGestors(searchTerm) {
-        try {
-            console.log("Searching with term:", searchTerm);
-            const result = await getGestors(searchTerm);
-            setGestors(result.data);
-            console.log("Search result:", result.data);
-        } catch (error) {
-            console.error(error);
-            navigate("/");
-        }
-    }
-    async function editGestor(data) {
-        try {
-            console.log("Editing gestor with data:", data);
-            // ...
-            await updateGestor({
-                id: data.id,
-                nomeGestor: data.nomeGestor,
-                sobrenomeGestor: data.sobrenomeGestor,
-                idadeGestor: data.idadeGestor,
-                generoGestor: data.generoGestor,
-                dataDeNascimentoGestor: data.dataDeNascimentoGestor,
-                localDeTrabalhoGestor: data.localDeTrabalhoGestor,
-                CRMGestor: data.CRMGestor,
-                tipoDeContratoGestor: data.tipoDeContratoGestor,
-                formacaoGestor: data.formacaoGestor,
-                senhaProvisoriaGestor: data.senhaProvisoriaGestor,
-                metasGestor: data.metasGestor,
-                vendasGestor: data.vendasGestor,
-                eventosPGestor: data.eventosPGestor,
-            });
-            console.log("gestor updated successfully.");
-            await findGestors();
-        } catch (error) {
-            console.error(error);
-        }
-    }
-
-    function handleOrderBy(criterion) {
-        const sortedEventos = [...eventos];
-        sortedEventos.sort((a, b) => {
-            if (criterion === "nome") {
-                return a.nome.localeCompare(b.nome);
-            } else if (criterion === "data") {
-                return new Date(a.data) - new Date(b.data);
-            }
-            // Add more sorting criteria as needed
-            return 0;
-        });
-
-        setEventos(sortedEventos);
-    }
 
     async function findEventos() {
         try {
@@ -125,13 +65,13 @@ export function Eventos() {
             setIsCreated(false);
             await findEventos();
         } catch (error) {
-            console.error(error);
+            console.error("Error creat evento:", error);
         }
     }
 
     async function editEvento(data) {
         try {
-            console.log("Editing event with data:", data);
+            console.log("Editando o evento:", data);
             // ...
             await updateEvento({
                 id: data.id,
@@ -140,14 +80,13 @@ export function Eventos() {
                 adendo: data.adendoEvento,
             });
             alert("O evento foi alterado com sucesso!");
-            console.log("Event updated successfully.");
+            console.log("Evento alterado com sucesso.");
             await findEventos();
         } catch (error) {
             console.error("Error editing event:", error);
         }
     }
 
-    const [searchTerm, setSearchTerm] = useState("");
     async function handleSearch() {
         try {
             const result = await getEventos();
@@ -163,7 +102,7 @@ export function Eventos() {
     }
 
     return (
-        <Container fluid>
+        <>
             <Bar />
 
             <Container>
@@ -281,6 +220,6 @@ export function Eventos() {
                     </Form>
                 </Modal>
             </Container>
-        </Container>
+        </>
     );
 }

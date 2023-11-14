@@ -8,6 +8,7 @@ import {
     Offcanvas,
 } from "react-bootstrap";
 
+
 export function Bar() {
     return (
         <>
@@ -15,12 +16,13 @@ export function Bar() {
                 <Navbar
                     key={expand}
                     expand={expand}
-                    className="bg-body-tertiary mb-3"
+                    className="navbar navbar--fixed-top navbar navbar--fixed-top navbar-sidebar--show"
+                    id="NavBar"
                 >
                     <Container fluid>
-                        <Navbar.Brand href="#">Inicio</Navbar.Brand>
-                        <Navbar.Brand href="#">Gestores</Navbar.Brand>
-                        <Navbar.Brand href="#">Eventos</Navbar.Brand>
+                        <Navbar.Brand href="#"></Navbar.Brand>
+                        <Navbar.Brand href="#"></Navbar.Brand>
+                        <Navbar.Brand href="#"></Navbar.Brand>
 
                         <Navbar.Offcanvas
                             id={`offcanvasNavbar-expand-${expand}`}
@@ -36,31 +38,21 @@ export function Bar() {
                             </Offcanvas.Header>
                             <Offcanvas.Body>
                                 <Nav className="justify-content-end flex-grow-1 pe-8">
-                                    <Nav.Link href="#action1">Bem vimdo!!!</Nav.Link>
-                                    <Nav.Link href="#action2">Nomedogestor</Nav.Link>
-                                    <Nav.Link href="#action3">Icone</Nav.Link>
-                                    <Nav.Link href="#action4">Cone</Nav.Link>
-                                    <NavDropdown
-                                        title="Dropdown"
-                                        id={`offcanvasNavbarDropdown-expand-${expand}`}
-                                    >
-                                        <NavDropdown.Item href="#action5">
-                                            Perfil
-                                        </NavDropdown.Item>
-                                        <NavDropdown.Item href="#action6">
-                                            Tema
-                                        </NavDropdown.Item>
-                                        <NavDropdown.Item href="#action7">
-                                            Ajuda
-                                        </NavDropdown.Item>
-                                        <NavDropdown.Divider />
-                                        <NavDropdown.Item href="#action8">
-                                            Sair
-                                        </NavDropdown.Item>
-                                    </NavDropdown>
+                                    <Nav.Link href="#action1">
+                                        Bem vindo!!! 
+                                    </Nav.Link>
+                                    <Nav.Link href="#action2" >
+                                        entre com sua conta
+                                    </Nav.Link>
+                                    <Nav.Link href="#action2">
+                                        ajuda
+                                    </Nav.Link>
+                                    <Nav.Link href="#action4"></Nav.Link>
+                                    
                                 </Nav>
                             </Offcanvas.Body>
                         </Navbar.Offcanvas>
+                        
                     </Container>
                 </Navbar>
             ))}
