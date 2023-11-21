@@ -117,10 +117,10 @@ export function Gestors() {
 
     return (
         <>
-            <Container fluid>
-                <Bar />
-
-                <Col >
+            <Bar />
+          
+            <Container>
+                <Col>
                     <section>
                         {" "}
                         <input
@@ -151,51 +151,59 @@ export function Gestors() {
                             </Link>
                         </Button>
                     </section>
-
-                    <Table striped bordered hover>
-                        <thead>
-                            <tr>
-                                <th>#</th>
-                                <th>Nome</th>
-                                <th>genero</th>
-                                <th>idade</th>
-                                <th>local de trabalho</th>
-                                <th>CRM</th>
-                                <th>Formação</th>
-                                <th>Tipo de contrato</th>
-                                <th>Senha provisoria</th>
-                                <th>Meta</th>
-                                <th>Atendimento</th>
-                                <th></th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                            {gestors.map((gestor) => (
-                                <tr key={gestor.id}>
-                                    <td>😀</td>
-                                    <td>{gestor.nome}</td>
-                                    <td>{gestor.genero}</td>
-                                    <td>{gestor.idade}</td>
-                                    <td>{gestor.localDeTrabalho}</td>
-                                    <td>{gestor.CRM}</td>
-                                    <td>{gestor.formacao}</td>
-                                    <td>{gestor.tipoDeContrato}</td>
-                                    <td>{gestor.senhaProvisoria}</td>
-                                    <td>{gestor.metas}</td>
-                                    <td>{gestor.atendimentos}</td>
-                                    <td>
-                                        <Gestor
-                                            gestor={gestor}
-                                            removeGestor={async () =>
-                                                await removeGestor(gestor.id)
-                                            }
-                                            editGestor={editGestor}
-                                        />
-                                    </td>
-                                </tr>
-                            ))}
-                        </tbody>
-                    </Table>
+                    <Container>
+                        <div class="table-responsive">
+                            <Table class=" table table-light table-striped table-borderless caption-top">
+                                <thead class=" text-center">
+                                    <tr>
+                                        <th>#</th>
+                                        <th>Nome</th>
+                                        <th>genero</th>
+                                        <th>idade</th>
+                                        <th>local de trabalho</th>
+                                        <th>CRM</th>
+                                        <th>Formação</th>
+                                        <th>T.contrato</th>
+                                        <th>Senha.P</th>
+                                        <th>Meta</th>
+                                        <th>Atendimento</th>
+                                        <th>Alterações</th>
+                                    </tr>
+                                </thead>
+                                <tbody class=" text-center">
+                                    {gestors.map((gestor) => (
+                                        <tr key={gestor.id}>
+                                            <td>🟢</td>
+                                            <td>{gestor.nome}</td>
+                                            <td>{gestor.genero}</td>
+                                            <td>{gestor.idade}</td>
+                                            <td>{gestor.localDeTrabalho}</td>
+                                            <td>{gestor.CRM}</td>
+                                            <td>{gestor.formacao}</td>
+                                            <td>{gestor.tipoDeContrato}</td>
+                                            <td>{gestor.senhaProvisoria}</td>
+                                            <td>{gestor.metas}</td>
+                                            <td>{gestor.atendimentos}</td>
+                                            <td>
+                                                <Gestor
+                                                    gestor={gestor}
+                                                    removeGestor={async () =>
+                                                        await removeGestor(
+                                                            gestor.id
+                                                        )
+                                                    }
+                                                    editGestor={editGestor}
+                                                />
+                                            </td>
+                                        </tr>
+                                    ))}
+                                </tbody>
+                                <caption class="caption-top text-center">
+                                    Gestores cadastrado:
+                                </caption>
+                            </Table>
+                        </div>
+                    </Container>
                 </Col>
 
                 <Modal show={isCreated} onHide={() => setIsCreated(false)}>

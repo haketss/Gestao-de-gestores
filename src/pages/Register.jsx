@@ -35,9 +35,7 @@ export function Register() {
     return (
         <>
             <Bar />
-            <div id="retangulo" class="rectangle">
-                a
-            </div>
+           
             <Container>
                 <Modal
                     show={result}

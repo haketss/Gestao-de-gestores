@@ -1,8 +1,35 @@
-#subtitulo{
+
+#NavBara{
+  background-color:rgb(0, 52, 136)
+}
+
+#linksDaBarra{
+  text-decoration: none;
+  color: rgb(255, 255, 255);
+  
+  padding: 7px;
+  padding-bottom: 11px;
+}
+
+#graficoDeBarra {
+  margin-left: 10%;
+  border: 10%;
+  border-color: azure;
+}
+
+#valores {
+  padding-top: -50%;
+  border: 10%;
+  border-color: azure;
+}
+
+
+#subtitulo {
   background-color: rgb(239, 254, 254);
 }
+
 #imagemDeLogin {
-margin-left: 30%;
+  margin-left: 30%;
 }
 
 #item-1 {
@@ -249,8 +276,6 @@ li {
   margin-left: 1%;
   font-family: 'DM Sans', sans-serif;
 }
-
-
 
 #q_g {
   font-size: 25px;
@@ -630,16 +655,13 @@ li {
 }
 
 .card {
-  margin: 1.39%
+  margin: 1%
 }
 
 /* navbar */
 
 #NavBar {
   background-color: rgb(255, 255, 255);
-  
-
-
 }
 
 #retangulo {

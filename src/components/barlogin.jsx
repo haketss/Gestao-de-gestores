@@ -8,7 +8,6 @@ import {
     Offcanvas,
 } from "react-bootstrap";
 
-
 export function Bar() {
     return (
         <>
@@ -39,20 +38,16 @@ export function Bar() {
                             <Offcanvas.Body>
                                 <Nav className="justify-content-end flex-grow-1 pe-8">
                                     <Nav.Link href="#action1">
-                                        Bem vindo!!! 
-                                    </Nav.Link>
-                                    <Nav.Link href="#action2" >
-                                        entre com sua conta
+                                        Bem vindo!!!
                                     </Nav.Link>
                                     <Nav.Link href="#action2">
-                                        ajuda
+                                        entre com sua conta
                                     </Nav.Link>
+                                    <Nav.Link href="#action2">ajuda</Nav.Link>
                                     <Nav.Link href="#action4"></Nav.Link>
-                                    
                                 </Nav>
                             </Offcanvas.Body>
                         </Navbar.Offcanvas>
-                        
                     </Container>
                 </Navbar>
             ))}

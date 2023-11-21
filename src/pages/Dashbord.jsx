@@ -125,99 +125,100 @@ export function Dashbord(props) {
     return (
         <>
             <Bar />
-            <Container fluid>
-                {" "}
-                <Chart
-                    id="chart"
-                    chartType="Bar"
-                    width="100%"
-                    height="400px"
-                    data={[
-                        ["Gestores", "atendimentos", "Metas"],
-                        ...gestors
-                            .slice(0, maxGestorsToShow)
-                            .map((gestor) => [
-                                `${gestor.nome} `,
-                                gestor.atendimentos || 0,
-                                gestor.metas || 0,
-                            ]),
-                    ]}
-                    options={{
-                        chart: {
-                            title: "Resultados dos atendimentos",
-                            subtitle: "Metas e ganhos do ano: 2023",
-                        },
-                    }}
-                />{" "}
-                <p id="menumaism">
-                    {" "}
-                    <td
-                        onClick={() =>
-                            setMaxGestorsToShow(maxGestorsToShow + 5)
-                        }
-                    >
-                        <button id="menumais">Mostrar+</button>
+            <Container>
+                
+                    <td id="graficoDeBarra" Class="center">
+                        <Chart
+                            chartType="Bar"
+                            width="600px"
+                            height="400px"
+                            data={[
+                                ["Gestores", "atendimentos", "Metas"],
+                                ...gestors
+                                    .slice(0, maxGestorsToShow)
+                                    .map((gestor) => [
+                                        `${gestor.nome} `,
+                                        gestor.atendimentos || 0,
+                                        gestor.metas || 0,
+                                    ]),
+                            ]}
+                            options={{
+                                chart: {
+                                    title: "Resultados dos atendimentos",
+                                    subtitle: "Metas e ganhos do ano: 2023",
+                                },
+                            }}
+                        />
+                        <p id="menumaism">
+                            <td
+                                onClick={() =>
+                                    setMaxGestorsToShow(maxGestorsToShow + 5)
+                                }
+                            >
+                                <button id="menumais">Mostrar+</button>
+                            </td>
+                            <td
+                                onClick={() =>
+                                    setMaxGestorsToShow(maxGestorsToShow - 5)
+                                }
+                            >
+                                <button id="menumais">Mostrar-</button>
+                            </td>
+                        </p>
                     </td>
-                    <td
-                        onClick={() =>
-                            setMaxGestorsToShow(maxGestorsToShow - 5)
-                        }
-                    >
-                        <button id="menumais">Mostrar-</button>
+                    <td id="valores">
+                        <p id="q_g">
+                            <li>
+                                <img
+                                    id="imagen"
+                                    width={50}
+                                    src="https://static.vecteezy.com/system/resources/previews/000/379/094/original/edit-profile-vector-icon.jpg"
+                                ></img>
+                                Quantidade de gestors:
+                                <strong>{gestors.length}</strong>
+                                <strong>
+                                    {totalSales > 400 ? (
+                                        <img
+                                            id="imagen"
+                                            width={37}
+                                            src="   https://cdn-icons-png.flaticon.com/512/5610/5610930.png "
+                                            alt="Large Sales Icon"
+                                        />
+                                    ) : (
+                                        <img
+                                            id="imagen"
+                                            width={37}
+                                            src="https://cdn-icons-png.flaticon.com/512/5974/5974734.png"
+                                            alt="Small Sales Icon"
+                                        />
+                                    )}
+                                </strong>
+                                Total de atendimentos:
+                                <strong>{totalSales} </strong>
+                            </li>
+                        </p>
+                        <p id="q_g">
+                            <li>
+                                <img
+                                    id="imagen"
+                                    width={50}
+                                    src="https://th.bing.com/th/id/OIP.5HYVKNZNNUPOwvVY11yO3gHaHa?pid=ImgDet&rs=1"
+                                ></img>
+                                Total de Metas: <strong>{totalmeta} </strong>
+                            </li>
+                        </p>
+                        <p id="q_e">
+                            <img
+                                id="imagen"
+                                width={50}
+                                src="https://th.bing.com/th/id/OIP.MH2GSCtym73Bu2M_z288ywHaHa?pid=ImgDet&rs=1"
+                            ></img>
+                            Quantidade de Eventos: {eventos.length}
+                        </p>
                     </td>
-                </p>
+                
+
                 <li>
-                    <p id="q_g">
-                        <li>
-                            {" "}
-                            <img
-                                id="imagen"
-                                width={50}
-                                src="https://static.vecteezy.com/system/resources/previews/000/379/094/original/edit-profile-vector-icon.jpg"
-                            ></img>{" "}
-                            Quantidade de gestors:{" "}
-                            <strong>{gestors.length}</strong>{" "}
-                            <strong>
-                                {totalSales > 400 ? (
-                                    <img
-                                        id="imagen"
-                                        width={37}
-                                        src="   https://cdn-icons-png.flaticon.com/512/5610/5610930.png "
-                                        alt="Large Sales Icon"
-                                    />
-                                ) : (
-                                    <img
-                                        id="imagen"
-                                        width={37}
-                                        src="https://cdn-icons-png.flaticon.com/512/5974/5974734.png"
-                                        alt="Small Sales Icon"
-                                    />
-                                )}{" "}
-                            </strong>
-                            Total de atendimentos:{" "}
-                            <strong>{totalSales} </strong>
-                        </li>
-                    </p>{" "}
-                    <p id="q_g">
-                        <li>
-                            {" "}
-                            <img
-                                id="imagen"
-                                width={50}
-                                src="https://th.bing.com/th/id/OIP.5HYVKNZNNUPOwvVY11yO3gHaHa?pid=ImgDet&rs=1"
-                            ></img>{" "}
-                            Total de Metas: <strong>{totalmeta} </strong>
-                        </li>
-                    </p>
-                    <p id="q_e">
-                        {" "}
-                        <img
-                            id="imagen"
-                            width={50}
-                            src="https://th.bing.com/th/id/OIP.MH2GSCtym73Bu2M_z288ywHaHa?pid=ImgDet&rs=1"
-                        ></img>
-                        Quantidade de Eventos: {eventos.length}{" "}
-                    </p>{" "}
                     <div>
                         <ul class="nav-bar nav-pills nav-fill navbar  navbar-expand-md ">
                             <li className="nav-item">
@@ -250,8 +251,8 @@ export function Dashbord(props) {
                                             <strong>
                                                 Quantidade em % de cada gestor
                                                 no montante total
-                                            </strong>{" "}
-                                        </label>{" "}
+                                            </strong>
+                                        </label>
                                         <Chart
                                             width={300}
                                             height={300}

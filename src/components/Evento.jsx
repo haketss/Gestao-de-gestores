@@ -27,9 +27,7 @@ export function Evento(props) {
     }
 
     async function confirmDelete() {
-       confirmDelete = props.removeEvento();
-       
-           
+        confirmDelete = props.removeEvento();
     }
     function formatarData(dataString) {
         const data = new Date(dataString);
@@ -47,7 +45,6 @@ export function Evento(props) {
         return dataFormatada;
     }
 
-   
     return (
         <>
             <Card style={{ width: "18rem" }}>
@@ -60,11 +57,11 @@ export function Evento(props) {
                         <strong>Nome: </strong>
                         {props.evento.nome}
                     </Card.Title>
-                    <Card.Text id="chardssub">
+                    <Card.Text  id="chardssub">
                         <strong>Data do evento: </strong>
                         {formatarData(props.evento.data)}
                     </Card.Text>
-                    <Card.Text id="chardssub">
+                    <Card.Text class="align-middle text-center" id="chardssub">
                         <strong>Adendo: </strong>
                         {props.evento.adendo}
                     </Card.Text>

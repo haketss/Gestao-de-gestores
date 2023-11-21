@@ -104,7 +104,6 @@ export function Eventos() {
     return (
         <>
             <Bar />
-
             <Container>
                 <input
                     id="inpsharch"
@@ -130,7 +129,7 @@ export function Eventos() {
                         <path d="M14 4.5V14a2 2 0 0 1-2 2H4a2 2 0 0 1-2-2V2a2 2 0 0 1 2-2h5.5L14 4.5zm-3 0A1.5 1.5 0 0 1 9.5 3V1H4a1 1 0 0 0-1 1v12a1 1 0 0 0 1 1h8a1 1 0 0 0 1-1V4.5h-2z" />
                     </svg>
                 </Button>
-                <section className="eventos-container">
+                <Container>
                     {eventos && eventos.length > 0 ? (
                         <div className="eventos-list">
                             {eventos.map((evento, index) => (
@@ -149,76 +148,77 @@ export function Eventos() {
                             Não existe nenhum evento cadastrado!
                         </p>
                     )}
-                </section>
-                {/* Formulário dentro do Modal, ideal seria componentizar também, pois é parecido com o Modal de editar */}
-                <Modal show={isCreated} onHide={() => setIsCreated(false)}>
-                    <Modal.Header>
-                        <Modal.Title>Cadastrar novo evento</Modal.Title>
-                    </Modal.Header>
-                    <Form
-                        noValidate
-                        onSubmit={handleSubmit(addEvento)}
-                        validated={!!errors}
-                    >
-                        <Modal.Body>
-                            <Input
-                                className="mb-3"
-                                type="text"
-                                label="nome"
-                                placeholder="Insira o nome do evento"
-                                required={true}
-                                error={errors.nomeEvento}
-                                validations={register("nomeEvento", {
-                                    required: {
-                                        value: true,
-                                        message:
-                                            "Sovrenome do evento é obrigatório.",
-                                    },
-                                })}
-                            />
-                            <Input
-                                className="mb-3"
-                                type="datetime-local"
-                                label="Nome do evento"
-                                placeholder="Insira o nome do evento"
-                                required={true}
-                                error={errors.dataEvento}
-                                validations={register("dataEvento", {
-                                    required: {
-                                        value: true,
-                                        message:
-                                            "Nome do evento é obrigatório.",
-                                    },
-                                })}
-                            />
-                            <Input
-                                className="mb-3"
-                                type="text"
-                                label="adendo"
-                                placeholder="Insira um adendo do evento"
-                                required={true}
-                                error={errors.adendoEvento}
-                                validations={register("adendoEvento", {
-                                    required: {
-                                        value: true,
-                                        message: "erro?.",
-                                    },
-                                })}
-                            />
-                        </Modal.Body>
-                        <Modal.Footer>
-                            <Button variant="primary" type="submit">
-                                Criar
-                            </Button>
-                            <Button
-                                variant="secondary"
-                                onClick={() => setIsCreated(false)}
-                            >
-                                Fechar
-                            </Button>
-                        </Modal.Footer>
-                    </Form>
-                </Modal>
+
+                    {/* Formulário dentro do Modal, ideal seria componentizar também, pois é parecido com o Modal de editar */}
+                    <Modal show={isCreated} onHide={() => setIsCreated(false)}>
+                        <Modal.Header>
+                            <Modal.Title>Cadastrar novo evento</Modal.Title>
+                        </Modal.Header>
+                        <Form
+                            noValidate
+                            onSubmit={handleSubmit(addEvento)}
+                            validated={!!errors}
+                        >
+                            <Modal.Body>
+                                <Input
+                                    className="mb-3"
+                                    type="text"
+                                    label="nome"
+                                    placeholder="Insira o nome do evento"
+                                    required={true}
+                                    error={errors.nomeEvento}
+                                    validations={register("nomeEvento", {
+                                        required: {
+                                            value: true,
+                                            message:
+                                                "Sovrenome do evento é obrigatório.",
+                                        },
+                                    })}
+                                />
+                                <Input
+                                    className="mb-3"
+                                    type="datetime-local"
+                                    label="Nome do evento"
+                                    placeholder="Insira o nome do evento"
+                                    required={true}
+                                    error={errors.dataEvento}
+                                    validations={register("dataEvento", {
+                                        required: {
+                                            value: true,
+                                            message:
+                                                "Nome do evento é obrigatório.",
+                                        },
+                                    })}
+                                />
+                                <Input
+                                    className="mb-3"
+                                    type="text"
+                                    label="adendo"
+                                    placeholder="Insira um adendo do evento"
+                                    required={true}
+                                    error={errors.adendoEvento}
+                                    validations={register("adendoEvento", {
+                                        required: {
+                                            value: true,
+                                            message: "erro?.",
+                                        },
+                                    })}
+                                />
+                            </Modal.Body>
+                            <Modal.Footer>
+                                <Button variant="primary" type="submit">
+                                    Criar
+                                </Button>
+                                <Button
+                                    variant="secondary"
+                                    onClick={() => setIsCreated(false)}
+                                >
+                                    Fechar
+                                </Button>
+                            </Modal.Footer>
+                        </Form>
+                    </Modal>
+                </Container>
             </Container>
         </>
     );

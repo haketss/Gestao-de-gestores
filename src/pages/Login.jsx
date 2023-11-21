@@ -33,9 +33,7 @@ export function Login() {
     return (
         <>
             <Bar />
-            <div id="retangulo" class="rectangle">
-                a
-            </div>
+            
             <Container>
                 <Modal 
                     noValidate
