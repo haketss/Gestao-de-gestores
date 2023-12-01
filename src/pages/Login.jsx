@@ -33,14 +33,14 @@ export function Login() {
     return (
         <>
             <Bar />
-            
-            <Container>
-                <Modal 
+            <p class="align-middle" id="barraColorida">a</p>
+            <Container class=" border-dark border-top border-bottom border-5 ">
+                <Modal
                     noValidate
                     validated={!!errors}
                     onSubmit={handleSubmit(onSubmit)}
-                    />
-                    
+                />
+
                 <Form
                     id="form"
                     noValidate
@@ -59,7 +59,7 @@ export function Login() {
                     >
                         E-mail:
                         <Input
-                            className="m-1"
+                            className="mx-alto"
                             type="text"
                             placeholder="Insira seu e-mail"
                             error={errors.email}
@@ -103,26 +103,29 @@ export function Login() {
                             </Button>
                         </div>
                         <div>
-                            <a id="criar-2">Ou crie uma conta</a>
-                            <Link id="criar" to="/register">
+                            <a id="criar-2">Ou crie uma conta </a>
+                            <Link  class="text-center" to="/register">
                                 aqui!
                             </Link>
                         </div>
                     </Col>
                 </Form>
                 <br />
+            </Container>
+            <Container>
+                {" "}
                 <label id="subtitulo">
-                    <p>
-                        <strong>Referência:</strong>
+                    <p class="text-center">
+                        <strong>Referência: Silva, Joana.</strong>
                         <br />
-                        Silva, Joana. "Inovações na Gestão Hospitalar: Um Estudo
+                         "Inovações na Gestão Hospitalar: Um Estudo
                         de Caso". Revista de Saúde e Tecnologia, 15 de abril de
                         2023. Disponível em: [URL fictício].
                     </p>
-                    <p>
-                        <strong>Contato:</strong>
+                    <p class="text-center">
+                        <strong>Contato: Hospital Esperança</strong>
                         <br />
-                        Hospital Esperança Endereço: Rua Flores, 123, Bairro
+                        Endereço: Rua Flores, 123, Bairro
                         Saúde, Cidade Feliz, Estado Feliz, CEP 12345-678
                         Telefone: (012) 3456-7890 E-mail:
                         contato@hospital-esperanca.com Website:

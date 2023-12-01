@@ -35,8 +35,8 @@ export function Register() {
     return (
         <>
             <Bar />
-           
-            <Container>
+            <p class="align-middle" id="barraColorida">a</p>
+            <Container >
                 <Modal
                     show={result}
                     title={result?.title}
@@ -81,7 +81,6 @@ export function Register() {
                         Senha:
                         <Input
                             className="m-1 shadow"
-                            
                             type="password"
                             placeholder="Insira sua senha"
                             error={errors.password}
@@ -106,21 +105,23 @@ export function Register() {
                     </Col>
                 </Form>
                 <br />
+            </Container>
+            <Container>
+            
                 <label id="subtitulo">
-                    <p>
-                        <strong>Referência:</strong>
+                    <p class="text-center">
+                        <strong>Referência: Silva, Joana.</strong>
                         <br />
-                        Silva, Joana. "Inovações na Gestão Hospitalar: Um Estudo
-                        de Caso". Revista de Saúde e Tecnologia, 15 de abril de
-                        2023. Disponível em: [URL fictício].
+                        "Inovações na Gestão Hospitalar: Um Estudo de Caso".
+                        Revista de Saúde e Tecnologia, 15 de abril de 2023.
+                        Disponível em: [URL fictício].
                     </p>
-                    <p>
-                        <strong>Contato:</strong>
+                    <p class="text-center">
+                        <strong>Contato: Hospital Esperança</strong>
                         <br />
-                        Hospital Esperança Endereço: Rua Flores, 123, Bairro
-                        Saúde, Cidade Feliz, Estado Feliz, CEP 12345-678
-                        Telefone: (012) 3456-7890 E-mail:
-                        contato@hospital-esperanca.com Website:
+                        Endereço: Rua Flores, 123, Bairro Saúde, Cidade Feliz,
+                        Estado Feliz, CEP 12345-678 Telefone: (012) 3456-7890
+                        E-mail: contato@hospital-esperanca.com Website:
                         www.hospital-esperanca.com.br
                     </p>
                 </label>

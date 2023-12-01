@@ -23,7 +23,7 @@ import {
     updateEvento,
 } from "../services/evento-service";
 
-export function Dashbord() {
+export function Perfil() {
     const [eventos, setEventos] = useState([]);
     const [gestors, setGestors] = useState([]);
     const [isCreated, setIsCreated] = useState(false);
@@ -107,7 +107,7 @@ export function Dashbord() {
     return (
         <Container fluid>
             <Bar />
-
+            <p class="align-middle" id="barraColorida">a</p>
             <Container>
                 <p id="q_g">Quantidade de gestors: {gestors.length} <img id="imagen" width={150} src="https://static.vecteezy.com/system/resources/previews/000/379/094/original/edit-profile-vector-icon.jpg"></img></p>
                 <p id="q_e">Quantidade de Eventos: {eventos.length} <img id="imagen" width={150} src="https://th.bing.com/th/id/OIP.MH2GSCtym73Bu2M_z288ywHaHa?pid=ImgDet&rs=1"></img></p>

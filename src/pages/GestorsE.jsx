@@ -55,21 +55,19 @@ export function GestorsE() {
     }
 
     return (
-        <Container fluid>
+        <>
             <Bar />
-            <Container></Container> <Col id="botocria" md="10"></Col>
-            {/* Formulário dentro do Modal, ideal seria componentizar também, pois é parecido com o Modal de editar */}
             <Container>
-                <Modal.Header>
-                    <Modal.Title>Cadastrar novo gestor</Modal.Title>
-                </Modal.Header>
-                <Form
-                    noValidate
-                    onSubmit={handleSubmit(addGestor)}
-                    validated={!!errors}
-                >
-                    <Modal.Body>
-                        <td>
+                <label class="text-center mb-3">
+                    <title>Cadastrar novo gestor</title>
+                </label>
+                <Col>
+                    <Form
+                        noValidate
+                        onSubmit={handleSubmit(addGestor)}
+                        validated={!!errors}
+                    >
+                        <Modal.Body>
                             <Input
                                 className="mb-3"
                                 type="text"
@@ -86,9 +84,6 @@ export function GestorsE() {
                                     },
                                 })}
                             />
-                        </td>
-                        <td>
-                            {" "}
                             <Input
                                 className="mb-3"
                                 type="text"
@@ -105,12 +100,9 @@ export function GestorsE() {
                                     },
                                 })}
                             />
-                        </td>
-                        <td>
-                            {" "}
                             <Input
                                 className="mb-3"
-                                type="number"
+                                type="text"
                                 label="idade"
                                 placeholder="Insira o nome do gestor"
                                 required={true}
@@ -124,8 +116,7 @@ export function GestorsE() {
                                     },
                                 })}
                             />
-                        </td>
-                        <td>
+                          
                             <Input
                                 className="mb-3"
                                 type="text"
@@ -142,8 +133,6 @@ export function GestorsE() {
                                     },
                                 })}
                             />
-                        </td><br></br>
-                        <td>
                             <Input
                                 className="mb-3"
                                 type="date"
@@ -163,8 +152,6 @@ export function GestorsE() {
                                     }
                                 )}
                             />
-                        </td>
-                        <td>
                             <Input
                                 className="mb-3"
                                 type="text"
@@ -181,9 +168,6 @@ export function GestorsE() {
                                     },
                                 })}
                             />
-                        </td>
-                        <td>
-                            {" "}
                             <Input
                                 className="mb-3"
                                 type="text"
@@ -199,9 +183,6 @@ export function GestorsE() {
                                     },
                                 })}
                             />
-                        </td>
-                        <td>
-                            {" "}
                             <Input
                                 className="mb-3"
                                 type="text"
@@ -218,8 +199,6 @@ export function GestorsE() {
                                     },
                                 })}
                             />
-                        </td><br></br>
-                        <td>
                             <Input
                                 className="mb-3"
                                 type="text"
@@ -236,8 +215,6 @@ export function GestorsE() {
                                     },
                                 })}
                             />
-                        </td>
-                        <td>
                             <Input
                                 className="mb-3"
                                 type="text"
@@ -254,18 +231,49 @@ export function GestorsE() {
                                     },
                                 })}
                             />
-                        </td>
-                    </Modal.Body>
-                    <Modal.Footer>
-                        <Button variant="primary" type="submit">
-                            Adicionar
-                        </Button>
-                        <Button variant="secondary">
-                            <Link to="/gestors">voltar</Link>
-                        </Button>
-                    </Modal.Footer>
-                </Form>
+                            <Input
+                                className="mb-3"
+                                type="text"
+                                label="Metas"
+                                placeholder="Ensira a meta do gestor"
+                                required={true}
+                                name="metasGestor"
+                                error={errors.metasGestor}
+                                validations={register("metasGestor", {
+                                    required: {
+                                        value: true,
+                                        message:
+                                            "Senha Provisoria do gestor é obrigatório.",
+                                    },
+                                })}
+                            />
+                            <Input
+                                className="mb-3"
+                                type="text"
+                                label="atendimentos"
+                                placeholder="Emcira o tandimento do gestor"
+                                required={true}
+                                name="atendimentosGestor"
+                                error={errors.atendimentosGestor}
+                                validations={register("atendimentosGestor", {
+                                    required: {
+                                        value: true,
+                                        message: "atendimentos do gestor.",
+                                    },
+                                })}
+                            />
+                        </Modal.Body>
+                        <Modal.Footer>
+                            <Button variant="primary" type="submit">
+                                Adicionar
+                            </Button>
+                            <Button variant="secondary">
+                                <Link to="/gestors">voltar</Link>
+                            </Button>
+                        </Modal.Footer>
+                    </Form>
+                </Col>
             </Container>
-        </Container>
+        </>
     );
 }

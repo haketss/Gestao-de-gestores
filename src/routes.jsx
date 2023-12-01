@@ -10,6 +10,8 @@ import { Eventos } from "./pages/Eventos";
 
 import { GestorsE } from "./pages/GestorsE";
 
+import { Perfil } from "./pages/perfil"
+
 
 
 import { isAuthenticated } from "./utils/is-authenticated";
@@ -32,6 +34,15 @@ export function Navigations() {
             <Routes>
                 <Route index path="/" element={<Login />} />
                 <Route path="/register" element={<Register />} />
+                <Route
+                    path="/perfil"
+                    element={
+                        <PrivateRoute>
+                            {" "}
+                            <Perfil />{" "}
+                        </PrivateRoute>
+                    }
+                />
                 <Route
                     path="/gestors"
                     element={

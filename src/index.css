@@ -1,28 +1,21 @@
 
-#NavBara{
-  background-color:rgb(0, 52, 136)
+#barraColorida {
+  background-color: rgb(0, 52, 136);
+  color: rgb(0, 52, 136);
 }
 
-#linksDaBarra{
+#linksDaBarra {
   text-decoration: none;
-  color: rgb(255, 255, 255);
-  
-  padding: 7px;
-  padding-bottom: 11px;
-}
-
-#graficoDeBarra {
-  margin-left: 10%;
-  border: 10%;
-  border-color: azure;
+  color: rgb(0, 52, 136);
+  background-color: rgb(249, 251, 255);
+  border-radius: 7px;
 }
 
 #valores {
+  margin-top: -50%;
+  border-top: -50%;
   padding-top: -50%;
-  border: 10%;
-  border-color: azure;
 }
-
 
 #subtitulo {
   background-color: rgb(239, 254, 254);
@@ -497,19 +490,20 @@ li {
   box-shadow: 0 4px 8px rgba(255, 255, 255, 0);
   background-color: aliceblue;
   background-color: rgb(0, 35, 91);
-  padding: 0.6%;
+  padding: 12px;
   text-decoration: none;
   border: 2px solid #ffffff;
   border-color: rgb(0, 35, 91);
+  border-radius: 7px;
 
 }
 
 #charttA {
-  margin-left: 56%;
+
   box-shadow: 0 4px 8px rgba(255, 255, 255, 0);
   background-color: aliceblue;
   background-color: rgb(0, 35, 91);
-  padding: 0.6%;
+  padding: 8px;
   text-decoration: none;
   border: 2px solid #ffffff;
   border-color: rgb(0, 35, 91);
@@ -543,10 +537,6 @@ li {
   text-decoration: none;
 }
 
-#menumaism {
-
-  margin-left: 40%;
-}
 
 #pizza {
   margin-left: 1%;
@@ -563,29 +553,24 @@ li {
 }
 
 #inpsharch {
-  margin-left: 10%;
-  padding-left: 10%;
+  margin: 1%;
   background-color: rgb(185, 212, 255);
   border-radius: 10px;
   border: 2px solid #ffffff;
   color: #ffffff;
   padding: 10px;
-  width: 300px;
-  margin: 20px;
-  box-shadow: 0 4px 8px rgba(255, 255, 255, 0);
+  width: 500px;
+
 }
 
 #inpsharch:hover {
-  margin-left: 10%;
-  padding-left: 10%;
   background-color: rgb(185, 212, 255);
   border-radius: 10px;
   border: 2px solid #ffffff;
   color: #ffffff;
   padding: 10px;
-  width: 300px;
-  margin: 20px;
-  box-shadow: 0 4px 8px rgba(255, 255, 255, 0);
+  width: 500px;
+  margin: 1%;
 }
 
 
@@ -655,7 +640,7 @@ li {
 }
 
 .card {
-  margin: 1%
+  margin: 0.1%
 }
 
 /* navbar */

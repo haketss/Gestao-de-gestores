@@ -1,5 +1,10 @@
-import { useState } from "react";
+import { useForm } from "react-hook-form";
+import { Input } from "./Input";
+import { useState, useEffect  } from "react";
+import { useNavigate, Link } from "react-router-dom";
+
 import {
+    Nav,
     Button,
     Card,
     Container,
@@ -7,20 +12,23 @@ import {
     Modal,
     Table,
     Row,
+    Dropdown,
 } from "react-bootstrap";
-import { useForm } from "react-hook-form";
 
-import { Input } from "./Input";
 
 export function Evento(props) {
     const [isUpdated, setIsUpdated] = useState(false);
     const [modalTest, setModalTest] = useState(false);
+    const [gestors, setGestors] = useState([]);
+    const [eventos, setEventos] = useState([]);
+    const navigate = useNavigate();
     const {
         handleSubmit,
         register,
         formState: { errors },
     } = useForm();
 
+  
     async function editEvento(data) {
         await props.editEvento({ ...data, id: props.evento.id });
         setIsUpdated(false);
@@ -57,7 +65,7 @@ export function Evento(props) {
                         <strong>Nome: </strong>
                         {props.evento.nome}
                     </Card.Title>
-                    <Card.Text  id="chardssub">
+                    <Card.Text id="chardssub">
                         <strong>Data do evento: </strong>
                         {formatarData(props.evento.data)}
                     </Card.Text>

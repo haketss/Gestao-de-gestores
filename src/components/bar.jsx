@@ -5,6 +5,7 @@ import {
     Nav,
     Navbar,
     NavDropdown,
+    Dropdown,
     Offcanvas,
 } from "react-bootstrap";
 
@@ -13,15 +14,7 @@ import { useNavigate } from "react-router-dom";
 import { useEffect, useState } from "react";
 import { useForm } from "react-hook-form";
 
-import {
-    createGestor,
-    deleteGestor,
-    getGestors,
-    updateGestor,
-} from "../services/gestor-service";
-
 export function Bar() {
-    const [gestors, setGestors] = useState([]);
     const [isCreated, setIsCreated] = useState(false);
     const {
         handleSubmit,
@@ -30,33 +23,23 @@ export function Bar() {
     } = useForm();
     const navigate = useNavigate();
 
-    useEffect(() => {
-        findGestors();
-        // eslint-disable-next-line
-    }, []);
-
-    async function findGestors() {
-        try {
-            const result = await getGestors();
-            setGestors(result.data);
-        } catch (error) {
-            console.error(error);
-            navigate("/");
-        }
-    }
-
     return (
         <>
-            {[true].map((expand) => (
+            {[false].map((expand) => (
                 <Navbar
+                    id="NavBara"
                     key={expand}
                     expand={expand}
-                    className="navbar navbar--fixed-top navbar navbar--fixed-top navbar-sidebar--show"
-                    id="NavBara"
+                    className="bg-body-tertiary  fixed-top   navbar--fixed-top"
                 >
                     <Container fluid>
                         <Navbar.Brand href="#">
-                            <Link id="linksDaBarra" to="/dashbord">
+                            <Navbar.Brand id="gigante" />
+                            <Link
+                                class="align-end"
+                                id="linksDaBarra"
+                                to="/dashbord"
+                            >
                                 Home
                             </Link>
                         </Navbar.Brand>
@@ -71,56 +54,98 @@ export function Bar() {
                             </Link>
                         </Navbar.Brand>
 
+                        <Navbar.Brand id="gigante" />
+                        <Navbar.Brand id="gigante" />
+                        <Navbar.Brand id="gigante" />
+                        <Navbar.Brand id="gigante" />
+                        <Navbar.Brand id="gigante" />
+                        <Navbar.Brand id="gigante" />
+                        <Navbar.Brand id="gigante" />
+                        <Navbar.Brand id="gigante" />
+                        <Navbar.Brand id="gigante" />
+                        <Navbar.Brand id="gigante" />
+                        <Navbar.Brand id="gigante" />
+
+                        <Navbar.Brand id="linksDaBarra" href="#action1">
+                            Logado com, Vitor {" "}
+                            <img
+                                class="rounded"
+                                height={45}
+                                src="https://mir-s3-cdn-cf.behance.net/project_modules/max_1200/d4ad40103067131.5f450dd53ccd1.png"
+                            />
+                        </Navbar.Brand>
+
+                        <Navbar.Toggle
+                            aria-controls={`offcanvasNavbar-expand-${expand}`}
+                        />
+
                         <Navbar.Offcanvas
                             id={`offcanvasNavbar-expand-${expand}`}
-                            aria-labelledby={`offcanvasNavbarLabel-expand-${expand}`}
+                            aria-labelledby={`offcanvasNavbarLabel-expand-true${expand}`}
                             placement="end"
                         >
                             <Offcanvas.Header closeButton>
                                 <Offcanvas.Title
                                     id={`offcanvasNavbarLabel-expand-${expand}`}
                                 >
-                                    Offcanvas
+                                    Menu
                                 </Offcanvas.Title>
                             </Offcanvas.Header>
                             <Offcanvas.Body>
                                 <Nav className="justify-content-end flex-grow-1 pe-8">
-                                    <Nav.Link id="linksDaBarra" href="#action1">
-                                        Bem vindo!!!
-                                    </Nav.Link>
-                                    <Nav.Link href="#action2"></Nav.Link>
-                                    <Nav.Link id="linksDaBarra" href="#action2">
-                                        ajuda
-                                    </Nav.Link>
-                                    <NavDropdown id="tentrativa">
+                                    <Nav.Link
+                                        class=" text-center"
+                                        href="#action1"
+                                    >
                                         <img
-                                            src="https://cdn-icons-png.flaticon.com/512/3135/3135715.png"
-                                            class="img-fluid"
+                                            src="https://mir-s3-cdn-cf.behance.net/project_modules/max_1200/d4ad40103067131.5f450dd53ccd1.png"
+                                            class="img-fluid rounded"
                                             alt="Imagem responsiva"
                                             width={100}
-                                        />
-                                        <NavDropdown.Item href="#action3">
-                                            Perfil
-                                        </NavDropdown.Item>
-                                        <NavDropdown.Item href="#action4">
-                                            Configuração
-                                        </NavDropdown.Item>
-                                        <NavDropdown.Divider />
-                                        <NavDropdown.Item href="#action5">
-                                            <Button
-                                                className="m-1"
-                                                variant="outline-secondary"
-                                                onClick={() => {
-                                                    sessionStorage.removeItem(
-                                                        "token"
-                                                    );
-                                                    navigate("/");
-                                                }}
-                                            >
-                                                Sair da pagina
-                                            </Button>
-                                        </NavDropdown.Item>
-                                    </NavDropdown>
+                                        />{" "}
+                                        Logado com [...]
+                                    </Nav.Link>
+
+                                    <Button
+                                        className="m-1"
+                                        variant="outline-secondary"
+                                        onClick={() => {
+                                            navigate("/perfil");
+                                        }}
+                                    >
+                                        Perfil
+                                    </Button>
+                                    <Button
+                                        className="m-1"
+                                        variant="outline-secondary"
+                                    >
+                                        suporte
+                                    </Button>
+
+                                    <Button
+                                        className="m-1"
+                                        variant="outline-secondary"
+                                    >
+                                        ajuda
+                                    </Button>
+
+                                    <Button
+                                        className="m-1"
+                                        variant="outline-secondary"
+                                    >
+                                        Configuração
+                                    </Button>
+
+                                    <Button
+                                        className="m-1"
+                                        variant="outline-secondary"
+                                        onClick={() => {
+                                            sessionStorage.removeItem("token");
+                                            navigate("/");
+                                        }}
+                                    >
+                                        Sair da pagina
+                                    </Button>
                                 </Nav>
                             </Offcanvas.Body>
                         </Navbar.Offcanvas>

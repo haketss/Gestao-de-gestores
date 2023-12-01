@@ -130,7 +130,8 @@ export function Gestor(props) {
                                     },
                                 })}
                             />
-                        </td><br/>
+                        </td>
+                        <br />
                         <td>
                             {" "}
                             <Input
@@ -170,7 +171,8 @@ export function Gestor(props) {
                                     },
                                 })}
                             />
-                        </td><br/>
+                        </td>
+                        <br />
                         <td>
                             <Input
                                 className="mb-3"
@@ -212,7 +214,8 @@ export function Gestor(props) {
                                     },
                                 })}
                             />
-                        </td><br/>
+                        </td>
+                        <br />
                         <td>
                             <Input
                                 className="mb-3"
@@ -249,7 +252,8 @@ export function Gestor(props) {
                                     },
                                 })}
                             />
-                        </td><br/>
+                        </td>
+                        <br />
                         <td>
                             <Input
                                 className="mb-3"
@@ -308,7 +312,6 @@ export function Gestor(props) {
                                 })}
                             />
                         </td>
-
                         <Input
                             className="mb-3"
                             type="text"
@@ -321,7 +324,23 @@ export function Gestor(props) {
                             validations={register("atendimentosGestor", {
                                 required: {
                                     value: true,
-                                    message: "atendimentos do gestor.",
+                                    message: "atendimentos do gestor é obrigatório.",
+                                },
+                            })}
+                        />
+                        <Input
+                            className="mb-3"
+                            type="text"
+                            defaultValue={props.gestor.eventoPGestor}
+                            label="Eventos participante"
+                            placeholder=""
+                            required={true}
+                            name="eventoPGestor"
+                            error={errors.atendimentosGestor}
+                            validations={register("eventoPGestor", {
+                                required: {
+                                    value: true,
+                                    message: "eventoPGestor é obrigatório.",
                                 },
                             })}
                         />
