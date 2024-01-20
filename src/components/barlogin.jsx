@@ -1,10 +1,9 @@
 import {
     Container,
-    Button,
-    Form,
+   
     Nav,
     Navbar,
-    NavDropdown,
+  
     Offcanvas,
 } from "react-bootstrap";
 
@@ -16,7 +15,7 @@ export function Bar() {
                     key={expand}
                     expand={expand}
                     className="navbar navbar--fixed-top navbar navbar--fixed-top navbar-sidebar--show"
-                    id="NavBara"
+                    
                 >
                     <Container className="fixed-to" fluid>
                         <Navbar.Brand href="#"></Navbar.Brand>
@@ -37,13 +36,13 @@ export function Bar() {
                             </Offcanvas.Header>
                             <Offcanvas.Body>
                                 <Nav className="justify-content-end flex-grow-1 pe-8">
-                                    <Nav.Link id="linksDaBarra" href="#action1">
+                                    <Nav.Link  href="#action1">
                                         Bem vindo!!!
                                     </Nav.Link>
-                                    <Nav.Link id="linksDaBarra" href="#action2">
+                                    <Nav.Link  href="#action2">
                                         entre com sua conta
                                     </Nav.Link>
-                                    <Nav.Link id="linksDaBarra" href="#action2">ajuda</Nav.Link>
+                                    <Nav.Link  href="#action2">ajuda</Nav.Link>
                                     <Nav.Link href="#action4"></Nav.Link>
                                 </Nav>
                             </Offcanvas.Body>

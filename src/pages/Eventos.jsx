@@ -1,14 +1,13 @@
 import {
     Container,
-    Row,
-    Col,
+    
     Modal,
     Form,
     Button,
     Dropdown,
 } from "react-bootstrap";
 
-import { useNavigate, Link } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 import { useEffect, useState } from "react";
 import { useForm } from "react-hook-form";
 
@@ -24,23 +23,25 @@ import {
     getEventos,
     updateEvento,
 } from "../services/evento-service";
+import {
+   
+    getGestors,
+    
+} from "../services/gestor-service";
+
 
 export function Eventos() {
-    const [modalTest, setModalTest] = useState(false);
-    const [eventos, setEventos] = useState([]);
+  
     const [isCreated, setIsCreated] = useState(false);
-    const nomesEventos = eventos.map((evento) => evento.nome);
-    const [selectedid, setSelectedid] = useState("");
+    const [eventos, setEventos] = useState([]);
+    const [gestors, setGestors] = useState([]);
+   
+ 
+    
     const navigate = useNavigate();
     const [searchTerm, setSearchTerm] = useState("");
 
-    //Exemplo bacana de opções e variaves que posso fornecer
-    const limiteDeItens = 6;
-    const Teventos = [
-        { id: 1, nome: "Evento 1" },
-        { id: 2, nome: "Evento 2" },
-        // Adicione outros eventos conforme necessário
-    ];
+
 
     const {
         handleSubmit,
@@ -49,9 +50,22 @@ export function Eventos() {
     } = useForm();
 
     useEffect(() => {
+        findGestors();
+    });
+
+    useEffect(() => {
         findEventos();
-        // eslint-disable-next-line
-    }, []);
+    });
+
+    async function findGestors () {
+        try{
+            const result = await getGestors();
+            setGestors(result.data);
+        } catch (error) {
+            console.error(error);
+            navigate("/")
+        }
+    }
 
     async function findEventos() {
         try {
@@ -136,49 +150,46 @@ export function Eventos() {
                     </div>
                     <div class="p-2">
                         <Button id="chartt" onClick={handleSearch}>
-                            <a id="letra">Pesquisar</a>
+                            <p id="letra">Pesquisar</p>
                         </Button>
                     </div>
                     <div class="p-2">
-                        <Button id="charttA">
-                            <Link id="tituloto" to="/gestorse">
-                                Adicionar
-                                <svg
-                                    id="bibi"
-                                    xmlns="http://www.w3.org/2000/svg"
-                                    width="32"
-                                    height="32"
-                                    fill="currentColor"
-                                    class="bi bi-file-earmark-plus"
-                                    viewBox="0 0 16 16"
-                                >
-                                    <path d="M8 6.5a.5.5 0 0 1 .5.5v1.5H10a.5.5 0 0 1 0 1H8.5V11a.5.5 0 0 1-1 0V9.5H6a.5.5 0 0 1 0-1h1.5V7a.5.5 0 0 1 .5-.5z" />
-                                    <path d="M14 4.5V14a2 2 0 0 1-2 2H4a2 2 0 0 1-2-2V2a2 2 0 0 1 2-2h5.5L14 4.5zm-3 0A1.5 1.5 0 0 1 9.5 3V1H4a1 1 0 0 0-1 1v12a1 1 0 0 0 1 1h8a1 1 0 0 0 1-1V4.5h-2z" />
-                                </svg>
-                            </Link>
-                        </Button>
+                    <Button id="charttA" onClick={() => setIsCreated(true)}>
+                    Adicionar
+                    <svg
+                        xmlns="http://www.w3.org/2000/svg"
+                        width="32"
+                        height="32"
+                        fill="currenttror"
+                        class="bi bi-file-earmark-plus"
+                        viewBox="0 0 16 16"
+                    >
+                        <path d="M8 6.5a.5.5 0 0 1 .5.5v1.5H10a.5.5 0 0 1 0 1H8.5V11a.5.5 0 0 1-1 0V9.5H6a.5.5 0 0 1 0-1h1.5V7a.5.5 0 0 1 .5-.5z" />
+                        <path d="M14 4.5V14a2 2 0 0 1-2 2H4a2 2 0 0 1-2-2V2a2 2 0 0 1 2-2h5.5L14 4.5zm-3 0A1.5 1.5 0 0 1 9.5 3V1H4a1 1 0 0 0-1 1v12a1 1 0 0 0 1 1h8a1 1 0 0 0 1-1V4.5h-2z" />
+                    </svg>
+                </Button>
                     </div>
                 </div>
-
-                {eventos && eventos.length > 0 ? (
-                    <div class="eventos-list">
-                        {eventos.map((evento, index) => (
-                            <Evento
-                                key={index}
-                                evento={evento}
-                                removeEvento={async () =>
-                                    await removeEvento(evento.id)
-                                }
-                                editEvento={editEvento}
-                            />
-                        ))}
-                    </div>
-                ) : (
-                    <p className="text-center">
-                        Não existe nenhum evento cadastrado!
-                    </p>
-                )}
-
+                <div class="item-middle">
+                    {eventos && eventos.length > 0 ? (
+                        <div class="eventos-list">
+                            {eventos.map((evento, index) => (
+                                <Evento
+                                    key={index}
+                                    evento={evento}
+                                    removeEvento={async () =>
+                                        await removeEvento(evento.id)
+                                    }
+                                    editEvento={editEvento}
+                                />
+                            ))}
+                        </div>
+                    ) : (
+                        <p className="text-center">
+                           Sem itens, ou carregando!!
+                        </p>
+                    )}
+                </div>
                 {/* Formulário dentro do Modal, ideal seria componentizar também, pois é parecido com o Modal de editar */}
                 <Modal show={isCreated} onHide={() => setIsCreated(false)}>
                     <Modal.Header>
@@ -244,14 +255,14 @@ export function Eventos() {
                                 </Dropdown.Toggle>
 
                                 <Dropdown.Menu>
-                                    {eventos.map(
-                                        (evento, index) =>
-                                            index < limiteDeItens && (
+                                    {gestors.map(
+                                        (gestor, index) =>
+                                            index < (
                                                 <Dropdown.Item
-                                                    key={evento.id}
-                                                    href={`#/action-${evento.id}`}
+                                                    key={gestor.id}
+                                                    href={`#/action-${gestor.id}`}
                                                 >
-                                                    {evento.nome}
+                                                    {gestor.nome}
                                                 </Dropdown.Item>
                                             )
                                     )}

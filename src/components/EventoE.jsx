@@ -1,45 +1,15 @@
-import { useState } from "react";
-import { Button, Card, Form, Modal, Row } from "react-bootstrap";
+import { Card, Row } from "react-bootstrap";
 import { useForm } from "react-hook-form";
-
-import { Input } from "./Input";
 
 export function Evento(props) {
     const {
-        handleSubmit,
-        register,
-        formState: { errors },
+       
+        formState: { Errou },
     } = useForm();
-    const [isUpdated, setIsUpdated] = useState(false);
+  
 
-    async function editEvento(data) {
-        await props.editEvento({ ...data, id: props.evento.id });
-        setIsUpdated(false);
-    }
-
-    async function confirmDelete() {
-        const shouldDelete = window.confirm(
-            "Tem certeza que deseja apagar evento"
-        );
-
-        if (shouldDelete) {
-            props.removeEvento();
-        }
-    }
-
-    async function confirmDelete() {
-        const shouldDelete = window.confirm(
-            "Tem certeza que deseja apagar este evento?"
-        );
-
-        if (shouldDelete) {
-            // Chama a função para remover o gestor
-            props.removeEvento();
-
-            // Adiciona um alerta para informar que o gestor foi excluído
-            alert("O Evento foi excluído com sucesso!");
-        }
-    }
+  
+  
 
     function formatarData(dataString) {
         const data = new Date(dataString);
@@ -60,7 +30,7 @@ export function Evento(props) {
         <>
             <Card id="Cards" className="mb-custon p-custon bg-custon">
                 <Card.Title id="chardssub">
-                    <strong>Nome: </strong>
+                    <strong>Nome: {Errou} </strong>
                     {props.evento.nome}
                 </Card.Title>
                 <Card.Text id="chardssub">

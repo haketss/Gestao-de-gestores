@@ -1,21 +1,21 @@
 import {
     Container,
-    Col,
+   
     Modal,
     Form,
     Button,
-    Dropdown,
+    
     Table,
 } from "react-bootstrap";
 
 import { useNavigate, Link } from "react-router-dom";
-import { useEffect, useState } from "react";
+import { useState, useEffect } from "react";
 import { useForm } from "react-hook-form";
 
 import "../index.css";
 import { Gestor } from "../components/Gestor";
 import { Bar } from "../components/bar";
-import { Input } from "../components/Input";
+
 
 import {
     createGestor,
@@ -27,22 +27,20 @@ import {
 export function Gestors() {
     const [gestors, setGestors] = useState([]);
     const [isCreated, setIsCreated] = useState(false);
-    const [modalTest, setModalTest] = useState(false);
 
-    const [orderBy, setOrderBy] = useState("nome");
-    const [selectedCRM, setSelectedCRM] = useState("");
     const [searchTerm, setSearchTerm] = useState("");
 
     const {
         handleSubmit,
-        register,
+       
         formState: { errors },
     } = useForm();
     const navigate = useNavigate();
 
     useEffect(() => {
-        findGestors(searchTerm);
-    }, [searchTerm]);
+        findGestors();
+    });
+
 
     async function findGestors(searchTerm) {
         try {
@@ -93,7 +91,7 @@ export function Gestors() {
                 senhaProvisoriaGestor: data.senhaProvisoriaGestor,
                 metasGestor: data.metasGestor,
                 atendimentosGestor: data.atendimentosGestor,
-                eventosPGestor: data.eventosPGestor,
+                ePGesor: data.ePGesor,
             });
             console.log("gestor updated successfully.");
             await findGestors();
@@ -136,7 +134,7 @@ export function Gestors() {
                         </div>
                         <div class="p-2">
                             <Button id="chartt" onClick={handleSearch}>
-                                <a id="letra">Pesquisar</a>
+                                <p id="letra">Pesquisar</p>
                             </Button>
                         </div>
                         <div class="p-2">
@@ -160,25 +158,26 @@ export function Gestors() {
                         </div>
                     </div>
                     <Container>
-                        <div class="table-responsive">
-                            <Table class=" table table-light table-striped table-responsive table-borderless caption-top">
+                        <div>
+                        <Table class="table table-light table-hover table-responsive table-sm caption-top text-end table-bordered table-striped">
                                 <thead class=" text-center">
                                     <tr>
-                                        <th>#</th>
+                                        <th>Estatos</th>
                                         <th>Nome</th>
                                         <th>genero</th>
                                         <th>idade</th>
-                                        <th>local de trabalho</th>
+                                        <th>local D.T</th>
                                         <th>CRM</th>
                                         <th>Formação</th>
                                         <th>T.contrato</th>
                                         <th>Senha.P</th>
                                         <th>Meta</th>
                                         <th>Atendimento</th>
-                                        <th>Alterações</th>
+                                        <th>Eventos</th>
+                                        <th>alterar</th>
                                     </tr>
                                 </thead>
-                                <tbody class=" text-center">
+                                <tbody class="text-center">
                                     {gestors.map((gestor) => (
                                         <tr key={gestor.id}>
                                             <td>🟢</td>
@@ -194,6 +193,7 @@ export function Gestors() {
                                             <td>{gestor.senhaProvisoria}</td>
                                             <td>{gestor.metas}</td>
                                             <td>{gestor.atendimentos}</td>
+                                            <td>{gestor.eventosP} </td>
                                             <td>
                                                 <Gestor
                                                     gestor={gestor}

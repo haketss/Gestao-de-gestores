@@ -52,7 +52,8 @@ export function Register() {
                     {" "}
                     <img
                         id="imagemDeLogin"
-                        src="https://th.bing.com/th/id/OIG.4F7FJQwjdZKK6AGooVVj?pid=ImgGn"
+                        alt="qualquercoisa"
+                        src="https://th.bing.com/th/id/OIG.jGSf7n01LudSawMKjyjW?w=1024&h=1024&rs=1&pid=ImgDetMain"
                         width={200}
                     ></img>
                     <Col
@@ -100,7 +101,7 @@ export function Register() {
                             </Button>
                         </div>{" "}
                         <Link id="criar-2" to="/">
-                            Já tenho minha conta
+                            Já tenho minha conta 
                         </Link>
                     </Col>
                 </Form>

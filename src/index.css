@@ -1,3 +1,34 @@
+body {
+  font-family: 'DM Sans', sans-serif;
+}
+
+
+#reactgooglegraph-1 {
+  width: 100%; /* A largura será 100% do contêiner pai */
+  aspect-ratio: 3 / 2; /* Substitua 3/2 pela proporção desejada (largura/altura) */
+  max-width: 550px; /* Opcional: limite máximo de largura para telas maiores */
+}
+
+#reactgooglegraph-2 {
+  width: 100%; /* A largura será 100% do contêiner pai */
+  aspect-ratio: 3 / 2; /* Substitua 3/2 pela proporção desejada (largura/altura) */
+  max-width: 550px; /* Opcional: limite máximo de largura para telas maiores */
+}
+
+
+#grafchart {
+  width:50%;
+  height: 400px;
+  align-items: center;
+  
+}
+
+#mido{
+  align-items: end;
+}
+#Card {width: 40%;
+  margin: 4%;
+}
 
 #barraColorida {
   background-color: rgb(0, 52, 136);
@@ -211,7 +242,6 @@
   margin-top: 2%;
   margin-right: -12%;
   margin-left: -12%;
-  font-family: 'DM Sans', sans-serif;
   border-bottom: 10px;
   border-color: red;
 }
@@ -227,13 +257,13 @@
 #tituloT {
   margin-left: -4%;
   color: rgb(0, 52, 136);
-  font-family: 'DM Sans', sans-serif;
+  
 }
 
 #tituloTL {
   margin-left: -40%;
   color: rgb(0, 52, 136);
-  font-family: 'DM Sans', sans-serif;
+ 
 }
 
 li {
@@ -258,7 +288,7 @@ li {
   color: rgb(255, 255, 255);
   margin-bottom: -4px;
   margin-left: 15px;
-  font-family: 'DM Sans', sans-serif;
+  
 }
 
 #Cardsgestors {
@@ -267,7 +297,7 @@ li {
   margin: 0.2%;
   margin-right: -11.5%;
   margin-left: 1%;
-  font-family: 'DM Sans', sans-serif;
+ 
 }
 
 #q_g {
@@ -275,7 +305,8 @@ li {
   color: rgb(249, 249, 249);
   padding: 1%;
   background-color: rgb(62, 45, 223);
-  border-radius: 2px;
+  border-radius: 10px;
+  margin: 1%;
 }
 
 #q_e {
@@ -283,7 +314,7 @@ li {
   color: rgb(255, 255, 255);
   padding: 1%;
   background-color: rgb(62, 45, 223);
-  border-radius: 2px;
+  border-radius: 10px;
 }
 
 #q_g:hover {
@@ -291,7 +322,7 @@ li {
   color: rgb(249, 249, 249);
   padding: 1%;
   background-color: rgb(51, 28, 250);
-  border-radius: 2px;
+  border-radius: 10px;
 }
 
 #q_e:hover {
@@ -532,9 +563,10 @@ li {
   padding-bottom: 10px;
   padding-left: 20px;
   padding-right: 20px;
-
   text-shadow: none;
   text-decoration: none;
+  align-items: center;
+  
 }
 
 
@@ -563,20 +595,10 @@ li {
 
 }
 
-#inpsharch:hover {
-  background-color: rgb(185, 212, 255);
-  border-radius: 10px;
-  border: 2px solid #ffffff;
-  color: #ffffff;
-  padding: 10px;
-  width: 500px;
-  margin: 1%;
-}
 
 
 #botaodocard {
-  margin-left: 13%;
-  margin-bottom: 1%;
+ 
   background-color: rgb(255, 255, 255);
   color: rgb(0, 52, 136);
   border-radius: 0;
@@ -586,8 +608,7 @@ li {
 }
 
 #botaodocard:hover {
-  margin-left: 13%;
-  margin-bottom: 1%;
+  
   background-color: rgb(0, 52, 136);
   border-color: rgb(0, 52, 136);
   ;
@@ -598,8 +619,7 @@ li {
 }
 
 #botaodocarde {
-  margin-left: 10%;
-  margin-bottom: 1%;
+  
   background-color: rgb(255, 255, 255);
   color: rgb(0, 52, 136);
   border-radius: 0;
@@ -609,8 +629,7 @@ li {
 }
 
 #botaodocarde:hover {
-  margin-left: 10%;
-  margin-bottom: 1%;
+  
   background-color: rgb(255, 0, 0);
   color: rgb(255, 255, 255);
   border-radius: 5px;
@@ -627,15 +646,15 @@ li {
 }
 
 .eventos-container {
-
   display: flex;
   justify-content: space-between;
   /* ou qualquer outra propriedade de alinhamento desejada */
 }
 
 .eventos-list {
+  align-items: flex-start;
   display: flex;
-  flex-wrap: wrap;
+  flex-wrap: wrap
   /* Permite que os eventos quebrem para a próxima linha se não houver espaço suficiente na largura da tela muito util */
 }
 

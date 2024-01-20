@@ -15,6 +15,8 @@ export function Login() {
         formState: { errors },
     } = useForm();
     const [result, setResult] = useState(null);
+   
+
     const navigate = useNavigate();
 
     const onSubmit = async (data) => {
@@ -49,7 +51,8 @@ export function Login() {
                 >
                     <img
                         id="imagemDeLogin"
-                        src="https://th.bing.com/th/id/OIG.4F7FJQwjdZKK6AGooVVj?pid=ImgGn"
+                        alt="qualquer coisa"
+                        src="https://th.bing.com/th/id/OIG.jGSf7n01LudSawMKjyjW?w=1024&h=1024&rs=1&pid=ImgDetMain"
                         width={200}
                     ></img>
 
@@ -76,7 +79,7 @@ export function Login() {
                                 },
                             })}
                         />
-                        Senha:
+                        Senha:{result}
                         <Input
                             className="m-1 shadow"
                             id="inputs"
@@ -103,10 +106,10 @@ export function Login() {
                             </Button>
                         </div>
                         <div>
-                            <a id="criar-2">Ou crie uma conta </a>
-                            <Link  class="text-center" to="/register">
+                            <p id="criar-2">Ou crie uma conta  <Link  class="text-center" to="/register">
                                 aqui!
-                            </Link>
+                            </Link></p>
+                           
                         </div>
                     </Col>
                 </Form>

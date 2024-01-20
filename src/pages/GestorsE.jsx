@@ -1,7 +1,7 @@
 import { Container, Col, Modal, Form, Button } from "react-bootstrap";
 
-import { useNavigate, Link } from "react-router-dom";
-import { useEffect, useState } from "react";
+import { Link } from "react-router-dom";
+
 import { useForm } from "react-hook-form";
 
 import "../index.css";
@@ -9,51 +9,20 @@ import "../index.css";
 import { Input } from "../components/Input";
 import { Bar } from "../components/bar";
 
-import { createGestor, getGestors } from "../services/gestor-service";
 
 export function GestorsE() {
-    const [gestors, setGestors] = useState([]);
-    const [isCreated, setIsCreated] = useState(false);
+  
     const {
         handleSubmit,
         register,
         formState: { errors },
     } = useForm();
-    const navigate = useNavigate();
+    
+   
+ 
 
-    useEffect(() => {
-        findGestors();
-        // eslint-disable-next-line
-    }, []);
-
-    async function findGestors() {
-        try {
-            const result = await getGestors();
-            setGestors(result.data);
-        } catch (error) {
-            console.error(error);
-            navigate("/");
-        }
-    }
-
-    async function addGestor(data) {
-        try {
-            await createGestor(data);
-
-            // Adiciona um alerta para informar que o gestor foi criado com sucesso
-            alert("O gestor foi criado com sucesso!");
-
-            setIsCreated(false);
-            await findGestors();
-        } catch (error) {
-            console.error(error);
-        }
-    }
-    function showAlert() {
-        alert("Gestor criado com sucesso!");
-        setIsCreated(false); // Reinicia o estado para evitar alertas repetidos
-    }
-
+    
+  
     return (
         <>
             <Bar />
@@ -64,7 +33,7 @@ export function GestorsE() {
                 <Col>
                     <Form
                         noValidate
-                        onSubmit={handleSubmit(addGestor)}
+                        onSubmit={handleSubmit()}
                         validated={!!errors}
                     >
                         <Modal.Body>

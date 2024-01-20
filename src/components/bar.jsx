@@ -1,26 +1,19 @@
 import {
     Container,
     Button,
-    Form,
+  
     Nav,
     Navbar,
-    NavDropdown,
-    Dropdown,
+   
     Offcanvas,
 } from "react-bootstrap";
 
 import { Link } from "react-router-dom";
 import { useNavigate } from "react-router-dom";
-import { useEffect, useState } from "react";
-import { useForm } from "react-hook-form";
 
 export function Bar() {
-    const [isCreated, setIsCreated] = useState(false);
-    const {
-        handleSubmit,
-        register,
-        formState: { errors },
-    } = useForm();
+    
+  
     const navigate = useNavigate();
 
     return (
@@ -45,7 +38,7 @@ export function Bar() {
                         </Navbar.Brand>
                         <Navbar.Brand href="#">
                             <Link id="linksDaBarra" to="/gestors">
-                                Gestores
+                                Gestores 
                             </Link>
                         </Navbar.Brand>
                         <Navbar.Brand href="#">
@@ -70,6 +63,7 @@ export function Bar() {
                             Logado com, Vitor {" "}
                             <img
                                 class="rounded"
+                                alt="qualquercoisa"
                                 height={45}
                                 src="https://mir-s3-cdn-cf.behance.net/project_modules/max_1200/d4ad40103067131.5f450dd53ccd1.png"
                             />

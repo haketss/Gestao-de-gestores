@@ -43,7 +43,7 @@ export async function updateGestor(data) {
         senhaProvisoria:  data.senhaProvisoriaGestor,
         metas:            data.metasGestor,
         atendimentos:     data.atendimentosGestor,
-        eventosP:         data.eventosPGesor
+        eventosP:         data.ePGesor
 
     }, {
         headers: {
@@ -68,7 +68,7 @@ export async function createGestor(data) {
         senhaProvisoria:  data.senhaProvisoriaGestor,
         metas:            data.metasGestor,
         atendimentos:     data.atendimentosGestor,
-        eventosP:         data.eventosPGesor
+        eventosP:         data.ePGesor
 
     }, {
         headers: {
