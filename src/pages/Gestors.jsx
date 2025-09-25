@@ -117,13 +117,13 @@ export function Gestors() {
     return (
         <>
             <Bar />
-            <p class="align-middle" id="barraColorida">
+            <p className="align-middle" id="barraColorida">
                 a
             </p>
-            <Container class="my3 hstack gap-3">
+            <Container className="my3 hstack gap-3">
                 
-                    <div class="container my-3 hstack gap-3">
-                        <div class="p-2">
+                    <div className="container my-3 hstack gap-3">
+                        <div className="p-2">
                             <input
                                 id="inpsharch"
                                 type="text"
@@ -132,12 +132,12 @@ export function Gestors() {
                                 onChange={(e) => setSearchTerm(e.target.value)}
                             />
                         </div>
-                        <div class="p-2">
+                        <div className="p-2">
                             <Button id="chartt" onClick={handleSearch}>
                                 <p id="letra">Pesquisar</p>
                             </Button>
                         </div>
-                        <div class="p-2">
+                        <div className="p-2">
                             <Button id="charttA">
                                 <Link id="tituloto" to="/gestorse">
                                     Adicionar
@@ -147,7 +147,7 @@ export function Gestors() {
                                         width="32"
                                         height="32"
                                         fill="currentColor"
-                                        class="bi bi-file-earmark-plus"
+                                        className="bi bi-file-earmark-plus"
                                         viewBox="0 0 16 16"
                                     >
                                         <path d="M8 6.5a.5.5 0 0 1 .5.5v1.5H10a.5.5 0 0 1 0 1H8.5V11a.5.5 0 0 1-1 0V9.5H6a.5.5 0 0 1 0-1h1.5V7a.5.5 0 0 1 .5-.5z" />
@@ -159,8 +159,8 @@ export function Gestors() {
                     </div>
                     <Container>
                         <div>
-                        <Table class="table table-light table-hover table-responsive table-sm caption-top text-end table-bordered table-striped">
-                                <thead class=" text-center">
+                        <Table className="table table-light table-hover table-responsive table-sm caption-top text-end table-bordered table-striped">
+                                <thead className=" text-center">
                                     <tr>
                                         <th>Estatos</th>
                                         <th>Nome</th>
@@ -177,11 +177,11 @@ export function Gestors() {
                                         <th>alterar</th>
                                     </tr>
                                 </thead>
-                                <tbody class="text-center">
+                                <tbody className="text-center">
                                     {gestors.map((gestor) => (
                                         <tr key={gestor.id}>
                                             <td>🟢</td>
-                                            <td Class="text-truncate">
+                                            <td className="text-truncate">
                                                 {gestor.nome}
                                             </td>
                                             <td>{gestor.genero}</td>
@@ -208,7 +208,7 @@ export function Gestors() {
                                         </tr>
                                     ))}
                                 </tbody>
-                                <caption class="caption-top text-center">
+                                <caption className="caption-top text-center">
                                     Gestores cadastrado:
                                 </caption>
                             </Table>

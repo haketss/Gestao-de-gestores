@@ -27,7 +27,7 @@ export function GestorsE() {
         <>
             <Bar />
             <Container>
-                <label class="text-center mb-3">
+                <label className="text-center mb-3">
                     <title>Cadastrar novo gestor</title>
                 </label>
                 <Col>

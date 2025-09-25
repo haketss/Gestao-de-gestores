@@ -35,8 +35,8 @@ export function Login() {
     return (
         <>
             <Bar />
-            <p class="align-middle" id="barraColorida">a</p>
-            <Container class=" border-dark border-top border-bottom border-5 ">
+            <p className="align-middle" id="barraColorida">a</p>
+            <Container className=" border-dark border-top border-bottom border-5 ">
                 <Modal
                     noValidate
                     validated={!!errors}
@@ -95,7 +95,7 @@ export function Login() {
                                 },
                             })}
                         />
-                        <lu id="criar-3">Esqueceu a senha?</lu>
+                        <p id="criar-3">Esqueceu a senha?</p>
                         <div className="d-flex justify-content-between">
                             <Button
                                 id="entrar"
@@ -106,7 +106,7 @@ export function Login() {
                             </Button>
                         </div>
                         <div>
-                            <p id="criar-2">Ou crie uma conta  <Link  class="text-center" to="/register">
+                            <p id="criar-2">Ou crie uma conta  <Link  className="text-center" to="/register">
                                 aqui!
                             </Link></p>
                            
@@ -118,14 +118,14 @@ export function Login() {
             <Container>
                 {" "}
                 <label id="subtitulo">
-                    <p class="text-center">
+                    <p className="text-center">
                         <strong>Referência: Silva, Joana.</strong>
                         <br />
                          "Inovações na Gestão Hospitalar: Um Estudo
                         de Caso". Revista de Saúde e Tecnologia, 15 de abril de
                         2023. Disponível em: [URL fictício].
                     </p>
-                    <p class="text-center">
+                    <p className="text-center">
                         <strong>Contato: Hospital Esperança</strong>
                         <br />
                         Endereço: Rua Flores, 123, Bairro

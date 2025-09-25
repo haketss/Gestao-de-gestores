@@ -70,8 +70,8 @@ export function Navigations() {
                         </PrivateRoute>
                     }
                 />{" "}
-                
-                 <Route
+
+                <Route
                     path="/dashbord"
                     element={
                         <PrivateRoute>

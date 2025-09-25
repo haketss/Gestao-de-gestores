@@ -35,7 +35,7 @@ export function Register() {
     return (
         <>
             <Bar />
-            <p class="align-middle" id="barraColorida">a</p>
+            <p className="align-middle" id="barraColorida">a</p>
             <Container >
                 <Modal
                     show={result}

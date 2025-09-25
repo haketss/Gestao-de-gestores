@@ -134,12 +134,12 @@ export function Eventos() {
     return (
         <>
             <Bar />
-            <p class="align-middle" id="barraColorida">
+            <p className="align-middle" id="barraColorida">
                 a
             </p>
             <Container>
-                <div class="container my-3 hstack gap-3">
-                    <div class="p-2">
+                <div className="container my-3 hstack gap-3">
+                    <div className="p-2">
                         <input
                             id="inpsharch"
                             type="text"
@@ -148,12 +148,12 @@ export function Eventos() {
                             onChange={(e) => setSearchTerm(e.target.value)}
                         />
                     </div>
-                    <div class="p-2">
+                    <div className="p-2">
                         <Button id="chartt" onClick={handleSearch}>
                             <p id="letra">Pesquisar</p>
                         </Button>
                     </div>
-                    <div class="p-2">
+                    <div className="p-2">
                     <Button id="charttA" onClick={() => setIsCreated(true)}>
                     Adicionar
                     <svg
@@ -161,7 +161,7 @@ export function Eventos() {
                         width="32"
                         height="32"
                         fill="currenttror"
-                        class="bi bi-file-earmark-plus"
+                        className="bi bi-file-earmark-plus"
                         viewBox="0 0 16 16"
                     >
                         <path d="M8 6.5a.5.5 0 0 1 .5.5v1.5H10a.5.5 0 0 1 0 1H8.5V11a.5.5 0 0 1-1 0V9.5H6a.5.5 0 0 1 0-1h1.5V7a.5.5 0 0 1 .5-.5z" />
@@ -170,9 +170,9 @@ export function Eventos() {
                 </Button>
                     </div>
                 </div>
-                <div class="item-middle">
+                <div className="item-middle">
                     {eventos && eventos.length > 0 ? (
-                        <div class="eventos-list">
+                        <div className="eventos-list">
                             {eventos.map((evento, index) => (
                                 <Evento
                                     key={index}

@@ -93,7 +93,7 @@ export function Dashbord() {
     return (
         <>
             <Bar />
-            <p class="align-middle" id="barraColorida">
+            <p className="align-middle" id="barraColorida">
                 a
             </p>
             <Container>
@@ -154,7 +154,7 @@ export function Dashbord() {
                                 <li>
                                     {" "}
                                     <img
-                                        class="rounded"
+                                        className="rounded"
                                         id="imagen"
                                         alt="qualquercoisa"
                                         width={50}
@@ -187,7 +187,7 @@ export function Dashbord() {
                             <section id="q_g">
                                 <li>
                                     <img
-                                        class="rounded"
+                                        className="rounded"
                                         id="imagen"
                                         alt="qualquercoisa"
                                         width={50}
@@ -198,7 +198,7 @@ export function Dashbord() {
                             </section>
                             <section id="q_e">
                                 <img
-                                    class="rounded"
+                                    className="rounded"
                                     alt="qualquercoisa"
                                     id="imagen"
                                     width={50}

@@ -3,6 +3,7 @@ import { api } from "./api";
 export async function getGestors() {
     try {
         const accessToken = sessionStorage.getItem('token');
+        console.log('entrou na função')
         const result = await api.get('/gestors', {
             headers: {
                 'Authorization': `Bearer ${JSON.parse(accessToken)}`
