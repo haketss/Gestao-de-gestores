@@ -74,16 +74,18 @@ export function Dashbord() {
     useEffect(() => {
         findGestors();
         findEventos();
+        // eslint-disable-next-line
     }, []);
 
     useEffect(() => {
         calculateTotalSales();
         calculateTotalmeta();
+        // eslint-disable-next-line
     }, [gestors]);
    
     return (
         <>
-            <Bar />
+            <Bar/>
             <p className="align-middle" id="barraColorida">
                 a
             </p>

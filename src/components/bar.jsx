@@ -26,24 +26,24 @@ export function Bar() {
                     className="bg-body-tertiary  fixed-top   navbar--fixed-top"
                 >
                     <Container fluid>
-                        <Navbar.Brand href="#">
+                        <Navbar.Brand>
                             <Navbar.Brand id="gigante" />
                             <Link
-                                class="align-end"
+                                className="align-end"
                                 id="linksDaBarra"
                                 to="/dashbord"
                             >
-                                Home
+                                <span>Home</span>
                             </Link>
                         </Navbar.Brand>
-                        <Navbar.Brand href="#">
+                        <Navbar.Brand>
                             <Link id="linksDaBarra" to="/gestors">
-                                Gestores
+                                <span>Gestores</span>
                             </Link>
                         </Navbar.Brand>
-                        <Navbar.Brand href="#">
+                        <Navbar.Brand>
                             <Link id="linksDaBarra" to="/eventos">
-                                Eventos
+                                <span>Eventos</span>
                             </Link>
                         </Navbar.Brand>
 
@@ -62,7 +62,7 @@ export function Bar() {
                         <Navbar.Brand id="linksDaBarra" href="#action1">
                             Logado com, Vitor {" "}
                             <img
-                                class="rounded"
+                                className="rounded"
                                 alt="qualquercoisa"
                                 height={45}
                                 src="https://mir-s3-cdn-cf.behance.net/project_modules/max_1200/d4ad40103067131.5f450dd53ccd1.png"
@@ -88,16 +88,16 @@ export function Bar() {
                             <Offcanvas.Body>
                                 <Nav className="justify-content-end flex-grow-1 pe-8">
                                     <Nav.Link
-                                        class=" text-center"
+                                        className=" text-center"
                                         href="#action1"
                                     >
                                         <img
                                             src="https://mir-s3-cdn-cf.behance.net/project_modules/max_1200/d4ad40103067131.5f450dd53ccd1.png"
-                                            class="img-fluid rounded"
+                                            className="img-fluid rounded"
                                             alt="Imagem responsiva"
                                             width={100}
                                         />{" "}
-                                        Logado com [...]
+                                       <span> Logado com [...]</span>
                                     </Nav.Link>
 
                                     <Button

@@ -40,6 +40,7 @@ export function Gestors() {
 
     useEffect(() => {
         findGestors();
+        // eslint-disable-next-line
     },[]);
 
 
@@ -77,7 +78,6 @@ export function Gestors() {
     async function editGestor(data) {
         try {
             console.log("Editing gestor with data:", data);
-            // ...
             await updateGestor({
                 id: data.id,
                 nomeGestor: data.nomeGestor,
@@ -119,7 +119,7 @@ export function Gestors() {
         <>
             <Bar />
             <p className="align-middle" id="barraColorida">
-                a
+                
             </p>
             <Container className="my3 hstack gap-3">
                 
@@ -141,7 +141,7 @@ export function Gestors() {
                         <div className="p-2">
                             <Button id="charttA">
                                 <Link id="tituloto" to="/gestorse">
-                                    Adicionar
+                                   <span className="profile-link">Adicionar</span> 
                                     <svg
                                         id="bibi"
                                         xmlns="http://www.w3.org/2000/svg"
