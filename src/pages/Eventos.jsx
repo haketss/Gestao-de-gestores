@@ -36,12 +36,8 @@ export function Eventos() {
     const [eventos, setEventos] = useState([]);
     const [gestors, setGestors] = useState([]);
    
- 
-    
     const navigate = useNavigate();
     const [searchTerm, setSearchTerm] = useState("");
-
-
 
     const {
         handleSubmit,
@@ -51,11 +47,9 @@ export function Eventos() {
 
     useEffect(() => {
         findGestors();
-    });
-
-    useEffect(() => {
         findEventos();
-    });
+    }, []);
+
 
     async function findGestors () {
         try{

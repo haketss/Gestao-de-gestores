@@ -1,3 +1,4 @@
+
 import {
     Container,
    
@@ -39,7 +40,7 @@ export function Gestors() {
 
     useEffect(() => {
         findGestors();
-    });
+    },[]);
 
 
     async function findGestors(searchTerm) {

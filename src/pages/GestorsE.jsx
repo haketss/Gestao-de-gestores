@@ -18,10 +18,6 @@ export function GestorsE() {
         formState: { errors },
     } = useForm();
     
-   
- 
-
-    
   
     return (
         <>

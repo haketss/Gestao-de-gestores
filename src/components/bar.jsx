@@ -38,7 +38,7 @@ export function Bar() {
                         </Navbar.Brand>
                         <Navbar.Brand href="#">
                             <Link id="linksDaBarra" to="/gestors">
-                                Gestores 
+                                Gestores
                             </Link>
                         </Navbar.Brand>
                         <Navbar.Brand href="#">

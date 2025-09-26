@@ -16,6 +16,7 @@ export function Register() {
         register,
         formState: { errors },
     } = useForm();
+    
     const [result, setResult] = useState(null);
     const navigate = useNavigate();
 

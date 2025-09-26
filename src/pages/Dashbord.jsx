@@ -33,23 +33,8 @@ export function Dashbord() {
 
     const navigate = useNavigate();
 
-    useEffect(() => {
-        findGestors();
-        calculateTotalSales();
-    });
-
-    useEffect(() => {
-        calculateTotalSales(); // Calculate total sales after gestors state is updated
-    }); 
-    useEffect(() => {
-        calculateTotalmeta(); // Calculate total sales after gestors state is updated
-    }); 
-
-    useEffect(() => {
-        findEventos();
-    });
-
-    // usado para mostrar os gestores onde eu quero no corpo do dashibord
+    
+   
 
     const calculateTotalSales = () => {
         const total = gestors.reduce(
@@ -65,9 +50,6 @@ export function Dashbord() {
         );
         setTotalmeta(total);
     };
-
-   
- 
 
     async function findEventos() {
         try {
@@ -87,9 +69,18 @@ export function Dashbord() {
             console.error(error);
             navigate("/");
         }
-    }
+    } 
+    
+    useEffect(() => {
+        findGestors();
+        findEventos();
+    }, []);
+
+    useEffect(() => {
+        calculateTotalSales();
+        calculateTotalmeta();
+    }, [gestors]);
    
-  
     return (
         <>
             <Bar />
