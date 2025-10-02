@@ -11,7 +11,6 @@ import {
 
 import { useNavigate, Link } from "react-router-dom";
 import { useState, useEffect } from "react";
-import { useForm } from "react-hook-form";
 
 import "../index.css";
 import { Gestor } from "../components/Gestor";
@@ -27,15 +26,8 @@ import {
 
 export function Gestors() {
     const [gestors, setGestors] = useState([]);
-    const [isCreated, setIsCreated] = useState(false);
-
     const [searchTerm, setSearchTerm] = useState("");
 
-    const {
-        handleSubmit,
-       
-        formState: { errors },
-    } = useForm();
     const navigate = useNavigate();
 
     useEffect(() => {
@@ -65,36 +57,9 @@ export function Gestors() {
         }
     }
 
-    async function addGestor(data) {
-        try {
-            await createGestor(data);
-            setIsCreated(false);
-            await findGestors();
-        } catch (error) {
-            console.error(error);
-        }
-    }
-
     async function editGestor(data) {
         try {
-            console.log("Editing gestor with data:", data);
-            await updateGestor({
-                id: data.id,
-                nomeGestor: data.nomeGestor,
-                sobrenomeGestor: data.sobrenomeGestor,
-                idadeGestor: data.idadeGestor,
-                generoGestor: data.generoGestor,
-                dataDeNascimentoGestor: data.dataDeNascimentoGestor,
-                localDeTrabalhoGestor: data.localDeTrabalhoGestor,
-                CRMGestor: data.CRMGestor,
-                tipoDeContratoGestor: data.tipoDeContratoGestor,
-                formacaoGestor: data.formacaoGestor,
-                senhaProvisoriaGestor: data.senhaProvisoriaGestor,
-                metasGestor: data.metasGestor,
-                atendimentosGestor: data.atendimentosGestor,
-                ePGesor: data.ePGesor,
-            });
-            console.log("gestor updated successfully.");
+            await updateGestor(data);
             await findGestors();
         } catch (error) {
             console.error(error);
@@ -179,7 +144,7 @@ export function Gestors() {
                                     </tr>
                                 </thead>
                                 <tbody className="text-center">
-                                    {gestors.map((gestor) => (
+                                    {gestors.map((gestor, index) => (
                                         <tr key={gestor.id}>
                                             <td>🟢</td>
                                             <td className="text-truncate">
@@ -197,6 +162,7 @@ export function Gestors() {
                                             <td>{gestor.eventosP} </td>
                                             <td>
                                                 <Gestor
+                                               key={index}
                                                     gestor={gestor}
                                                     removeGestor={async () =>
                                                         await removeGestor(
@@ -217,28 +183,6 @@ export function Gestors() {
                     </Container>
                 
 
-                <Modal show={isCreated} onHide={() => setIsCreated(false)}>
-                    <Modal.Header>
-                        <Modal.Title>Cadastrar novo gestor</Modal.Title>
-                    </Modal.Header>
-                    <Form
-                        noValidate
-                        onSubmit={handleSubmit(addGestor)}
-                        validated={!!errors}
-                    >
-                        <Modal.Footer>
-                            <Button variant="primary" type="submit">
-                                Adicionar
-                            </Button>
-                            <Button
-                                variant="secondary"
-                                onClick={() => setIsCreated(false)}
-                            >
-                                Fechar
-                            </Button>
-                        </Modal.Footer>
-                    </Form>
-                </Modal>
             </Container>
         </>
     );

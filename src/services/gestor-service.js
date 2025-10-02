@@ -3,7 +3,7 @@ import { api } from "./api";
 export async function getGestors() {
     try {
         const accessToken = sessionStorage.getItem('token');
-        console.log('entrou na função')
+        
         const result = await api.get('/gestors', {
             headers: {
                 'Authorization': `Bearer ${JSON.parse(accessToken)}`
@@ -30,6 +30,7 @@ export async function deleteGestor(id) {
 
 export async function updateGestor(data) {
     const accessToken = sessionStorage.getItem('token');
+    console.log("chegou na função")
     const result = await api.put(`/gestor/${data.id}`, {
         id:               data.id,
         nome:             data.nomeGestor,
@@ -56,6 +57,7 @@ export async function updateGestor(data) {
 
 export async function createGestor(data) {
     const accessToken = sessionStorage.getItem('token');
+    console.log('entrou na função /br', data )
     const result = await api.post('/gestor', {
         nome:             data.nomeGestor,
         sobrenome:        data.sobrenomeGestor,

@@ -101,10 +101,9 @@ export function Eventos() {
                 id: data.id,
                 nomeEvento: data.nomeEvento,
                 dataEvento: data.dataEvento,
-                adendo: data.adendoEvento,
+                adendoEvento: data.adendoEvento,
             });
             alert("O evento foi alterado com sucesso!");
-            console.log("Evento alterado com sucesso.");
             await findEventos();
         } catch (error) {
             console.error("Error editing event:", error);

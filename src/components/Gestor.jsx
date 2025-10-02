@@ -4,7 +4,7 @@ import { Input } from "./Input";
 import {
     Button,
     Form,
-    Modal   
+    Modal
 } from "react-bootstrap";
 
 
@@ -13,7 +13,7 @@ export function Gestor(props) {
     const [isUpdated, setIsUpdated] = useState(false);
     const [isEventoP, setIsEvendoP] = useState(false);
     const [modalTest, setModalTest] = useState(false);
-  
+
 
     const {
         handleSubmit,
@@ -24,14 +24,15 @@ export function Gestor(props) {
 
     async function editGestor(data) {
         await props.editGestor({ ...data, id: props.gestor.id });
+        setIsUpdated(false);
 
         // Adiciona um alerta para informar que o gestor foi alterado com sucesso
         alert("O gestor foi alterado com sucesso!");
 
         setIsUpdated(false);
     }
-   
-    
+
+
     async function confirmDelete() {
         const result = window.confirm("Tem certeza de que deseja excluir?");
         if (result) {
@@ -39,7 +40,7 @@ export function Gestor(props) {
             setModalTest(false);
         }
     }
-    
+
 
 
     return (
@@ -86,24 +87,8 @@ export function Gestor(props) {
 
             </td>
             <td>
-                <Button
-                    id="editeedele"
-                    variant="secondary"
-                    onClick={() => setIsEvendoP(true)}
-                >
-                    né
-                    <svg
-                        xmlns="http://www.w3.org/2000/svg"
-                        width="33"
-                        height="33"
-                        fill="currentColor"
-                        className="bi bi-pen"
-                        viewBox="0 0 16 16"
-                    >
-                        <path d="m13.498.795.149-.149a1.207 1.207 0 1 1 1.707 1.708l-.149.148a1.5 1.5 0 0 1-.059 2.059L4.854 14.854a.5.5 0 0 1-.233.131l-4 1a.5.5 0 0 1-.606-.606l1-4a.5.5 0 0 1 .131-.232l9.642-9.642a.5.5 0 0 0-.642.056L6.854 4.854a.5.5 0 1 1-.708-.708L9.44.854A1.5 1.5 0 0 1 11.5.796a1.5 1.5 0 0 1 1.998-.001zm-.644.766a.5.5 0 0 0-.707 0L1.95 11.756l-.764 3.057 3.057-.764L14.44 3.854a.5.5 0 0 0 0-.708l-1.585-1.585z" />
-                    </svg>
-                </Button>
-                 </td>
+
+            </td>
 
             <Modal show={modalTest} onHide={() => setModalTest(false)}>
                 <Modal.Header className="text-center" >
@@ -145,45 +130,7 @@ export function Gestor(props) {
                 </Modal.Footer>
             </Modal>
 
-            <Modal show={isEventoP} onHide={() => setIsEvendoP(false)}>
-                <Modal.Header>
-                    <Modal.Title>
-                        Editar Eventos a comparecer: {props.gestor.nome}
-                    </Modal.Title>
-                </Modal.Header>
-                <Form noValidate onSubmit={handleSubmit(editGestor)}>
-                    <Modal.Body>
 
-                        <Input
-                            className="mb-3"
-                            type="text"
-                            defaultValue={props.gestor.ePGesor}
-                            label="Eventos a comparecer"
-                            placeholder=""
-                            required={true}
-                            name="eventosPGesor"
-                            error={errors.ePGesor}
-                            validations={register("ePGesor", {
-                                required: {
-                                    value: true,
-                                    message: "Atribua um evento",
-                                },
-                            })}
-                        />
-                    </Modal.Body>
-                    <Modal.Footer>
-                        <Button variant="primary" type="submit">
-                            Editar
-                        </Button>
-                        <Button
-                            variant="secondary"
-                            onClick={() => setIsEvendoP(false)}
-                        >
-                            Fechar
-                        </Button>
-                    </Modal.Footer>
-                </Form>
-            </Modal>
 
             <Modal show={isUpdated} onHide={() => setIsUpdated(false)}>
                 <Modal.Header>
@@ -431,6 +378,24 @@ export function Gestor(props) {
                         />
 
                         <td>
+                            
+                                <Input
+                                    className="mb-3"
+                                    type="text"
+                                    defaultValue={props.gestor.ePGesor}
+                                    label="Eventos a comparecer"
+                                    placeholder=""
+                                    required={true}
+                                    name="eventosPGesor"
+                                    error={errors.ePGesor}
+                                    validations={register("ePGesor", {
+                                        required: {
+                                            value: true,
+                                            message: "Atribua um evento",
+                                        },
+                                    })}
+                                />
+                            
 
                         </td>
                     </Modal.Body>

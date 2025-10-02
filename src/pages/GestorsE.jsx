@@ -1,6 +1,6 @@
 import { Container, Col, Modal, Form, Button } from "react-bootstrap";
 
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 
 import { useForm } from "react-hook-form";
 
@@ -8,15 +8,26 @@ import "../index.css";
 
 import { Input } from "../components/Input";
 import { Bar } from "../components/bar";
+import { createGestor } from "../services/gestor-service";
 
 
 export function GestorsE() {
-  
+  console.log("ahud")
     const {
         handleSubmit,
         register,
         formState: { errors },
     } = useForm();
+    const navigate = useNavigate();
+
+    async function addGestor(data) {
+        try {
+            await createGestor(data);
+            navigate("/gestors");
+        } catch (error) {
+            console.error(error);
+        }
+    }
     
   
     return (
@@ -29,7 +40,7 @@ export function GestorsE() {
                 <Col>
                     <Form
                         noValidate
-                        onSubmit={handleSubmit()}
+                        onSubmit={handleSubmit(addGestor)}
                         validated={!!errors}
                     >
                         <Modal.Body>

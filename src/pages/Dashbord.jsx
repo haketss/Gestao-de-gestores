@@ -103,8 +103,8 @@ export function Dashbord() {
                                         .slice(0, maxGestorsToShow)
                                         .map((gestor) => [
                                             `${gestor.nome} `,
-                                            gestor.atendimentos || 0,
-                                            gestor.metas || 0,
+                                           Number(gestor.atendimentos) || 0,
+  Number(gestor.metas) || 0,
                                         ]),
                                 ]}
                                 options={{
@@ -234,7 +234,7 @@ export function Dashbord() {
                                 data={[
                                     ["Gestor", "atendimentos"],
                                     ...gestors.map((gestor) => [
-                                        gestor.nome,
+                                        gestor.nome ,
                                         gestor.atendimentos || 0,
                                     ]),
                                 ]}

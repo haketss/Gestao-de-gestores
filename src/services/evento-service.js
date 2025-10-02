@@ -27,7 +27,7 @@ export async function updateEvento(data) {
         {
             nome: data.nomeEvento,
             data: data.dataEvento,
-            adendo: data.adendoEvento,
+            adendo: data.adendoEvento
         },
         {
             headers: {
