@@ -1,11 +1,11 @@
-import { useState } from "react";
+import { useState, memo } from "react";
 
 import { Button, Card, Form, Modal, Row } from "react-bootstrap";
 import { useForm } from "react-hook-form";
 
 import { Input } from "./Input";
 
-export function Gestor(props) {
+export const Gestor = memo(function Gestor(props) {
     const {
         handleSubmit,
         register,
@@ -17,15 +17,15 @@ export function Gestor(props) {
         await props.editGestor({ ...data, id: props.gestor.id });
         setIsUpdated(false);
 
-        
+
     }
     async function confirmDelete() {
-            const shouldDelete = window.confirm("Tem certeza que deseja apagar um gestor");
-    
-            if (shouldDelete) {
-                props.removeGestor();
-            }
+        const shouldDelete = window.confirm("Tem certeza que deseja apagar um gestor");
+
+        if (shouldDelete) {
+            props.removeGestor();
         }
+    }
     return (
         <>
             <Card id="Cardsgestors" className="mb-custon p-custon bg-custon">
@@ -74,7 +74,7 @@ export function Gestor(props) {
                         </svg>
                     </Button>
                     <Button
-                    id="editeedelet"
+                        id="editeedelet"
                         variant="outline-danger"
                         className="ms-3"
                         onClick={confirmDelete}
@@ -100,7 +100,7 @@ export function Gestor(props) {
                     </Modal.Title>
                 </Modal.Header>
                 <Form noValidate onSubmit={handleSubmit(editGestor)}>
-               
+
                     <Modal.Footer>
                         <Button variant="primary" type="submit">
                             Editar
@@ -116,4 +116,4 @@ export function Gestor(props) {
             </Modal>
         </>
     );
-}
+});

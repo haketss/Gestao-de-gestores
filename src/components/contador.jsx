@@ -1,6 +1,6 @@
-import React, { useState } from 'react';
+import React, { useState, memo } from 'react';
 
-function Contador(props) {
+const Contador = memo(function Contador(props) {
   const [contador, setContador] = useState(0);
 
   function incrementar() {
@@ -20,6 +20,6 @@ function Contador(props) {
       <button onClick={incrementar}>Incrementar</button>
     </div>
   );
-}
+});
 
 export default Contador;

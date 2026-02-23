@@ -1,5 +1,4 @@
 import { useState } from "react";
-import { Button, Col, Container, Form } from "react-bootstrap";
 import { useForm } from "react-hook-form";
 import { Link, useNavigate } from "react-router-dom";
 import { Input } from "../components/Input";
@@ -14,128 +13,141 @@ export function Login() {
         register,
         formState: { errors },
     } = useForm();
-    const [result, setResult] = useState(null);
-   
 
+    const [result, setResult] = useState(null);
     const navigate = useNavigate();
 
     const onSubmit = async (data) => {
         try {
             const user = await loginUser(data);
             setResult(user);
-            navigate("/dashbord");
+            navigate("/dashboard");
         } catch (error) {
             setResult({
-                title: "Houve um erro no login!",
-                message: error.response.data.error,
+                title: "Erro no login!",
+                message: error.response?.data?.error || "E-mail ou senha incorretos",
             });
         }
     };
 
     return (
-        <>
+        <div className="min-h-screen bg-gray-50 flex flex-col">
             <Bar />
-            <p className="align-middle" id="barraColorida">a</p>
-            <Container className=" border-dark border-top border-bottom border-5 ">
-                <Modal
-                    noValidate
-                    validated={!!errors}
-                    onSubmit={handleSubmit(onSubmit)}
-                />
 
-                <Form
-                    id="form"
-                    noValidate
-                    validated={!!errors}
-                    onSubmit={handleSubmit(onSubmit)}
-                >
-                    <img
-                        id="imagemDeLogin"
-                        alt="qualquer coisa"
-                        src="https://th.bing.com/th/id/OIG.jGSf7n01LudSawMKjyjW?w=1024&h=1024&rs=1&pid=ImgDetMain"
-                        width={200}
-                    ></img>
+            <main className="flex-grow flex items-center justify-center p-4">
+                <div className="max-w-md w-full bg-white rounded-2xl shadow-xl overflow-hidden border border-gray-100">
+                    <div className="p-8">
+                        <div className="text-center mb-8">
+                            <div className="mx-auto h-32 w-32 rounded-full shadow-lg bg-blue-50 flex items-center justify-center mb-4 border-4 border-white">
+                                <svg
+                                    xmlns="http://www.w3.org/2000/svg"
+                                    className="h-16 w-16 text-blue-900"
+                                    fill="none"
+                                    viewBox="0 0 24 24"
+                                    stroke="currentColor"
+                                    strokeWidth={1.5}
+                                >
+                                    <path
+                                        strokeLinecap="round"
+                                        strokeLinejoin="round"
+                                        d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z"
+                                    />
+                                </svg>
+                            </div>
+                            <h2 className="text-2xl font-bold text-gray-900">Bem-vindo de volta</h2>
+                            <p className="text-gray-500 mt-2">Acesse sua conta para gerenciar gestores</p>
+                        </div>
 
-                    <Col
-                        id="inputs"
-                        className=".bg-white  p-5 m-auto novalidate border-top-style:"
-                    >
-                        E-mail:
-                        <Input
-                            className="mx-alto"
-                            type="text"
-                            placeholder="Insira seu e-mail"
-                            error={errors.email}
-                            required={true}
-                            name="email"
-                            validations={register("email", {
-                                required: {
-                                    value: true,
-                                    message: "E-mail é obrigatório",
-                                },
-                                pattern: {
-                                    value: /^[a-z0-9.]+@[a-z0-9]+\.[a-z]+(\.[a-z]+)?$/i,
-                                    message: "E-mail inválido!",
-                                },
-                            })}
+                        <Modal
+                            show={result}
+                            title={result?.title}
+                            message={result?.message}
+                            handleClose={() => setResult(null)}
                         />
-                        Senha:{result}
-                        <Input
-                            className="m-1 shadow"
-                            id="inputs"
-                            type="password"
-                            placeholder="Insira sua senha"
-                            error={errors.password}
-                            required={true}
-                            name="password"
-                            validations={register("password", {
-                                required: {
-                                    value: true,
-                                    message: "Senha é obrigatório",
-                                },
-                            })}
-                        />
-                        <p id="criar-3">Esqueceu a senha?</p>
-                        <div className="d-flex justify-content-between">
-                            <Button
-                                id="entrar"
-                                className="shadow"
+
+                        <form onSubmit={handleSubmit(onSubmit)} className="space-y-6">
+                            <Input
+                                type="text"
+                                placeholder="E-mail"
+                                label="Seu e-mail"
+                                error={errors.email}
+                                required={true}
+                                name="email"
+                                validations={register("email", {
+                                    required: {
+                                        value: true,
+                                        message: "E-mail é obrigatório",
+                                    },
+                                    pattern: {
+                                        value: /^[a-z0-9.]+@[a-z0-9]+\.[a-z]+(\.[a-z]+)?$/i,
+                                        message: "E-mail inválido!",
+                                    },
+                                })}
+                            />
+
+                            <Input
+                                type="password"
+                                placeholder="Senha"
+                                label="Sua senha"
+                                error={errors.password}
+                                required={true}
+                                name="password"
+                                validations={register("password", {
+                                    required: {
+                                        value: true,
+                                        message: "Senha é obrigatório",
+                                    },
+                                })}
+                            />
+
+                            <div className="flex items-center justify-between">
+                                <div className="text-sm">
+                                    <Link to="#" className="font-medium text-blue-600 hover:text-blue-500">
+                                        Esqueceu a senha?
+                                    </Link>
+                                </div>
+                            </div>
+
+                            <button
                                 type="submit"
+                                className="w-full flex justify-center py-3 px-4 border border-transparent rounded-lg shadow-sm text-sm font-medium text-white bg-blue-900 hover:bg-blue-800 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-500 transition-colors duration-200"
                             >
                                 Entrar
-                            </Button>
-                        </div>
-                        <div>
-                            <p id="criar-2">Ou crie uma conta  <Link  className="text-center" to="/register">
-                                aqui!
-                            </Link></p>
-                           
-                        </div>
-                    </Col>
-                </Form>
-                <br />
-            </Container>
-            <Container>
-                {" "}
-                <label id="subtitulo">
-                    <p className="text-center">
-                        <strong>Referência: Silva, Joana.</strong>
-                        <br />
-                         "Inovações na Gestão Hospitalar: Um Estudo
-                        de Caso". Revista de Saúde e Tecnologia, 15 de abril de
-                        2023. Disponível em: [URL fictício].
-                    </p>
-                    <p className="text-center">
-                        <strong>Contato: Hospital Esperança</strong>
-                        <br />
-                        Endereço: Rua Flores, 123, Bairro
-                        Saúde, Cidade Feliz, Estado Feliz, CEP 12345-678
-                        Telefone: (012) 3456-7890 E-mail:
-                        contato@hospital-esperanca.com Website:
-                        www.hospital-esperanca.com.br
-                    </p>
-                </label>
-            </Container>
-        </>
+                            </button>
+
+                            <div className="text-center mt-6">
+                                <p className="text-sm text-gray-600">
+                                    Ainda não tem uma conta?{" "}
+                                    <Link to="/register" className="font-medium text-blue-600 hover:text-blue-500">
+                                        Registre-se aqui
+                                    </Link>
+                                </p>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </main>
+
+            <footer className="bg-white border-t border-gray-200 py-8 px-4">
+                <div className="max-w-4xl mx-auto space-y-6">
+                    <div className="text-center text-sm text-gray-600">
+                        <p>
+                            <strong>Referência: Silva, Joana.</strong>
+                            <br />
+                            "Inovações na Gestão Hospitalar: Um Estudo de Caso". Revista de Saúde e Tecnologia, 15 de abril de 2023.
+                        </p>
+                    </div>
+                    <div className="text-center text-sm text-gray-600">
+                        <p>
+                            <strong>Contato: Hospital Esperança</strong>
+                            <br />
+                            Endereço: Rua Flores, 123, Bairro Saúde, Cidade Feliz, Estado Feliz, CEP 12345-678
+                            <br />
+                            Telefone: (012) 3456-7890 | E-mail: contato@hospital-esperanca.com
+                        </p>
+                    </div>
+                </div>
+            </footer>
+        </div>
     );
 }

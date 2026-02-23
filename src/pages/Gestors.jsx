@@ -1,24 +1,9 @@
-
-import {
-    Container,
-   
-    Modal,
-    Form,
-    Button,
-    
-    Table,
-} from "react-bootstrap";
-
 import { useNavigate, Link } from "react-router-dom";
-import { useState, useEffect } from "react";
-
-import "../index.css";
+import { useState, useEffect, useMemo, useCallback } from "react";
 import { Gestor } from "../components/Gestor";
 import { Bar } from "../components/bar";
-
-
+import { Modal } from "../components/Modal";
 import {
-    createGestor,
     deleteGestor,
     getGestors,
     updateGestor,
@@ -27,163 +12,172 @@ import {
 export function Gestors() {
     const [gestors, setGestors] = useState([]);
     const [searchTerm, setSearchTerm] = useState("");
+    const [loading, setLoading] = useState(true);
+    const [result, setResult] = useState(null);
 
     const navigate = useNavigate();
 
-    useEffect(() => {
-        findGestors();
-        // eslint-disable-next-line
-    },[]);
-
-
-    async function findGestors(searchTerm) {
+    const fetchData = useCallback(async () => {
         try {
-            console.log("Searching with term:", searchTerm);
-            const result = await getGestors(searchTerm);
-            setGestors(result.data);
-            console.log("Search result:", result.data);
+            setLoading(true);
+            const result = await getGestors();
+            setGestors(result.data || []);
         } catch (error) {
-            console.error(error);
+            console.error("Error fetching gestors:", error);
             navigate("/");
+        } finally {
+            setLoading(false);
         }
-    }
+    }, [navigate]);
 
-    async function removeGestor(id) {
+    useEffect(() => {
+        fetchData();
+        // eslint-disable-next-line
+    }, []);
+
+    const removeGestorItem = useCallback(async (id) => {
         try {
             await deleteGestor(id);
-            await findGestors();
+            setGestors(prev => prev.filter(g => g.id !== id));
+            setResult({
+                title: "Excluído!",
+                message: "O gestor foi removido com sucesso."
+            });
         } catch (error) {
-            console.error(error);
+            console.error("Error removing gestor:", error);
+            setResult({
+                title: "Erro!",
+                message: "Não foi possível remover o gestor."
+            });
         }
-    }
+    }, []);
 
-    async function editGestor(data) {
+    const editGestorItem = useCallback(async (data) => {
         try {
             await updateGestor(data);
-            await findGestors();
+            await fetchData();
+            setResult({
+                title: "Atualizado!",
+                message: "As informações do gestor foram salvas com sucesso."
+            });
         } catch (error) {
-            console.error(error);
+            console.error("Error updating gestor:", error);
+            setResult({
+                title: "Erro!",
+                message: "Ocorreu um erro ao atualizar os dados."
+            });
         }
-    }
+    }, [fetchData]);
 
-    async function handleSearch() {
-        try {
-            const result = await getGestors();
-            // Filtra a lista de funcionários com base no termo de pesquisa
-            const filteredGestors = result.data.filter((gestor) =>
-                gestor.nome.toLowerCase().includes(searchTerm.toLowerCase())
-            );
-            setGestors(filteredGestors);
-        } catch (error) {
-            console.error(error);
-            navigate("/");
-        }
-    }
+    const filteredGestors = useMemo(() => {
+        return gestors.filter((gestor) =>
+            (gestor.nome || "").toLowerCase().includes(searchTerm.toLowerCase()) ||
+            (gestor.sobrenome || "").toLowerCase().includes(searchTerm.toLowerCase())
+        );
+    }, [gestors, searchTerm]);
 
     return (
-        <>
+        <div className="min-h-screen bg-gray-50 flex flex-col">
             <Bar />
-            <p className="align-middle" id="barraColorida">
-                
-            </p>
-            <Container className="my3 hstack gap-3">
-                
-                    <div className="container my-3 hstack gap-3">
-                        <div className="p-2">
+            <Modal
+                show={result}
+                title={result?.title}
+                message={result?.message}
+                handleClose={() => setResult(null)}
+            />
+
+            <main className="flex-grow container mx-auto px-4 py-8">
+                <div className="flex flex-col md:flex-row md:items-center justify-between gap-4 mb-8">
+                    <h2 className="text-2xl font-bold text-gray-900">Gestão de Gestores</h2>
+
+                    <div className="flex flex-col sm:flex-row gap-3">
+                        <div className="relative">
                             <input
-                                id="inpsharch"
                                 type="text"
-                                placeholder="Pesquisar por nome"
+                                placeholder="Pesquisar por nome..."
                                 value={searchTerm}
                                 onChange={(e) => setSearchTerm(e.target.value)}
+                                className="pl-10 pr-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500 outline-none w-full sm:w-64 transition-all"
                             />
+                            <div className="absolute left-3 top-2.5 text-gray-400">
+                                <svg xmlns="http://www.w3.org/2000/svg" className="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z" />
+                                </svg>
+                            </div>
                         </div>
-                        <div className="p-2">
-                            <Button id="chartt" onClick={handleSearch}>
-                                <p id="letra">Pesquisar</p>
-                            </Button>
-                        </div>
-                        <div className="p-2">
-                            <Button id="charttA">
-                                <Link id="tituloto" to="/gestorse">
-                                   <span className="profile-link">Adicionar</span> 
-                                    <svg
-                                        id="bibi"
-                                        xmlns="http://www.w3.org/2000/svg"
-                                        width="32"
-                                        height="32"
-                                        fill="currentColor"
-                                        className="bi bi-file-earmark-plus"
-                                        viewBox="0 0 16 16"
-                                    >
-                                        <path d="M8 6.5a.5.5 0 0 1 .5.5v1.5H10a.5.5 0 0 1 0 1H8.5V11a.5.5 0 0 1-1 0V9.5H6a.5.5 0 0 1 0-1h1.5V7a.5.5 0 0 1 .5-.5z" />
-                                        <path d="M14 4.5V14a2 2 0 0 1-2 2H4a2 2 0 0 1-2-2V2a2 2 0 0 1 2-2h5.5L14 4.5zm-3 0A1.5 1.5 0 0 1 9.5 3V1H4a1 1 0 0 0-1 1v12a1 1 0 0 0 1 1h8a1 1 0 0 0 1-1V4.5h-2z" />
-                                    </svg>
-                                </Link>
-                            </Button>
-                        </div>
+
+                        <Link to="/gestorse" className="inline-flex items-center justify-center px-4 py-2 bg-blue-900 text-white rounded-lg hover:bg-blue-800 transition-colors font-medium">
+                            <svg className="h-5 w-5 mr-2" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 6v6m0 0v6m0-6h6m-6 0H6" />
+                            </svg>
+                            Adicionar Gestor
+                        </Link>
                     </div>
-                    <Container>
-                        <div>
-                        <Table className="table table-light table-hover table-responsive table-sm caption-top text-end table-bordered table-striped">
-                                <thead className=" text-center">
-                                    <tr>
-                                        <th>Estatos</th>
-                                        <th>Nome</th>
-                                        <th>genero</th>
-                                        <th>idade</th>
-                                        <th>local D.T</th>
-                                        <th>CRM</th>
-                                        <th>Formação</th>
-                                        <th>T.contrato</th>
-                                        <th>Senha.P</th>
-                                        <th>Meta</th>
-                                        <th>Atendimento</th>
-                                        <th>Eventos</th>
-                                        <th>alterar</th>
+                </div>
+
+                <div className="bg-white rounded-2xl shadow-sm border border-gray-100 overflow-hidden">
+                    {loading ? (
+                        <div className="flex items-center justify-center py-20">
+                            <div className="animate-spin rounded-full h-10 w-10 border-b-2 border-blue-900"></div>
+                        </div>
+                    ) : (
+                        <div className="overflow-x-auto">
+                            <table className="w-full text-left border-collapse">
+                                <thead>
+                                    <tr className="bg-gray-50 border-b border-gray-100">
+                                        <th className="px-6 py-4 text-xs font-semibold text-gray-500 uppercase tracking-wider">Status</th>
+                                        <th className="px-6 py-4 text-xs font-semibold text-gray-500 uppercase tracking-wider">Nome</th>
+                                        <th className="px-6 py-4 text-xs font-semibold text-gray-500 uppercase tracking-wider">Gênero</th>
+                                        <th className="px-6 py-4 text-xs font-semibold text-gray-500 uppercase tracking-wider">Idade</th>
+                                        <th className="px-6 py-4 text-xs font-semibold text-gray-500 uppercase tracking-wider">Local</th>
+                                        <th className="px-6 py-4 text-xs font-semibold text-gray-500 uppercase tracking-wider">Metas</th>
+                                        <th className="px-6 py-4 text-xs font-semibold text-gray-500 uppercase tracking-wider">Atend.</th>
+                                        <th className="px-6 py-4 text-xs font-semibold text-gray-500 uppercase tracking-wider text-center">Ações</th>
                                     </tr>
                                 </thead>
-                                <tbody className="text-center">
-                                    {gestors.map((gestor, index) => (
-                                        <tr key={gestor.id}>
-                                            <td>🟢</td>
-                                            <td className="text-truncate">
-                                                {gestor.nome}
-                                            </td>
-                                            <td>{gestor.genero}</td>
-                                            <td>{gestor.idade}</td>
-                                            <td>{gestor.localDeTrabalho}</td>
-                                            <td>{gestor.CRM}</td>
-                                            <td>{gestor.formacao}</td>
-                                            <td>{gestor.tipoDeContrato}</td>
-                                            <td>{gestor.senhaProvisoria}</td>
-                                            <td>{gestor.metas}</td>
-                                            <td>{gestor.atendimentos}</td>
-                                            <td>{gestor.eventosP} </td>
-                                            <td>
-                                                <Gestor
-                                               key={index}
-                                                    gestor={gestor}
-                                                    removeGestor={async () =>
-                                                        await removeGestor(
-                                                            gestor.id
-                                                        )
-                                                    }
-                                                    editGestor={editGestor}
-                                                />
+                                <tbody className="divide-y divide-gray-100">
+                                    {filteredGestors.length > 0 ? (
+                                        filteredGestors.map((gestor) => (
+                                            <tr key={gestor.id} className="hover:bg-gray-50 transition-colors">
+                                                <td className="px-6 py-4">
+                                                    <span className="inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium bg-green-100 text-green-800">
+                                                        Ativo
+                                                    </span>
+                                                </td>
+                                                <td className="px-6 py-4 font-semibold text-gray-900">
+                                                    {gestor.nome} {gestor.sobrenome}
+                                                    <div className="text-xs text-gray-400 font-normal">CRM: {gestor.CRM}</div>
+                                                </td>
+                                                <td className="px-6 py-4 text-sm text-gray-600">{gestor.genero}</td>
+                                                <td className="px-6 py-4 text-sm text-gray-600">{gestor.idade}</td>
+                                                <td className="px-6 py-4 text-sm text-gray-600">{gestor.localDeTrabalho}</td>
+                                                <td className="px-6 py-4 text-sm font-medium text-gray-900">{gestor.metas}</td>
+                                                <td className="px-6 py-4 text-sm font-medium text-gray-900">{gestor.atendimentos}</td>
+                                                <td className="px-6 py-4 text-center">
+                                                    <Gestor
+                                                        gestor={gestor}
+                                                        removeGestor={() => removeGestorItem(gestor.id)}
+                                                        editGestor={editGestorItem}
+                                                    />
+                                                </td>
+                                            </tr>
+                                        ))
+                                    ) : (
+                                        <tr>
+                                            <td colSpan="8" className="px-6 py-12 text-center text-gray-500 italic">
+                                                Nenhum gestor encontrado.
                                             </td>
                                         </tr>
-                                    ))}
+                                    )}
                                 </tbody>
-                                <caption className="caption-top text-center">
-                                    Gestores cadastrado:
-                                </caption>
-                            </Table>
+                            </table>
                         </div>
-                    </Container>
-                
-
-            </Container>
-        </>
+                    )}
+                    <div className="px-6 py-4 bg-gray-50 border-t border-gray-100 text-sm text-gray-500">
+                        Total de gestores: <span className="font-bold text-gray-900">{filteredGestors.length}</span>
+                    </div>
+                </div>
+            </main>
+        </div>
     );
 }

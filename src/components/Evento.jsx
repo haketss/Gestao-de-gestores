@@ -1,233 +1,215 @@
 import { useForm } from "react-hook-form";
 import { Input } from "./Input";
-import { useState } from "react";
+import { Modal } from "./Modal";
+import { useState, memo } from "react";
 
-import {
-    
-    Button,
-    Card,
-    
-    Form,
-    Modal
-} from "react-bootstrap";
+const EditIcon = () => (
+    <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M11 5H6a2 2 0 00-2 2v11a2 2 0 002 2h11a2 2 0 002-2v-5m-1.414-9.414a2 2 0 112.828 2.828L11.828 15H9v-2.828l8.586-8.586z" />
+    </svg>
+);
 
-export function Evento(props) {
-    const [isUpdated, setIsUpdated] = useState(false);
-    const [modalTest, setModalTest] = useState(false);
-   
-   
+const TrashIcon = () => (
+    <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 7l-.867 12.142A2 2 0 0116.138 21H7.862a2 2 0 01-1.995-1.858L5 7m5 4v6m4-6v6m1-10V4a1 1 0 00-1-1h-4a1 1 0 00-1 1v3M4 7h16" />
+    </svg>
+);
+
+export const Evento = memo(function Evento(props) {
+    const [isEditModalOpen, setIsEditModalOpen] = useState(false);
+    const [isDeleteModalOpen, setIsDeleteModalOpen] = useState(false);
+    const [result, setResult] = useState(null);
+
     const {
         handleSubmit,
         register,
         formState: { errors },
-    } = useForm();
+    } = useForm({
+        defaultValues: {
+            nomeEvento: props.evento.nome,
+            dataEvento: props.evento.data,
+            adendoEvento: props.evento.adendo,
+        }
+    });
 
-    async function editEvento(data) {
-        await props.editEvento({ ...data, id: props.evento.id });
-        setIsUpdated(false);
+    async function handleEdit(data) {
+        try {
+            await props.editEvento({ ...data, id: props.evento.id });
+            setIsEditModalOpen(false);
+            setResult({
+                title: "Sucesso!",
+                message: "O evento foi atualizado corretamente."
+            });
+        } catch (error) {
+            console.error("Error editing event:", error);
+            setResult({
+                title: "Erro!",
+                message: "Erro ao atualizar o evento."
+            });
+        }
     }
 
-    
-
-    async function confirmDelete() {
-         props.removeEvento()
-        
-        setModalTest(false);
-        ;}
+    async function handleDelete() {
+        try {
+            await props.removeEvento();
+            setIsDeleteModalOpen(false);
+        } catch (error) {
+            console.error("Error removing event:", error);
+            setResult({
+                title: "Erro!",
+                message: "Houve um problema ao remover o evento."
+            });
+        }
+    }
 
     function formatarData(dataString) {
+        if (!dataString) return "Indefinida";
         const data = new Date(dataString);
-
-        // Obtém os componentes da data
         const dia = data.getDate().toString().padStart(2, "0");
-        const mes = (data.getMonth() + 1).toString().padStart(2, "0"); // Mês é base 0
+        const mes = (data.getMonth() + 1).toString().padStart(2, "0");
         const ano = data.getFullYear();
         const horas = data.getHours().toString().padStart(2, "0");
         const minutos = data.getMinutes().toString().padStart(2, "0");
-
-        // Formata a data como "DD/MM/YYYY HH:mm"
-        const dataFormatada = `${dia}/${mes}/${ano} ${horas}:${minutos}`;
-
-        return dataFormatada;
+        return `${dia}/${mes}/${ano} ${horas}:${minutos}`;
     }
 
     return (
-        <>
-            <section className="p-2 ">
-                <Card style={{ width: "16rem" }}>
-                    <Card.Img
-                        variant="top"
-                        src="https://picsum.photos/400/400? random=1"
-                    />
-                    <Card.Body>
-                        <Card.Title
-                            className="align-middle text-center"
-                            id="chardssub"
-                        >
-                            <strong>Nome: </strong>
-                            {props.evento.nome}
-                        </Card.Title>
-                        <Card.Text
-                            className="align-middle text-center"
-                            id="chardssub"
-                        >
-                            <strong >Data do evento: </strong>
-                            {formatarData(props.evento.data)}
-                        </Card.Text>
-                        <Card.Text
-                            className="align-middle text-center"
-                            id="chardssub"
-                        >
-                            <strong>Adendo: </strong>
-                            {props.evento.adendo}
-                        </Card.Text>{" "}
-                        <Button
-                            className=""
-                            id="botaodocard"
-                            variant="outline-danger"
-                            onClick={() => setIsUpdated(true)}
-                        >
-                            Editar
-                            <svg
-                                xmlns="http://www.w3.org/2000/svg"
-                                width="32"
-                                height="32"
-                                fill="currentColor"
-                                className="bi bi-pen"
-                                viewBox="0 0 16 16"
-                            >
-                                <path d="m13.498.795.149-.149a1.207 1.207 0 1 1 1.707 1.708l-.149.148a1.5 1.5 0 0 1-.059 2.059L4.854 14.854a.5.5 0 0 1-.233.131l-4 1a.5.5 0 0 1-.606-.606l1-4a.5.5 0 0 1 .131-.232l9.642-9.642a.5.5 0 0 0-.642.056L6.854 4.854a.5.5 0 1 1-.708-.708L9.44.854A1.5 1.5 0 0 1 11.5.796a1.5 1.5 0 0 1 1.998-.001zm-.644.766a.5.5 0 0 0-.707 0L1.95 11.756l-.764 3.057 3.057-.764L14.44 3.854a.5.5 0 0 0 0-.708l-1.585-1.585z" />
-                            </svg>
-                        </Button>
-                        <Button
-                            className=""
-                            id="botaodocarde"
-                            variant="outline-danger"
-                            onClick={() => setModalTest(true)}
-                        >
-                            Apagar
-                            <svg
-                                xmlns="http://www.w3.org/2000/svg"
-                                width="32"
-                                height="32"
-                                fill="currentColor"
-                                className="bi bi-trash"
-                                viewBox="0 0 16 16"
-                            >
-                                <path d="M5.5 5.5A.5.5 0 0 1 6 6v6a.5.5 0 0 1-1 0V6a.5.5 0 0 1 .5-.5Zm2.5 0a.5.5 0 0 1 .5.5v6a.5.5 0 0 1-1 0V6a.5.5 0 0 1 .5-.5Zm3 .5a.5.5 0 0 0-1 0v6a.5.5 0 0 0 1 0V6Z" />
-                                <path d="M14.5 3a1 1 0 0 1-1 1H13v9a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V4h-.5a1 1 0 0 1-1-1V2a1 1 0 0 1 1-1H6a1 1 0 0 1 1-1h2a1 1 0 0 1 1 1h3.5a1 1 0 0 1 1 1v1ZM4.118 4 4 4.059V13a1 1 0 0 0 1 1h6a1 1 0 0 0 1-1V4.059L11.882 4H4.118ZM2.5 3h11V2h-11v1Z" />
-                            </svg>
-                        </Button>
-                    </Card.Body>
-                </Card>
-            </section>
-            <Modal show={isUpdated} onHide={() => setIsUpdated(false)}>
-                <Modal.Header>
-                    <Modal.Title>
-                        Editar evento: {props.evento.nome}
-                    </Modal.Title>
-                </Modal.Header>
-                <Form noValidate onSubmit={handleSubmit(editEvento)}>
-                    <Modal.Body>
-                        <Input
-                            className="mb-3"
-                            type="text"
-                            defaultValue={props.evento.nome}
-                            label="Nome do Evento"
-                            placeholder="Insira o nome do Evento"
-                            required={true}
-                            error={errors.nomeEvento}
-                            validations={register("nomeEvento", {
-                                required: {
-                                    value: true,
-                                    message: "Nome do  é obrigatório.",
-                                },
-                            })}
-                        />
-                        <Input
-                            className="mb-3"
-                            type="datetime-local"
-                            defaultValue={props.evento.data}
-                            label="data do Evento"
-                            placeholder="Insira o nome do Evento"
-                            required={true}
-                            error={errors.dataEvento}
-                            validations={register("dataEvento", {
-                                required: {
-                                    value: true,
-                                    message: "Nome do  é obrigatório.",
-                                },
-                            })}
-                        />
-                        <Input
-                            className="mb-3"
-                            type="text"
-                            defaultValue={props.evento.adendo}
-                            label="Adendo e informações"
-                            placeholder="Insira o adendo do Evento"
-                            required={true}
-                            error={errors.adendoEvento}
-                            validations={register("adendoEvento", {
-                                required: {
-                                    value: true,
-                                    message: "adendo é obrigatório.",
-                                },
-                            })}
-                        />
-                    </Modal.Body>
-                    <Modal.Footer>
-                        <Button variant="primary" type="submit">
-                            Editar
-                        </Button>
-                        <Button
-                            variant="secondary"
-                            onClick={() => setIsUpdated(false)}
-                        >
-                            Fechar
-                        </Button>
-                    </Modal.Footer>
-                </Form>
-            </Modal>
-            <Modal show={modalTest} onHide={() => setModalTest(false)}>
-                <Modal.Header>
-                    <Modal.Title>Excluir evento</Modal.Title>
-                </Modal.Header>
-                <Modal.Body>
-                    Tem certeza que deseja apagar o evento: "{props.evento.nome}
-                    "
-                </Modal.Body>
-                <Modal.Body>
-                    Essa alteração apagara definitivamente este evento, não sera
-                    possivel resltaura-lo.
-                </Modal.Body>
-                <Modal.Footer>
-                    <Button
-                        id="editeedelet"
-                        variant="outline-danger"
-                        className="ms-3"
-                        onClick={confirmDelete}
-                    >
-                        Apagara
-                        <svg
-                            xmlns="http://www.w3.org/2000/svg"
-                            width="31"
-                            height="31"
-                            fill="currentColor"
-                            className="bi bi-trash"
-                            viewBox="0 0 16 16"
-                        >
-                            <path d="M5.5 5.5A.5.5 0 0 1 6 6v6a.5.5 0 0 1-1 0V6a.5.5 0 0 1 .5-.5Zm2.5 0a.5.5 0 0 1 .5.5v6a.5.5 0 0 1-1 0V6a.5.5 0 0 1 .5-.5Zm3 .5a.5.5 0 0 0-1 0v6a.5.5 0 0 0 1 0V6Z" />
-                            <path d="M14.5 3a1 1 0 0 1-1 1H13v9a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V4h-.5a1 1 0 0 1-1-1V2a1 1 0 0 1 1-1H6a1 1 0 0 1 1-1h2a1 1 0 0 1 1 1h3.5a1 1 0 0 1 1 1v1ZM4.118 4 4 4.059V13a1 1 0 0 0 1 1h6a1 1 0 0 0 1-1V4.059L11.882 4H4.118ZM2.5 3h11V2h-11v1Z" />
+        <div className="bg-white rounded-2xl shadow-sm border border-gray-100 overflow-hidden hover:shadow-md transition-shadow">
+            <img
+                className="w-full h-40 object-cover"
+                src={`https://picsum.photos/400/200?random=${props.evento.id || 1}`}
+                alt="Evento"
+            />
+            <div className="p-6">
+                <h3 className="text-xl font-bold text-blue-900 mb-2 truncate">
+                    {props.evento.nome}
+                </h3>
+
+                <div className="space-y-2 mb-6">
+                    <div className="flex items-center text-sm text-gray-600">
+                        <svg className="w-4 h-4 mr-2" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z" />
                         </svg>
-                    </Button>
-                    <Button
-                        variant="secondary"
-                        onClick={() => setModalTest(false)}
+                        <span className="font-medium text-gray-900 mr-2">Data:</span>
+                        {formatarData(props.evento.data)}
+                    </div>
+                    {props.evento.adendo && (
+                        <div className="flex items-start text-sm text-gray-600">
+                            <svg className="w-4 h-4 mr-2 mt-0.5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M7 8h10M7 12h4m1 8l-4-4H5a2 2 0 01-2-2V6a2 2 0 012-2h14a2 2 0 012 2v8a2 2 0 01-2 2h-3l-4 4z" />
+                            </svg>
+                            <div>
+                                <span className="font-medium text-gray-900 mr-2">Adendo:</span>
+                                <span className="italic">"{props.evento.adendo}"</span>
+                            </div>
+                        </div>
+                    )}
+                </div>
+
+                <div className="flex space-x-2">
+                    <button
+                        onClick={() => setIsEditModalOpen(true)}
+                        className="flex-1 flex items-center justify-center px-4 py-2 bg-blue-50 text-blue-700 hover:bg-blue-100 rounded-lg transition-colors text-sm font-semibold"
                     >
-                        Fechar
-                    </Button>
-                </Modal.Footer>
-            </Modal>
-        </>
+                        <EditIcon />
+                        <span className="ml-2">Editar</span>
+                    </button>
+                    <button
+                        onClick={() => setIsDeleteModalOpen(true)}
+                        className="flex-1 flex items-center justify-center px-4 py-2 bg-red-50 text-red-700 hover:bg-red-100 rounded-lg transition-colors text-sm font-semibold"
+                    >
+                        <TrashIcon />
+                        <span className="ml-2">Apagar</span>
+                    </button>
+                </div>
+            </div>
+
+            <Modal
+                show={result}
+                title={result?.title}
+                message={result?.message}
+                handleClose={() => setResult(null)}
+            />
+
+            {/* Edit Modal */}
+            {isEditModalOpen && (
+                <div className="fixed inset-0 z-[60] flex items-center justify-center p-4 bg-black bg-opacity-50">
+                    <div className="bg-white rounded-2xl max-w-md w-full p-8 shadow-2xl">
+                        <div className="flex justify-between items-center mb-6">
+                            <h3 className="text-2xl font-bold text-gray-900">Editar Evento</h3>
+                            <button onClick={() => setIsEditModalOpen(false)} className="text-gray-400 hover:text-gray-600">
+                                <svg className="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M6 18L18 6M6 6l12 12" />
+                                </svg>
+                            </button>
+                        </div>
+                        <form onSubmit={handleSubmit(handleEdit)} className="space-y-4">
+                            <Input
+                                label="Nome do Evento"
+                                placeholder="Insira o nome"
+                                error={errors.nomeEvento}
+                                validations={register("nomeEvento", { required: "Nome do evento é obrigatório." })}
+                            />
+                            <Input
+                                label="Data do Evento"
+                                type="datetime-local"
+                                error={errors.dataEvento}
+                                validations={register("dataEvento", { required: "Data é obrigatória." })}
+                            />
+                            <Input
+                                label="Adendo e Informações"
+                                placeholder="Observações..."
+                                error={errors.adendoEvento}
+                                validations={register("adendoEvento", { required: "Adendo é obrigatório." })}
+                            />
+                            <div className="flex justify-end space-x-3 mt-8">
+                                <button
+                                    type="button"
+                                    onClick={() => setIsEditModalOpen(false)}
+                                    className="px-4 py-2 text-gray-600 font-medium hover:text-gray-800"
+                                >
+                                    Cancelar
+                                </button>
+                                <button
+                                    type="submit"
+                                    className="px-6 py-2 bg-blue-900 text-white rounded-xl hover:bg-blue-800 transition-colors font-bold"
+                                >
+                                    Salvar Alterações
+                                </button>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            )}
+
+            {/* Delete Modal */}
+            {isDeleteModalOpen && (
+                <div className="fixed inset-0 z-[60] flex items-center justify-center p-4 bg-black bg-opacity-50">
+                    <div className="bg-white rounded-2xl max-w-sm w-full p-6 shadow-2xl text-center">
+                        <div className="w-16 h-16 bg-red-100 text-red-600 rounded-full flex items-center justify-center mx-auto mb-4">
+                            <TrashIcon />
+                        </div>
+                        <h3 className="text-xl font-bold text-gray-900 mb-2">Excluir Evento</h3>
+                        <p className="text-gray-600 mb-6">
+                            Tem certeza que deseja apagar o evento <span className="font-bold">"{props.evento.nome}"</span>? Esta ação não pode ser desfeita.
+                        </p>
+                        <div className="flex space-x-3">
+                            <button
+                                onClick={() => setIsDeleteModalOpen(false)}
+                                className="flex-1 px-4 py-2 border border-gray-300 text-gray-700 rounded-lg font-medium hover:bg-gray-50"
+                            >
+                                Cancelar
+                            </button>
+                            <button
+                                onClick={handleDelete}
+                                className="flex-1 px-4 py-2 bg-red-600 text-white rounded-lg font-medium hover:bg-red-700 transition-colors"
+                            >
+                                Confirmar Exclusão
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            )}
+        </div>
     );
-}
+});

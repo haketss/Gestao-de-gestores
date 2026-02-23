@@ -1,281 +1,263 @@
-import {
-    Container,
-    
-    Modal,
-    Form,
-    Button,
-    Dropdown,
-} from "react-bootstrap";
-
 import { useNavigate } from "react-router-dom";
-import { useEffect, useState } from "react";
+import { useEffect, useState, useMemo, useCallback } from "react";
 import { useForm } from "react-hook-form";
-
-import "../index.css";
 import { Evento } from "../components/Evento";
-
 import { Input } from "../components/Input";
 import { Bar } from "../components/bar";
-
+import { Modal } from "../components/Modal";
 import {
     createEvento,
     deleteEvento,
     getEventos,
     updateEvento,
 } from "../services/evento-service";
-import {
-   
-    getGestors,
-    
-} from "../services/gestor-service";
-
+import { getGestors } from "../services/gestor-service";
 
 export function Eventos() {
-  
-    const [isCreated, setIsCreated] = useState(false);
+    const [isAddModalOpen, setIsAddModalOpen] = useState(false);
     const [eventos, setEventos] = useState([]);
     const [gestors, setGestors] = useState([]);
-   
-    const navigate = useNavigate();
     const [searchTerm, setSearchTerm] = useState("");
+    const [loading, setLoading] = useState(true);
+    const [result, setResult] = useState(null);
+
+    const navigate = useNavigate();
 
     const {
         handleSubmit,
         register,
         formState: { errors },
+        reset
     } = useForm();
 
+    const fetchData = useCallback(async () => {
+        try {
+            setLoading(true);
+            const [eventosRes, gestorsRes] = await Promise.all([
+                getEventos(),
+                getGestors()
+            ]);
+            setEventos(eventosRes.data || []);
+            setGestors(gestorsRes.data || []);
+        } catch (error) {
+            console.error("Error fetching events data:", error);
+            navigate("/");
+        } finally {
+            setLoading(false);
+        }
+    }, [navigate]);
+
     useEffect(() => {
-        findGestors();
-        findEventos();
+        fetchData();
+        // eslint-disable-next-line
     }, []);
 
-
-    async function findGestors () {
-        try{
-            const result = await getGestors();
-            setGestors(result.data);
-        } catch (error) {
-            console.error(error);
-            navigate("/")
-        }
-    }
-
-    async function findEventos() {
-        try {
-            const result = await getEventos();
-            setEventos(result.data);
-        } catch (error) {
-            console.error(error);
-            navigate("/");
-        }
-    }
-
-    async function removeEvento(id) {
+    const removeEvento = useCallback(async (id) => {
         try {
             await deleteEvento(id);
-            await findEventos();
+            setEventos(prev => prev.filter(e => e.id !== id));
+            setResult({
+                title: "Excluído!",
+                message: "O evento foi removido com sucesso."
+            });
         } catch (error) {
-            console.error(error);
+            console.error("Error removing event:", error);
+            setResult({
+                title: "Erro!",
+                message: "Não foi possível remover o evento."
+            });
         }
-    }
+    }, []);
 
-    async function addEvento(data) {
+    const addEvento = useCallback(async (data) => {
         try {
             await createEvento(data);
-            // Adiciona um alerta para informar que o gestor foi criado com sucesso
-            alert("O evento foi criado com sucesso!");
-
-            setIsCreated(false);
-            await findEventos();
+            setIsAddModalOpen(false);
+            reset();
+            await fetchData();
+            setResult({
+                title: "Criado!",
+                message: "O novo evento foi agendado com sucesso."
+            });
         } catch (error) {
-            console.error("Error creat evento:", error);
+            console.error("Error creating event:", error);
+            setResult({
+                title: "Erro!",
+                message: "Falha ao criar o evento."
+            });
         }
-    }
+    }, [fetchData, reset]);
 
-    async function editEvento(data) {
+    const editEvento = useCallback(async (data) => {
         try {
-            console.log("Editando o evento:", data);
-            // ...
             await updateEvento({
                 id: data.id,
                 nomeEvento: data.nomeEvento,
                 dataEvento: data.dataEvento,
                 adendoEvento: data.adendoEvento,
             });
-            alert("O evento foi alterado com sucesso!");
-            await findEventos();
+            await fetchData();
+            setResult({
+                title: "Atualizado!",
+                message: "As informações do evento foram salvas."
+            });
         } catch (error) {
             console.error("Error editing event:", error);
+            setResult({
+                title: "Erro!",
+                message: "Não foi possível atualizar o evento."
+            });
         }
-    }
+    }, [fetchData]);
 
-    async function handleSearch() {
-        try {
-            const result = await getEventos();
-            // Filtra a lista de funcionários com base no termo de pesquisa
-            const filteredEventos = result.data.filter((evento) =>
-                evento.nome.toLowerCase().includes(searchTerm.toLowerCase())
-            );
-            setEventos(filteredEventos);
-        } catch (error) {
-            console.error(error);
-            navigate("/");
-        }
-    }
+    const filteredEventos = useMemo(() => {
+        return eventos.filter((evento) =>
+            (evento.nome || "").toLowerCase().includes(searchTerm.toLowerCase())
+        );
+    }, [eventos, searchTerm]);
 
     return (
-        <>
+        <div className="min-h-screen bg-gray-50 flex flex-col">
             <Bar />
-            <p className="align-middle" id="barraColorida">
-                a
-            </p>
-            <Container>
-                <div className="container my-3 hstack gap-3">
-                    <div className="p-2">
-                        <input
-                            id="inpsharch"
-                            type="text"
-                            placeholder="Pesquisar por nome"
-                            value={searchTerm}
-                            onChange={(e) => setSearchTerm(e.target.value)}
-                        />
+            <Modal
+                show={result}
+                title={result?.title}
+                message={result?.message}
+                handleClose={() => setResult(null)}
+            />
+
+            <main className="flex-grow container mx-auto px-4 py-8">
+                <div className="flex flex-col md:flex-row md:items-center justify-between gap-4 mb-8">
+                    <div>
+                        <h2 className="text-2xl font-bold text-gray-900">Eventos e Reuniões</h2>
+                        <p className="text-gray-500 text-sm">Gerencie o cronograma de atividades</p>
                     </div>
-                    <div className="p-2">
-                        <Button id="chartt" onClick={handleSearch}>
-                            <p id="letra">Pesquisar</p>
-                        </Button>
-                    </div>
-                    <div className="p-2">
-                    <Button id="charttA" onClick={() => setIsCreated(true)}>
-                    Adicionar
-                    <svg
-                        xmlns="http://www.w3.org/2000/svg"
-                        width="32"
-                        height="32"
-                        fill="currenttror"
-                        className="bi bi-file-earmark-plus"
-                        viewBox="0 0 16 16"
-                    >
-                        <path d="M8 6.5a.5.5 0 0 1 .5.5v1.5H10a.5.5 0 0 1 0 1H8.5V11a.5.5 0 0 1-1 0V9.5H6a.5.5 0 0 1 0-1h1.5V7a.5.5 0 0 1 .5-.5z" />
-                        <path d="M14 4.5V14a2 2 0 0 1-2 2H4a2 2 0 0 1-2-2V2a2 2 0 0 1 2-2h5.5L14 4.5zm-3 0A1.5 1.5 0 0 1 9.5 3V1H4a1 1 0 0 0-1 1v12a1 1 0 0 0 1 1h8a1 1 0 0 0 1-1V4.5h-2z" />
-                    </svg>
-                </Button>
-                    </div>
-                </div>
-                <div className="item-middle">
-                    {eventos && eventos.length > 0 ? (
-                        <div className="eventos-list">
-                            {eventos.map((evento, index) => (
-                                <Evento
-                                    key={index}
-                                    evento={evento}
-                                    removeEvento={async () =>
-                                        await removeEvento(evento.id)
-                                    }
-                                    editEvento={editEvento}
-                                />
-                            ))}
+
+                    <div className="flex flex-col sm:flex-row gap-3">
+                        <div className="relative">
+                            <input
+                                type="text"
+                                placeholder="Pesquisar por nome..."
+                                value={searchTerm}
+                                onChange={(e) => setSearchTerm(e.target.value)}
+                                className="pl-10 pr-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500 outline-none w-full sm:w-64 transition-all"
+                            />
+                            <div className="absolute left-3 top-2.5 text-gray-400">
+                                <svg xmlns="http://www.w3.org/2000/svg" className="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z" />
+                                </svg>
+                            </div>
                         </div>
-                    ) : (
-                        <p className="text-center">
-                           Sem itens, ou carregando!!
-                        </p>
-                    )}
+
+                        <button
+                            onClick={() => setIsAddModalOpen(true)}
+                            className="inline-flex items-center justify-center px-4 py-2 bg-blue-900 text-white rounded-lg hover:bg-blue-800 transition-colors font-medium shadow-sm"
+                        >
+                            <svg className="h-5 w-5 mr-2" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 6v6m0 0v6m0-6h6m-6 0H6" />
+                            </svg>
+                            Novo Evento
+                        </button>
+                    </div>
                 </div>
-                {/* Formulário dentro do Modal, ideal seria componentizar também, pois é parecido com o Modal de editar */}
-                <Modal show={isCreated} onHide={() => setIsCreated(false)}>
-                    <Modal.Header>
-                        <Modal.Title>Cadastrar novo evento</Modal.Title>
-                    </Modal.Header>
-                    <Form
-                        noValidate
-                        onSubmit={handleSubmit(addEvento)}
-                        validated={!!errors}
-                    >
-                        <Modal.Body>
+
+                {loading ? (
+                    <div className="flex items-center justify-center py-20">
+                        <div className="animate-spin rounded-full h-10 w-10 border-b-2 border-blue-900"></div>
+                    </div>
+                ) : (
+                    <>
+                        {filteredEventos.length > 0 ? (
+                            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6">
+                                {filteredEventos.map((evento) => (
+                                    <Evento
+                                        key={evento.id}
+                                        evento={evento}
+                                        removeEvento={() => removeEvento(evento.id)}
+                                        editEvento={editEvento}
+                                    />
+                                ))}
+                            </div>
+                        ) : (
+                            <div className="bg-white rounded-2xl border border-dashed border-gray-300 py-20 text-center">
+                                <div className="mx-auto w-16 h-16 bg-gray-50 rounded-full flex items-center justify-center text-gray-400 mb-4">
+                                    <svg className="w-8 h-8" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z" />
+                                    </svg>
+                                </div>
+                                <p className="text-gray-500 font-medium">Nenhum evento encontrado.</p>
+                            </div>
+                        )}
+                    </>
+                )}
+            </main>
+
+            {/* Add Event Modal */}
+            {isAddModalOpen && (
+                <div className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-black bg-opacity-50 transition-opacity">
+                    <div className="bg-white rounded-2xl max-w-md w-full p-8 shadow-2xl transform transition-all">
+                        <div className="flex justify-between items-center mb-6">
+                            <h3 className="text-2xl font-bold text-gray-900">Novo Evento</h3>
+                            <button onClick={() => setIsAddModalOpen(false)} className="text-gray-400 hover:text-gray-600">
+                                <svg className="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M6 18L18 6M6 6l12 12" />
+                                </svg>
+                            </button>
+                        </div>
+                        <form onSubmit={handleSubmit(addEvento)} className="space-y-4">
                             <Input
-                                className="mb-3"
-                                type="text"
-                                label="nome"
-                                placeholder="Insira o nome do evento"
-                                required={true}
+                                label="Nome do Evento"
+                                placeholder="Ex: Reunião de Alinhamento"
                                 error={errors.nomeEvento}
-                                validations={register("nomeEvento", {
-                                    required: {
-                                        value: true,
-                                        message:
-                                            "Sovrenome do evento é obrigatório.",
-                                    },
-                                })}
+                                validations={register("nomeEvento", { required: "Nome do evento é obrigatório." })}
                             />
                             <Input
-                                className="mb-3"
+                                label="Data e Hora"
                                 type="datetime-local"
-                                label="data do evento"
-                                placeholder="Insira a data doevento"
-                                required={true}
                                 error={errors.dataEvento}
-                                validations={register("dataEvento", {
-                                    required: {
-                                        value: true,
-                                        message:
-                                            "data do evento é obrigatório.",
-                                    },
-                                })}
+                                validations={register("dataEvento", { required: "Data e hora são obrigatórias." })}
                             />
-
                             <Input
-                                className="mb-3"
-                                type="text"
-                                label="adendo"
-                                placeholder="Insira um adendo do evento"
-                                required={true}
+                                label="Adendo"
+                                placeholder="Notas adicionais..."
                                 error={errors.adendoEvento}
-                                validations={register("adendoEvento", {
-                                    required: {
-                                        value: true,
-                                        message: "erro?.",
-                                    },
-                                })}
+                                validations={register("adendoEvento", { required: "Adendo é obrigatório." })}
                             />
-                            <Dropdown>
-                                <Dropdown.Toggle
-                                    variant="success"
-                                    id="dropdown-basic"
-                                >
-                                    Selecione um evento
-                                </Dropdown.Toggle>
 
-                                <Dropdown.Menu>
-                                    {gestors.map(
-                                        (gestor, index) =>
-                                            index < (
-                                                <Dropdown.Item
-                                                    key={gestor.id}
-                                                    href={`#/action-${gestor.id}`}
-                                                >
-                                                    {gestor.nome}
-                                                </Dropdown.Item>
-                                            )
-                                    )}
-                                </Dropdown.Menu>
-                            </Dropdown>
-                        </Modal.Body>
-                        <Modal.Footer>
-                            <Button variant="primary" type="submit">
-                                Criar
-                            </Button>
-                            <Button
-                                variant="secondary"
-                                onClick={() => setIsCreated(false)}
-                            >
-                                Fechar
-                            </Button>
-                        </Modal.Footer>
-                    </Form>
-                </Modal>
-            </Container>
-        </>
+                            <div className="space-y-1">
+                                <label className="block text-sm font-semibold text-gray-700">Selecione o Gestor</label>
+                                <select
+                                    {...register("idGestor")}
+                                    className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 outline-none appearance-none bg-white"
+                                >
+                                    <option value="">Selecione um gestor</option>
+                                    {gestors.map((gestor) => (
+                                        <option key={gestor.id} value={gestor.id}>
+                                            {gestor.nome} {gestor.sobrenome}
+                                        </option>
+                                    ))}
+                                </select>
+                            </div>
+
+                            <div className="flex justify-end space-x-3 mt-8 pt-4 border-t border-gray-100">
+                                <button
+                                    type="button"
+                                    onClick={() => setIsAddModalOpen(false)}
+                                    className="px-4 py-2 text-gray-600 font-medium hover:text-gray-800 transition-colors"
+                                >
+                                    Cancelar
+                                </button>
+                                <button
+                                    type="submit"
+                                    className="px-8 py-2 bg-blue-900 text-white rounded-xl hover:bg-blue-800 shadow-lg shadow-blue-900/20 transition-all font-bold"
+                                >
+                                    Criar Evento
+                                </button>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            )}
+        </div>
     );
 }

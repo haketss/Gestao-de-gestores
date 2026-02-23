@@ -1,420 +1,222 @@
-import { useState } from "react";
+import React, { useState, memo } from "react";
 import { useForm } from "react-hook-form";
 import { Input } from "./Input";
-import {
-    Button,
-    Form,
-    Modal
-} from "react-bootstrap";
 
+const EditIcon = () => (
+    <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M11 5H6a2 2 0 00-2 2v11a2 2 0 002 2h11a2 2 0 002-2v-5m-1.414-9.414a2 2 0 112.828 2.828L11.828 15H9v-2.828l8.586-8.586z" />
+    </svg>
+);
 
+const TrashIcon = () => (
+    <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 7l-.867 12.142A2 2 0 0116.138 21H7.862a2 2 0 01-1.995-1.858L5 7m5 4v6m4-6v6m1-10V4a1 1 0 00-1-1h-4a1 1 0 00-1 1v3M4 7h16" />
+    </svg>
+);
 
-export function Gestor(props) {
-    const [isUpdated, setIsUpdated] = useState(false);
-    const [isEventoP, setIsEvendoP] = useState(false);
-    const [modalTest, setModalTest] = useState(false);
-
+export const Gestor = memo(function Gestor({ gestor, editGestor: onEdit, removeGestor: onRemove }) {
+    const [isEditModalOpen, setIsEditModalOpen] = useState(false);
+    const [isDeleteModalOpen, setIsDeleteModalOpen] = useState(false);
 
     const {
         handleSubmit,
         register,
         formState: { errors },
-    } = useForm();
-
-
-    async function editGestor(data) {
-        await props.editGestor({ ...data, id: props.gestor.id });
-        setIsUpdated(false);
-
-        // Adiciona um alerta para informar que o gestor foi alterado com sucesso
-        alert("O gestor foi alterado com sucesso!");
-
-        setIsUpdated(false);
-    }
-
-
-    async function confirmDelete() {
-        const result = window.confirm("Tem certeza de que deseja excluir?");
-        if (result) {
-            await props.removeGestor();
-            setModalTest(false);
+    } = useForm({
+        defaultValues: {
+            nomeGestor: gestor.nome,
+            sobrenomeGestor: gestor.sobrenome,
+            generoGestor: gestor.genero,
+            idadeGestor: gestor.idade,
+            dataDeNascimentoGestor: gestor.dataDeNascimento ? gestor.dataDeNascimento.split('T')[0] : "",
+            localDeTrabalhoGestor: gestor.localDeTrabalho,
+            CRMGestor: gestor.CRM,
+            tipoDeContratoGestor: gestor.tipoDeContrato,
+            formacaoGestor: gestor.formacao,
+            senhaProvisoriaGestor: gestor.senhaProvisoria,
+            metasGestor: gestor.metas,
+            atendimentosGestor: gestor.atendimentos,
+            ePGesor: gestor.eventosP
         }
-    }
+    });
 
+    const handleEdit = async (data) => {
+        try {
+            await onEdit({ ...data, id: gestor.id });
+            setIsEditModalOpen(false);
+        } catch (error) {
+            console.error("Error editing gestor:", error);
+        }
+    };
 
+    const handleDelete = async () => {
+        try {
+            await onRemove();
+            setIsDeleteModalOpen(false);
+        } catch (error) {
+            console.error("Error deleting gestor:", error);
+        }
+    };
 
     return (
-        <>
-            <td>
-                <Button
-                    id="editeedele"
-                    variant="secondary"
-                    onClick={() => setIsUpdated(true)}
-                >
-                    Editar
-                    <svg
-                        xmlns="http://www.w3.org/2000/svg"
-                        width="33"
-                        height="33"
-                        fill="currentColor"
-                        className="bi bi-pen"
-                        viewBox="0 0 16 16"
-                    >
-                        <path d="m13.498.795.149-.149a1.207 1.207 0 1 1 1.707 1.708l-.149.148a1.5 1.5 0 0 1-.059 2.059L4.854 14.854a.5.5 0 0 1-.233.131l-4 1a.5.5 0 0 1-.606-.606l1-4a.5.5 0 0 1 .131-.232l9.642-9.642a.5.5 0 0 0-.642.056L6.854 4.854a.5.5 0 1 1-.708-.708L9.44.854A1.5 1.5 0 0 1 11.5.796a1.5 1.5 0 0 1 1.998-.001zm-.644.766a.5.5 0 0 0-.707 0L1.95 11.756l-.764 3.057 3.057-.764L14.44 3.854a.5.5 0 0 0 0-.708l-1.585-1.585z" />
-                    </svg>
-                </Button>
-            </td>
-            <td>
-                <Button
-                    id="editeedelet"
-                    variant="outline-danger"
-                    className="ms-3"
-                    onClick={() => setModalTest(true)}
-                >
-                    Apagar
-                    <svg
-                        xmlns="http://www.w3.org/2000/svg"
-                        width="31"
-                        height="31"
-                        fill="currentColor"
-                        className="bi bi-trash"
-                        viewBox="0 0 16 16"
-                    >
-                        <path d="M5.5 5.5A.5.5 0 0 1 6 6v6a.5.5 0 0 1-1 0V6a.5.5 0 0 1 .5-.5Zm2.5 0a.5.5 0 0 1 .5.5v6a.5.5 0 0 1-1 0V6a.5.5 0 0 1 .5-.5Zm3 .5a.5.5 0 0 0-1 0v6a.5.5 0 0 0 1 0V6Z" />
-                        <path d="M14.5 3a1 1 0 0 1-1 1H13v9a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V4h-.5a1 1 0 0 1-1-1V2a1 1 0 0 1 1-1H6a1 1 0 0 1 1-1h2a1 1 0 0 1 1 1h3.5a1 1 0 0 1 1 1v1ZM4.118 4 4 4.059V13a1 1 0 0 0 1 1h6a1 1 0 0 0 1-1V4.059L11.882 4H4.118ZM2.5 3h11V2h-11v1Z" />
-                    </svg>
-                </Button>
-
-            </td>
-            <td>
-
-            </td>
-
-            <Modal show={modalTest} onHide={() => setModalTest(false)}>
-                <Modal.Header className="text-center" >
-                    <Modal.Title >Excluir gestor</Modal.Title>
-                </Modal.Header>
-                <Modal.Body className="text-center m-3 ">
-                    Tem certeza que deseja apagar o gestor: <strong >{props.gestor.nome}</strong>
-
-                </Modal.Body>
-                <Modal.Body className="text-center m-3">
-                    Essa alteração apagara definitivamente este gestor, para colocado de volta sera necessario recadastralo.
-                </Modal.Body>
-                <Modal.Footer>
-                    <Button
-                        id="editeedelet"
-                        variant="outline-danger"
-                        className="ms-3"
-                        onClick={confirmDelete}
-                    >
-                        Apagar
-                        <svg
-                            xmlns="http://www.w3.org/2000/svg"
-                            width="31"
-                            height="31"
-                            fill="currentColor"
-                            className="bi bi-trash"
-                            viewBox="0 0 16 16"
-                        >
-                            <path d="M5.5 5.5A.5.5 0 0 1 6 6v6a.5.5 0 0 1-1 0V6a.5.5 0 0 1 .5-.5Zm2.5 0a.5.5 0 0 1 .5.5v6a.5.5 0 0 1-1 0V6a.5.5 0 0 1 .5-.5Zm3 .5a.5.5 0 0 0-1 0v6a.5.5 0 0 0 1 0V6Z" />
-                            <path d="M14.5 3a1 1 0 0 1-1 1H13v9a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V4h-.5a1 1 0 0 1-1-1V2a1 1 0 0 1 1-1H6a1 1 0 0 1 1-1h2a1 1 0 0 1 1 1h3.5a1 1 0 0 1 1 1v1ZM4.118 4 4 4.059V13a1 1 0 0 0 1 1h6a1 1 0 0 0 1-1V4.059L11.882 4H4.118ZM2.5 3h11V2h-11v1Z" />
-                        </svg>
-                    </Button>
-                    <Button
-                        variant="secondary"
-                        onClick={() => setModalTest(false)}
-                    >
-                        Fechar
-                    </Button>
-                </Modal.Footer>
-            </Modal>
+        <div className="flex space-x-2">
+            <button
+                onClick={() => setIsEditModalOpen(true)}
+                className="flex items-center px-3 py-1.5 bg-blue-50 text-blue-700 hover:bg-blue-100 rounded-lg transition-colors text-sm font-medium"
+            >
+                <EditIcon />
+                <span className="ml-1">Editar</span>
+            </button>
+            <button
+                onClick={() => setIsDeleteModalOpen(true)}
+                className="flex items-center px-3 py-1.5 bg-red-50 text-red-700 hover:bg-red-100 rounded-lg transition-colors text-sm font-medium"
+            >
+                <TrashIcon />
+                <span className="ml-1">Apagar</span>
+            </button>
 
 
 
-            <Modal show={isUpdated} onHide={() => setIsUpdated(false)}>
-                <Modal.Header>
-                    <Modal.Title>
-                        Editar gestores: {props.gestor.nome}
-                    </Modal.Title>
-                </Modal.Header>
-                <Form noValidate onSubmit={handleSubmit(editGestor)}>
-                    <Modal.Body>
-                        <td>
-                            {" "}
-                            <Input
-                                className="mb-3"
-                                type="text"
-                                defaultValue={props.gestor.nome}
-                                label="Nome do Gestor"
-                                placeholder=""
-                                required={true}
-                                name="nomeGestor"
-                                error={errors.nomeGestor}
-                                validations={register("nomeGestor", {
-                                    required: {
-                                        value: true,
-                                        message: "Nome do  é obrigatório.",
-                                    },
-                                })}
-                            />
-                        </td>
-                        <td>
-                            <Input
-                                className="mb-3"
-                                type="text"
-                                defaultValue={props.gestor.sobrenome}
-                                label=" sobrenome"
-                                placeholder=""
-                                required={true}
-                                name="sobrenomeGestor"
-                                error={errors.sobrenomeGestor}
-                                validations={register("sobrenomeGestor", {
-                                    required: {
-                                        value: true,
-                                        message:
-                                            "Sovrenome do gestor é obrigatório.",
-                                    },
-                                })}
-                            />
-                        </td>
-                        <br />
-                        <td>
-                            {" "}
-                            <Input
-                                className="mb-3"
-                                type="text"
-                                defaultValue={props.gestor.genero}
-                                label="genero"
-                                placeholder=""
-                                required={true}
-                                name="generoGestor"
-                                error={errors.generoGestor}
-                                validations={register("generoGestor", {
-                                    required: {
-                                        value: true,
-                                        message:
-                                            "genero do gestor é obrigatório.",
-                                    },
-                                })}
-                            />
-                        </td>
-                        <td>
-                            {" "}
-                            <Input
-                                className="mb-3"
-                                type="INTEGER"
-                                defaultValue={props.gestor.idade}
-                                label="idade"
-                                placeholder=""
-                                required={true}
-                                name="idadeGestor"
-                                error={errors.idadeGestor}
-                                validations={register("idadeGestor", {
-                                    required: {
-                                        value: true,
-                                        message:
-                                            "idade do gestor é obrigatório.",
-                                    },
-                                })}
-                            />
-                        </td>
-                        <br />
-                        <td>
-                            <Input
-                                className="mb-3"
-                                type="date"
-                                defaultValue={props.gestor.dataDeNascimento}
-                                label="Data de nacimento"
-                                placeholder=""
-                                required={true}
-                                name="dataDeNascimentoGestor"
-                                error={errors.dataDeNascimentoGestor}
-                                validations={register(
-                                    "dataDeNascimentoGestor",
-                                    {
-                                        required: {
-                                            value: true,
-                                            message:
-                                                "Data de nacimento do gestor é obrigatório.",
-                                        },
-                                    }
-                                )}
-                            />
-                        </td>
-                        <td>
-                            {" "}
-                            <Input
-                                className="mb-3"
-                                type="text"
-                                defaultValue={props.gestor.localDeTrabalho}
-                                label="local De Trabalho"
-                                placeholder=""
-                                required={true}
-                                name="localDeTrabalhoGestor"
-                                error={errors.localDeTrabalhoGestor}
-                                validations={register("localDeTrabalhoGestor", {
-                                    required: {
-                                        value: true,
-                                        message:
-                                            "Local de trabalho do gestor é obrigatório.",
-                                    },
-                                })}
-                            />
-                        </td>
-                        <br />
-                        <td>
-                            <Input
-                                className="mb-3"
-                                type="text"
-                                defaultValue={props.gestor.CRM}
-                                label="CRM"
-                                placeholder=""
-                                required={true}
-                                name="CRMGestor"
-                                error={errors.CRMGestor}
-                                validations={register("CRMGestor", {
-                                    required: {
-                                        value: true,
-                                        message: "CRM do gestor é obrigatório.",
-                                    },
-                                })}
-                            />
-                        </td>
-                        <td>
-                            <Input
-                                className="mb-3"
-                                type="text"
-                                defaultValue={props.gestor.tipoDeContrato}
-                                label=" tipo De Contrato"
-                                placeholder=""
-                                required={true}
-                                name="tipoDeContratoGestor"
-                                error={errors.tipoDeContratoGestor}
-                                validations={register("tipoDeContratoGestor", {
-                                    required: {
-                                        value: true,
-                                        message:
-                                            "Tipo de contrato do gestor é obrigatório.",
-                                    },
-                                })}
-                            />
-                        </td>
-                        <br />
-                        <td>
-                            <Input
-                                className="mb-3"
-                                type="text"
-                                defaultValue={props.gestor.formacao}
-                                label="Formação"
-                                placeholder=""
-                                required={true}
-                                name="formacaoGestor"
-                                error={errors.formacaoGestor}
-                                validations={register("formacaoGestor", {
-                                    required: {
-                                        value: true,
-                                        message:
-                                            "Formação do gestor é obrigatório.",
-                                    },
-                                })}
-                            />
-                        </td>
-                        <td>
-                            {" "}
-                            <Input
-                                className="mb-3"
-                                type="text"
-                                defaultValue={props.gestor.senhaProvisoria}
-                                label="senha Provisoria"
-                                placeholder=""
-                                required={true}
-                                name="senhaProvisoriaGestor"
-                                error={errors.senhaProvisoriaGestor}
-                                validations={register("senhaProvisoriaGestor", {
-                                    required: {
-                                        value: true,
-                                        message:
-                                            "Senha Provisoria do gestor é obrigatório.",
-                                    },
-                                })}
-                            />
-                        </td>
-                        <td>
-                            <Input
-                                className="mb-3"
-                                type="text"
-                                defaultValue={props.gestor.metas}
-                                label="Metas"
-                                placeholder=""
-                                required={true}
-                                name="metasGestor"
-                                error={errors.metasGestor}
-                                validations={register("metasGestor", {
-                                    required: {
-                                        value: true,
-                                        message:
-                                            "Senha Provisoria do gestor é obrigatório.",
-                                    },
-                                })}
-                            />
-                        </td>
-                        <Input
-                            className="mb-3"
-                            type="text"
-                            defaultValue={props.gestor.atendimentos}
-                            label="atendimentos"
-                            placeholder=""
-                            required={true}
-                            name="atendimentosGestor"
-                            error={errors.atendimentosGestor}
-                            validations={register("atendimentosGestor", {
-                                required: {
-                                    value: true,
-                                    message:
-                                        "atendimentos do gestor é obrigatório.",
-                                },
-                            })}
-                        />
+            {/* Delete Modal */}
+            {isDeleteModalOpen && (
+                <div className="fixed inset-0 z-[60] flex items-center justify-center p-4 bg-black bg-opacity-50">
+                    <div className="bg-white rounded-2xl max-w-sm w-full p-6 shadow-2xl scale-in-center">
+                        <h3 className="text-xl font-bold text-gray-900 mb-2 text-center">Excluir Gestor</h3>
+                        <p className="text-gray-600 text-center mb-6">
+                            Tem certeza que deseja apagar o gestor <span className="font-bold">{gestor.nome}</span>?
+                            <span className="block text-red-500 text-sm mt-1">Esta ação não pode ser desfeita.</span>
+                        </p>
+                        <div className="flex space-x-3">
+                            <button
+                                onClick={() => setIsDeleteModalOpen(false)}
+                                className="flex-1 px-4 py-2 border border-gray-300 text-gray-700 rounded-lg hover:bg-gray-50 transition-colors font-medium"
+                            >
+                                Cancelar
+                            </button>
+                            <button
+                                onClick={handleDelete}
+                                className="flex-1 px-4 py-2 bg-red-600 text-white rounded-lg hover:bg-red-700 transition-colors font-medium flex items-center justify-center"
+                            >
+                                <TrashIcon />
+                                <span className="ml-2">Excluir</span>
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            )}
 
-                        <td>
-                            
+            {/* Edit Modal */}
+            {isEditModalOpen && (
+                <div className="fixed inset-0 z-[60] flex items-center justify-center p-4 bg-black bg-opacity-50 overflow-y-auto">
+                    <div className="bg-white rounded-2xl max-w-2xl w-full p-8 shadow-2xl my-8">
+                        <div className="flex justify-between items-center mb-6">
+                            <h3 className="text-2xl font-bold text-gray-900">Editar Gestor: {gestor.nome}</h3>
+                            <button onClick={() => setIsEditModalOpen(false)} className="text-gray-400 hover:text-gray-600">
+                                <svg className="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M6 18L18 6M6 6l12 12" />
+                                </svg>
+                            </button>
+                        </div>
+
+                        <form onSubmit={handleSubmit(handleEdit)} className="space-y-4">
+                            <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
                                 <Input
-                                    className="mb-3"
-                                    type="text"
-                                    defaultValue={props.gestor.ePGesor}
-                                    label="Eventos a comparecer"
-                                    placeholder=""
-                                    required={true}
-                                    name="eventosPGesor"
-                                    error={errors.ePGesor}
-                                    validations={register("ePGesor", {
-                                        required: {
-                                            value: true,
-                                            message: "Atribua um evento",
-                                        },
-                                    })}
+                                    label="Nome"
+                                    name="nomeGestor"
+                                    error={errors.nomeGestor}
+                                    validations={register("nomeGestor", { required: "Nome é obrigatório" })}
                                 />
-                            
+                                <Input
+                                    label="Sobrenome"
+                                    name="sobrenomeGestor"
+                                    error={errors.sobrenomeGestor}
+                                    validations={register("sobrenomeGestor", { required: "Sobrenome é obrigatório" })}
+                                />
+                                <Input
+                                    label="Gênero"
+                                    name="generoGestor"
+                                    error={errors.generoGestor}
+                                    validations={register("generoGestor", { required: "Gênero é obrigatório" })}
+                                />
+                                <Input
+                                    label="Idade"
+                                    type="number"
+                                    name="idadeGestor"
+                                    error={errors.idadeGestor}
+                                    validations={register("idadeGestor", { required: "Idade é obrigatório" })}
+                                />
+                                <Input
+                                    label="Data de Nascimento"
+                                    type="date"
+                                    name="dataDeNascimentoGestor"
+                                    error={errors.dataDeNascimentoGestor}
+                                    validations={register("dataDeNascimentoGestor", { required: "Data é obrigatória" })}
+                                />
+                                <Input
+                                    label="Local de Trabalho"
+                                    name="localDeTrabalhoGestor"
+                                    error={errors.localDeTrabalhoGestor}
+                                    validations={register("localDeTrabalhoGestor", { required: "Local é obrigatório" })}
+                                />
+                                <Input
+                                    label="CRM"
+                                    name="CRMGestor"
+                                    error={errors.CRMGestor}
+                                    validations={register("CRMGestor", { required: "CRM é obrigatório" })}
+                                />
+                                <Input
+                                    label="Tipo de Contrato"
+                                    name="tipoDeContratoGestor"
+                                    error={errors.tipoDeContratoGestor}
+                                    validations={register("tipoDeContratoGestor", { required: "Tipo de contrato é obrigatório" })}
+                                />
+                                <Input
+                                    label="Formação"
+                                    name="formacaoGestor"
+                                    error={errors.formacaoGestor}
+                                    validations={register("formacaoGestor", { required: "Formação é obrigatória" })}
+                                />
+                                <Input
+                                    label="Metas"
+                                    type="number"
+                                    name="metasGestor"
+                                    error={errors.metasGestor}
+                                    validations={register("metasGestor", { required: "Metas é obrigatório" })}
+                                />
+                                <Input
+                                    label="Atendimentos"
+                                    type="number"
+                                    name="atendimentosGestor"
+                                    error={errors.atendimentosGestor}
+                                    validations={register("atendimentosGestor", { required: "Atendimentos é obrigatório" })}
+                                />
+                                <Input
+                                    label="Eventos a comparecer"
+                                    name="ePGesor"
+                                    error={errors.ePGesor}
+                                    validations={register("ePGesor")}
+                                />
+                            </div>
 
-                        </td>
-                    </Modal.Body>
-                    <Modal.Footer>
-                        <Button variant="primary" type="submit">
-                            Editar
-                        </Button>
-                        <Button
-                            variant="secondary"
-                            onClick={() => setIsUpdated(false)}
-                        >
-                            Fechar
-                        </Button>
-                    </Modal.Footer>
-                </Form>
-            </Modal>
-
-
-
-        </>
+                            <div className="flex justify-end space-x-3 mt-8">
+                                <button
+                                    type="button"
+                                    onClick={() => setIsEditModalOpen(false)}
+                                    className="px-6 py-2 border border-gray-300 text-gray-700 rounded-lg hover:bg-gray-50 transition-colors font-medium"
+                                >
+                                    Fechar
+                                </button>
+                                <button
+                                    type="submit"
+                                    className="px-6 py-2 bg-blue-900 text-white rounded-lg hover:bg-blue-800 transition-colors font-medium"
+                                >
+                                    Salvar Alterações
+                                </button>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            )}
+        </div>
     );
-}
+});
