@@ -6,9 +6,11 @@ import { Modal } from "../components/Modal";
 import { Evento } from "../components/EventoE";
 import { getGestors } from "../services/gestor-service";
 import { getEventos } from "../services/evento-service";
+import { useTheme } from "../contexts/ThemeContext";
 
 export function Dashboard() {
     const [maxGestorsToShow, setMaxGestorsToShow] = useState(5);
+    const { theme } = useTheme();
     const [eventos, setEventos] = useState([]);
     const [gestors, setGestors] = useState([]);
     const [loading, setLoading] = useState(true);
@@ -69,12 +71,15 @@ export function Dashboard() {
                     ]),
             ]}
             options={{
+                backgroundColor: 'transparent',
                 chart: { subtitle: "Metas e atendimentos do ano: 2023" },
-                colors: ['#1e3a8a', '#10b981'],
-                legend: { position: 'top' }
+                colors: theme === 'dark' ? ['#60a5fa', '#34d399'] : ['#1e3a8a', '#10b981'],
+                legend: { position: 'top', textStyle: { color: theme === 'dark' ? '#cbd5e1' : '#333' } },
+                hAxis: { textStyle: { color: theme === 'dark' ? '#cbd5e1' : '#333' }, titleTextStyle: { color: theme === 'dark' ? '#cbd5e1' : '#333' } },
+                vAxis: { textStyle: { color: theme === 'dark' ? '#cbd5e1' : '#333' }, titleTextStyle: { color: theme === 'dark' ? '#cbd5e1' : '#333' } }
             }}
         />
-    ), [gestors, maxGestorsToShow]);
+    ), [gestors, maxGestorsToShow, theme]);
 
     const distributionChart = useMemo(() => (
         <Chart
@@ -87,15 +92,16 @@ export function Dashboard() {
                 ]),
             ]}
             options={{
-                legend: { position: 'bottom' },
+                backgroundColor: 'transparent',
+                legend: { position: 'bottom', textStyle: { color: theme === 'dark' ? '#cbd5e1' : '#333' } },
                 chartArea: { width: '90%', height: '70%' },
                 pieHole: 0.4,
-                colors: ['#1e3a8a', '#3b82f6', '#60a5fa', '#93c5fd', '#bfdbfe'],
+                colors: theme === 'dark' ? ['#3b82f6', '#60a5fa', '#93c5fd', '#bfdbfe', '#dbeafe'] : ['#1e3a8a', '#3b82f6', '#60a5fa', '#93c5fd', '#bfdbfe'],
             }}
             width="100%"
             height="300px"
         />
-    ), [gestors]);
+    ), [gestors, theme]);
 
     useEffect(() => {
         let isMounted = true;
@@ -131,7 +137,7 @@ export function Dashboard() {
 
     // Render section
     return (
-        <div className="min-h-screen bg-gray-50 flex flex-col">
+        <div className="min-h-screen bg-gray-50 dark:bg-slate-950 flex flex-col transition-colors duration-300">
             <Bar />
             <Modal
                 show={result}
@@ -142,19 +148,19 @@ export function Dashboard() {
 
             {loading ? (
                 <div className="flex-grow flex items-center justify-center">
-                    <div className="animate-spin rounded-full h-12 w-12 border-b-2 border-blue-900"></div>
-                    <span className="ml-3 text-gray-600 font-medium">Carregando...</span>
+                    <div className="animate-spin rounded-full h-12 w-12 border-b-2 border-blue-900 dark:border-blue-500"></div>
+                    <span className="ml-3 text-gray-600 dark:text-gray-300 font-medium">Carregando...</span>
                 </div>
             ) : (
                 <main className="flex-grow container mx-auto px-4 py-8">
                     {/* Stats Grid */}
                     <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 mb-8">
                         {stats.map((stat, i) => (
-                            <div key={i} className={`${stat.bg} p-6 rounded-2xl shadow-sm border border-white flex items-center space-x-4`}>
-                                <img src={stat.icon} alt={stat.label} className="w-12 h-12 rounded-lg object-cover bg-white p-1" />
+                            <div key={i} className={`${stat.bg} dark:bg-slate-900 p-6 rounded-2xl shadow-sm border border-white dark:border-slate-800 flex items-center space-x-4 transition-colors duration-300`}>
+                                <img src={stat.icon} alt={stat.label} className="w-12 h-12 rounded-lg object-cover bg-white dark:bg-slate-800 p-1" />
                                 <div>
-                                    <p className="text-sm font-medium text-gray-500 uppercase tracking-wider">{stat.label}</p>
-                                    <p className="text-2xl font-bold text-gray-900">{stat.value}</p>
+                                    <p className="text-sm font-medium text-gray-500 dark:text-gray-400 uppercase tracking-wider">{stat.label}</p>
+                                    <p className="text-2xl font-bold text-gray-900 dark:text-white">{stat.value}</p>
                                 </div>
                             </div>
                         ))}
@@ -162,19 +168,19 @@ export function Dashboard() {
 
                     <div className="grid grid-cols-1 lg:grid-cols-3 gap-8">
                         {/* Main Chart */}
-                        <div className="lg:col-span-2 bg-white p-6 rounded-2xl shadow-sm border border-gray-100">
+                        <div className="lg:col-span-2 bg-white dark:bg-slate-900 p-6 rounded-2xl shadow-sm border border-gray-100 dark:border-slate-800 transition-colors duration-300">
                             <div className="flex justify-between items-center mb-6">
-                                <h3 className="text-lg font-bold text-gray-900">Resultados dos Atendimentos</h3>
+                                <h3 className="text-lg font-bold text-gray-900 dark:text-white">Resultados dos Atendimentos</h3>
                                 <div className="flex space-x-2">
                                     <button
-                                        className="px-3 py-1 text-sm font-medium text-blue-600 bg-blue-50 rounded-md hover:bg-blue-100 transition-colors"
+                                        className="px-3 py-1 text-sm font-medium text-blue-600 dark:text-blue-400 bg-blue-50 dark:bg-blue-900/30 rounded-md hover:bg-blue-100 dark:hover:bg-blue-900/50 transition-colors"
                                         onClick={() => setMaxGestorsToShow(prev => prev + 5)}
                                     >
                                         Ver mais
                                     </button>
                                     {maxGestorsToShow > 5 ? (
                                         <button
-                                            className="px-3 py-1 text-sm font-medium text-gray-600 bg-gray-50 rounded-md hover:bg-gray-100 transition-colors"
+                                            className="px-3 py-1 text-sm font-medium text-gray-600 dark:text-gray-300 bg-gray-50 dark:bg-slate-800 rounded-md hover:bg-gray-100 dark:hover:bg-slate-700 transition-colors"
                                             onClick={() => setMaxGestorsToShow(prev => Math.max(5, prev - 5))}
                                         >
                                             Recolher
@@ -186,8 +192,8 @@ export function Dashboard() {
                         </div>
 
                         {/* Distribution Chart */}
-                        <div className="bg-white p-6 rounded-2xl shadow-sm border border-gray-100">
-                            <h3 className="text-lg font-bold text-gray-900 mb-6 text-center">Distribuição</h3>
+                        <div className="bg-white dark:bg-slate-900 p-6 rounded-2xl shadow-sm border border-gray-100 dark:border-slate-800 transition-colors duration-300">
+                            <h3 className="text-lg font-bold text-gray-900 dark:text-white mb-6 text-center">Distribuição</h3>
                             {distributionChart}
                         </div>
                     </div>
@@ -195,8 +201,8 @@ export function Dashboard() {
                     {/* Events Section */}
                     <div className="mt-8">
                         <div className="flex items-center justify-between mb-6">
-                            <h3 className="text-xl font-bold text-gray-900">Próximos Eventos</h3>
-                            <Link to="/eventos" className="text-sm font-medium text-blue-600 hover:text-blue-500">
+                            <h3 className="text-xl font-bold text-gray-900 dark:text-white">Próximos Eventos</h3>
+                            <Link to="/eventos" className="text-sm font-medium text-blue-600 dark:text-blue-400 hover:text-blue-500 dark:hover:text-blue-300">
                                 Ver todos os eventos &rarr;
                             </Link>
                         </div>
@@ -210,8 +216,8 @@ export function Dashboard() {
                                 ))}
                             </div>
                         ) : (
-                            <div className="bg-white rounded-2xl p-12 text-center border border-dashed border-gray-300">
-                                <p className="text-gray-500">Nenhum evento agendado para o momento.</p>
+                            <div className="bg-white dark:bg-slate-900 rounded-2xl p-12 text-center border border-dashed border-gray-300 dark:border-slate-700">
+                                <p className="text-gray-500 dark:text-gray-400">Nenhum evento agendado para o momento.</p>
                             </div>
                         )}
                     </div>

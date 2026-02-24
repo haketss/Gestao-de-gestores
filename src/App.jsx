@@ -1,5 +1,10 @@
 import { Navigations } from './routes';
+import { ThemeProvider } from './contexts/ThemeContext';
 
 export default function App() {
-    return <Navigations />
+    return (
+        <ThemeProvider>
+            <Navigations />
+        </ThemeProvider>
+    );
 }

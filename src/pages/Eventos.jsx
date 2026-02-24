@@ -117,7 +117,7 @@ export function Eventos() {
     }, [eventos, searchTerm]);
 
     return (
-        <div className="min-h-screen bg-gray-50 flex flex-col">
+        <div className="min-h-screen bg-gray-50 dark:bg-slate-950 flex flex-col transition-colors duration-300">
             <Bar />
             <Modal
                 show={result}
@@ -129,8 +129,8 @@ export function Eventos() {
             <main className="flex-grow container mx-auto px-4 py-8">
                 <div className="flex flex-col md:flex-row md:items-center justify-between gap-4 mb-8">
                     <div>
-                        <h2 className="text-2xl font-bold text-gray-900">Eventos e Reuniões</h2>
-                        <p className="text-gray-500 text-sm">Gerencie o cronograma de atividades</p>
+                        <h2 className="text-2xl font-bold text-gray-900 dark:text-white">Eventos e Reuniões</h2>
+                        <p className="text-gray-500 dark:text-gray-400 text-sm">Gerencie o cronograma de atividades</p>
                     </div>
 
                     <div className="flex flex-col sm:flex-row gap-3">
@@ -140,9 +140,9 @@ export function Eventos() {
                                 placeholder="Pesquisar por nome..."
                                 value={searchTerm}
                                 onChange={(e) => setSearchTerm(e.target.value)}
-                                className="pl-10 pr-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500 outline-none w-full sm:w-64 transition-all"
+                                className="pl-10 pr-4 py-2 bg-white dark:bg-slate-800 border border-gray-300 dark:border-slate-700 text-gray-900 dark:text-white rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500 outline-none w-full sm:w-64 transition-all"
                             />
-                            <div className="absolute left-3 top-2.5 text-gray-400">
+                            <div className="absolute left-3 top-2.5 text-gray-400 dark:text-gray-500">
                                 <svg xmlns="http://www.w3.org/2000/svg" className="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                                     <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z" />
                                 </svg>
@@ -163,7 +163,7 @@ export function Eventos() {
 
                 {loading ? (
                     <div className="flex items-center justify-center py-20">
-                        <div className="animate-spin rounded-full h-10 w-10 border-b-2 border-blue-900"></div>
+                        <div className="animate-spin rounded-full h-10 w-10 border-b-2 border-blue-900 dark:border-blue-500"></div>
                     </div>
                 ) : (
                     <>
@@ -179,13 +179,13 @@ export function Eventos() {
                                 ))}
                             </div>
                         ) : (
-                            <div className="bg-white rounded-2xl border border-dashed border-gray-300 py-20 text-center">
-                                <div className="mx-auto w-16 h-16 bg-gray-50 rounded-full flex items-center justify-center text-gray-400 mb-4">
+                            <div className="bg-white dark:bg-slate-900 rounded-2xl border border-dashed border-gray-300 dark:border-slate-700 py-20 text-center">
+                                <div className="mx-auto w-16 h-16 bg-gray-50 dark:bg-slate-800 rounded-full flex items-center justify-center text-gray-400 dark:text-gray-500 mb-4">
                                     <svg className="w-8 h-8" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                                         <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z" />
                                     </svg>
                                 </div>
-                                <p className="text-gray-500 font-medium">Nenhum evento encontrado.</p>
+                                <p className="text-gray-500 dark:text-gray-400 font-medium">Nenhum evento encontrado.</p>
                             </div>
                         )}
                     </>
@@ -195,10 +195,10 @@ export function Eventos() {
             {/* Add Event Modal */}
             {isAddModalOpen && (
                 <div className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-black bg-opacity-50 transition-opacity">
-                    <div className="bg-white rounded-2xl max-w-md w-full p-8 shadow-2xl transform transition-all">
+                    <div className="bg-white dark:bg-slate-900 rounded-2xl max-w-md w-full p-8 shadow-2xl transform transition-all border dark:border-slate-800">
                         <div className="flex justify-between items-center mb-6">
-                            <h3 className="text-2xl font-bold text-gray-900">Novo Evento</h3>
-                            <button onClick={() => setIsAddModalOpen(false)} className="text-gray-400 hover:text-gray-600">
+                            <h3 className="text-2xl font-bold text-gray-900 dark:text-white">Novo Evento</h3>
+                            <button onClick={() => setIsAddModalOpen(false)} className="text-gray-400 dark:text-gray-500 hover:text-gray-600 dark:hover:text-gray-300">
                                 <svg className="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                                     <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M6 18L18 6M6 6l12 12" />
                                 </svg>
@@ -225,10 +225,10 @@ export function Eventos() {
                             />
 
                             <div className="space-y-1">
-                                <label className="block text-sm font-semibold text-gray-700">Selecione o Gestor</label>
+                                <label className="block text-sm font-semibold text-gray-700 dark:text-gray-300">Selecione o Gestor</label>
                                 <select
                                     {...register("idGestor")}
-                                    className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 outline-none appearance-none bg-white"
+                                    className="w-full px-4 py-2 border border-gray-300 dark:border-slate-700 rounded-lg focus:ring-2 focus:ring-blue-500 outline-none appearance-none bg-white dark:bg-slate-800 text-gray-900 dark:text-white transition-colors"
                                 >
                                     <option value="">Selecione um gestor</option>
                                     {gestors.map((gestor) => (
@@ -239,11 +239,11 @@ export function Eventos() {
                                 </select>
                             </div>
 
-                            <div className="flex justify-end space-x-3 mt-8 pt-4 border-t border-gray-100">
+                            <div className="flex justify-end space-x-3 mt-8 pt-4 border-t border-gray-100 dark:border-slate-800">
                                 <button
                                     type="button"
                                     onClick={() => setIsAddModalOpen(false)}
-                                    className="px-4 py-2 text-gray-600 font-medium hover:text-gray-800 transition-colors"
+                                    className="px-4 py-2 text-gray-600 dark:text-gray-400 font-medium hover:text-gray-800 dark:hover:text-gray-200 transition-colors"
                                 >
                                     Cancelar
                                 </button>

@@ -62,14 +62,14 @@ export const Gestor = memo(function Gestor({ gestor, editGestor: onEdit, removeG
         <div className="flex space-x-2">
             <button
                 onClick={() => setIsEditModalOpen(true)}
-                className="flex items-center px-3 py-1.5 bg-blue-50 text-blue-700 hover:bg-blue-100 rounded-lg transition-colors text-sm font-medium"
+                className="flex items-center px-3 py-1.5 bg-blue-50 dark:bg-blue-900/30 text-blue-700 dark:text-blue-400 hover:bg-blue-100 dark:hover:bg-blue-900/50 rounded-lg transition-colors text-sm font-medium"
             >
                 <EditIcon />
                 <span className="ml-1">Editar</span>
             </button>
             <button
                 onClick={() => setIsDeleteModalOpen(true)}
-                className="flex items-center px-3 py-1.5 bg-red-50 text-red-700 hover:bg-red-100 rounded-lg transition-colors text-sm font-medium"
+                className="flex items-center px-3 py-1.5 bg-red-50 dark:bg-red-900/30 text-red-700 dark:text-red-400 hover:bg-red-100 dark:hover:bg-red-900/50 rounded-lg transition-colors text-sm font-medium"
             >
                 <TrashIcon />
                 <span className="ml-1">Apagar</span>
@@ -80,16 +80,16 @@ export const Gestor = memo(function Gestor({ gestor, editGestor: onEdit, removeG
             {/* Delete Modal */}
             {isDeleteModalOpen && (
                 <div className="fixed inset-0 z-[60] flex items-center justify-center p-4 bg-black bg-opacity-50">
-                    <div className="bg-white rounded-2xl max-w-sm w-full p-6 shadow-2xl scale-in-center">
-                        <h3 className="text-xl font-bold text-gray-900 mb-2 text-center">Excluir Gestor</h3>
-                        <p className="text-gray-600 text-center mb-6">
+                    <div className="bg-white dark:bg-slate-900 rounded-2xl max-w-sm w-full p-6 shadow-2xl scale-in-center border dark:border-slate-800">
+                        <h3 className="text-xl font-bold text-gray-900 dark:text-white mb-2 text-center">Excluir Gestor</h3>
+                        <p className="text-gray-600 dark:text-gray-300 text-center mb-6">
                             Tem certeza que deseja apagar o gestor <span className="font-bold">{gestor.nome}</span>?
-                            <span className="block text-red-500 text-sm mt-1">Esta ação não pode ser desfeita.</span>
+                            <span className="block text-red-500 dark:text-red-400 text-sm mt-1">Esta ação não pode ser desfeita.</span>
                         </p>
                         <div className="flex space-x-3">
                             <button
                                 onClick={() => setIsDeleteModalOpen(false)}
-                                className="flex-1 px-4 py-2 border border-gray-300 text-gray-700 rounded-lg hover:bg-gray-50 transition-colors font-medium"
+                                className="flex-1 px-4 py-2 border border-gray-300 dark:border-slate-700 text-gray-700 dark:text-gray-300 rounded-lg hover:bg-gray-50 dark:hover:bg-slate-800 transition-colors font-medium"
                             >
                                 Cancelar
                             </button>
@@ -108,10 +108,10 @@ export const Gestor = memo(function Gestor({ gestor, editGestor: onEdit, removeG
             {/* Edit Modal */}
             {isEditModalOpen && (
                 <div className="fixed inset-0 z-[60] flex items-center justify-center p-4 bg-black bg-opacity-50 overflow-y-auto">
-                    <div className="bg-white rounded-2xl max-w-2xl w-full p-8 shadow-2xl my-8">
+                    <div className="bg-white dark:bg-slate-900 rounded-2xl max-w-2xl w-full p-8 shadow-2xl my-8 border dark:border-slate-800">
                         <div className="flex justify-between items-center mb-6">
-                            <h3 className="text-2xl font-bold text-gray-900">Editar Gestor: {gestor.nome}</h3>
-                            <button onClick={() => setIsEditModalOpen(false)} className="text-gray-400 hover:text-gray-600">
+                            <h3 className="text-2xl font-bold text-gray-900 dark:text-white">Editar Gestor: {gestor.nome}</h3>
+                            <button onClick={() => setIsEditModalOpen(false)} className="text-gray-400 dark:text-gray-500 hover:text-gray-600 dark:hover:text-gray-300">
                                 <svg className="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                                     <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M6 18L18 6M6 6l12 12" />
                                 </svg>
@@ -198,11 +198,11 @@ export const Gestor = memo(function Gestor({ gestor, editGestor: onEdit, removeG
                                 />
                             </div>
 
-                            <div className="flex justify-end space-x-3 mt-8">
+                            <div className="flex justify-end space-x-3 mt-8 pt-4 border-t border-gray-100 dark:border-slate-800">
                                 <button
                                     type="button"
                                     onClick={() => setIsEditModalOpen(false)}
-                                    className="px-6 py-2 border border-gray-300 text-gray-700 rounded-lg hover:bg-gray-50 transition-colors font-medium"
+                                    className="px-6 py-2 border border-gray-300 dark:border-slate-700 text-gray-700 dark:text-gray-300 rounded-lg hover:bg-gray-50 dark:hover:bg-slate-800 transition-colors font-medium"
                                 >
                                     Fechar
                                 </button>
